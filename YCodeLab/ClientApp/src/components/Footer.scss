@@ -1,0 +1,72 @@
+@import '../bootstrap.scss';
+@import 'bootstrap/scss/_variables.scss';
+@import 'bootstrap/scss/mixins/_breakpoints.scss';
+
+.footer {
+
+  .footer-container {
+    @extend .container;
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  .profile-img-col {
+    @extend .text-center;
+    flex: 100%;
+    padding-right: 0px;
+    padding-bottom: 20px;
+  }
+
+  .profile-content-col {
+    @extend .col-sm-12;
+  }
+
+  .image-cropper {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .profile-img {
+    width: 200px;
+  }
+
+  .links-col {
+    @extend .text-right;
+    flex: 100%;
+  }
+
+  .github-link {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  @include media-breakpoint-up(md) {
+
+    .profile-img-col {
+      flex: none;
+      padding-right: 20px;
+    }
+
+    .profile-content-col {
+      flex: 2;
+    }
+
+    .links-col {
+      @extend .text-md-right;
+      flex: 100%;
+    }
+
+  }
+
+  @include media-breakpoint-up(lg) {
+
+    .links-col {
+      flex: 1;
+    }
+
+  }
+
+}

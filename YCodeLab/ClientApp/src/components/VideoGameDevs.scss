@@ -1,0 +1,14 @@
+@import '../custom.scss';
+@import '../bootstrap.scss';
+
+.video-game-devs-page {
+  .site-category-name {
+    @extend .font-marck-script;
+    @extend .text-center;
+    font-size: 4em;
+  }
+
+  > * {
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>YCodeLab.DevDBSetup</RootNamespace>
+    <AssemblyName>YCodeLab.DevDBSetup</AssemblyName>
+    <StartupObject>YCodeLab.DevDBSetup.DevDBSetup</StartupObject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>Default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <StartAction>Project</StartAction>
+    <StartArguments>-s ./Scripts/update_dev_db.sh</StartArguments>
+    <StartWorkingDirectory>..</StartWorkingDirectory>
+    <ExternalConsole>true</ExternalConsole>
+    <ConsolePause>false</ConsolePause>
+    <EnvironmentVariables>
+      <Variable name="DB_ENVIRONMENT" value="Development" />
+    </EnvironmentVariables>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YCodeLabDBFactory\YCodeLabDBFactory.csproj" />
+    <ProjectReference Include="..\YCodeLabDB\YCodeLabDB.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NDesk.Options" Version="0.2.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+  </ItemGroup>
+</Project>

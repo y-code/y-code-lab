@@ -1,0 +1,14 @@
+@import '../custom.scss';
+@import '../bootstrap.scss';
+
+.contact-me-page {
+  .site-category-name {
+    @extend .font-marck-script;
+    @extend .text-center;
+    font-size: 4em;
+  }
+
+  > * {
+    margin-bottom: 20px;
+  }
+}

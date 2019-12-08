@@ -1,0 +1,95 @@
+@import '../custom.scss';
+@import '../bootstrap.scss';
+@import 'bootstrap/scss/_variables.scss';
+@import 'bootstrap/scss/mixins/_breakpoints.scss';
+
+.home-page {
+
+  .greeting-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    .greeting-container {
+      margin-left: 120px;
+      margin-right: 120px;
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .greeting-container {
+      margin-left: 220px;
+      margin-right: 220px;
+    }
+  }
+
+  .site-name {
+    @extend .font-marck-script;
+    @extend .text-center;
+    font-size: 6em;
+  }
+
+  .site-category-name {
+    @extend .font-marck-script;
+    @extend .text-center;
+  }
+
+  @include media-breakpoint-up(lg) {
+    .site-name {
+      font-size: 10em;
+    }
+  }
+
+  .image-cropper {
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .icon-frame {
+    height: 160px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .web-app-devs-icon-frame {
+    @extend .icon-frame;
+  }
+
+  .web-app-devs-icon {
+    width: 160px;
+  }
+
+  .code-project-icon-frame {
+    @extend .image-cropper;
+    @extend .icon-frame;
+  }
+
+  .code-project-icon {
+    position: absolute;
+    width: 170px;
+    top: -5px;
+    left: -1px;
+  }
+
+  .blender-unity-icon-frame {
+    @extend .icon-frame
+  }
+
+  .blender-unity-icon {
+    position: relative;
+    top: -90px;
+    width: 180px;
+  }
+
+  .site-category-col:hover {
+    box-shadow: 3px 3px 2px grey;
+    border: 1px solid grey;
+  }
+
+}

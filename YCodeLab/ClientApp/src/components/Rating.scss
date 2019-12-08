@@ -1,0 +1,11 @@
+.rating-component {
+  display: flex;
+
+  .star {
+    width: 18px;
+  }
+
+  .votes {
+    min-width: 80px;
+  }
+}

@@ -1,0 +1,55 @@
+@import 'bootstrap.scss';
+@import 'bootstrap/scss/_variables.scss';
+@import 'bootstrap/scss/mixins/_breakpoints.scss';
+
+@import url('https://fonts.googleapis.com/css?family=Marck+Script&display=swap');
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #E01A76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.font-marck-script {
+  font-family: 'Marck Script', cursive;
+}
+
+.main-content-container {
+  min-height: calc(100vh - 90px);
+}
+
+.main-content-message {
+  @extend .main-content-container;
+  @extend .row;
+  @extend .d-flex;
+  @extend .justify-content-center;
+
+  > div {
+    @extend .d-flex;
+    @extend .align-items-center;
+    max-width: 400px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+
+  .main-content-container {
+    min-height: calc(100vh - 100px);
+  }
+  
+  .main-content-message {
+    > div {
+      max-width: 600px;
+    }
+  }
+
+}
