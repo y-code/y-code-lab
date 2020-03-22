@@ -3,7 +3,7 @@
 export DB_CONTEXT_PRJ=YCodeLabDB
 export FACTORY_PRJ=YCodeLabDBFactory
 export DB_CONTEXT=YCodeLabDbContext
-export LAST_MIGRATION=initial
+export LAST_MIGRATION=v0_1
 export DEV_MIGRATION=dev
 export DOCKER_CONTAINER=ycodelab-db
 
