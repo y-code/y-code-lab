@@ -22,7 +22,7 @@ RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
-EXPOSE 8080/tcp
-ENV ASPNETCORE_URLS http://+:8080
+# EXPOSE 8080/tcp
+# ENV ASPNETCORE_URLS http://+:8080
 COPY --from=build /app/YCodeLab/out ./
 ENTRYPOINT ["dotnet", "YCodeLab.dll"]

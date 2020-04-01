@@ -2,13 +2,35 @@
 @import '../bootstrap.scss';
 
 .video-game-devs-page {
-  .site-category-name {
-    @extend .font-marck-script;
-    @extend .text-center;
-    font-size: 4em;
+  padding-bottom: 20px;
+
+  .intro {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    justify-content: center;
+    
+    *[class^="col"] {
+      max-width: 800px;
+    }
   }
 
-  > * {
-    margin-bottom: 20px;
+  .section {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* height: calc(100vh / 2); */
+    /* min-height: 355px; */
+    height: 355px;
+  }
+
+  .section:nth-child(odd) {
+    flex-direction: row;
+    background-color: #e7faf5;
+  }
+
+  .section:nth-child(even) {
+    flex-direction: row-reverse;
+    background-color: inherit;
   }
 }

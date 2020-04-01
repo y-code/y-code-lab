@@ -1,12 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace YCodeLab
@@ -15,14 +9,13 @@ namespace YCodeLab
     {
         public static void Main(string[] args)
         {
+            var port = Environment.GetEnvironmentVariable("PORT");
+
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .CreateLogger();
-            var logger = Log.Logger.ForContext<Program>();
 
-            var port = Environment.GetEnvironmentVariable("PORT");
-
-            var webHost = WebHost.CreateDefaultBuilder(args)
+            var webHostBuilder = WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseSerilog((webHostBuilderContext, loggerConfiguration) =>
                 {
@@ -31,12 +24,14 @@ namespace YCodeLab
                 });
 
             if (!string.IsNullOrEmpty(port))
-                webHost.UseUrls($"http://+:{port}");
+                webHostBuilder.UseUrls($"http://+:{port}");
 
-            logger.Information($"**1 {webHost.GetSetting(WebHostDefaults.ServerUrlsKey)}");
-            logger.Information($"**2 {Environment.GetEnvironmentVariable("ASPNETCORE_URLS")}");
 
-            webHost
+            Log.Logger.Information("PORT: {Port}", port);
+            //Log.Logger.Information("ASPNETCORE_URLS: {Port}", Environment.GetEnvironmentVariable("ASPNETCORE_URLS"));
+            //Log.Logger.Information("Urls setting in WebHost: {Port}", webHostBuilder.GetSetting(WebHostDefaults.ServerUrlsKey));
+
+            webHostBuilder
                 .Build()
                 .Run();
         }

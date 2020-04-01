@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{247E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevDBSetup", "DevDBSetup\DevDBSetup.csproj", "{C8DAE6C7-C15B-4009-86CF-C196D7021F90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YCodeLabTest", "YCodeLabTest\YCodeLabTest.csproj", "{9F269F5F-87FD-490F-9C38-F5563BCAE669}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YCodeLab.Test", "YCodeLabTest\YCodeLab.Test.csproj", "{9F269F5F-87FD-490F-9C38-F5563BCAE669}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

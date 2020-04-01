@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,16 +8,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using YCodeLab.DB;
 using YCodeLab.Models;
+using YCodeLab.Services;
+using YCodeLab.Services.HtmlAgilityPack;
+using YCodeLab.Services.Net;
 
 namespace YCodeLab
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        ILogger<Startup> _logger;
+
+        public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
             Configuration = configuration;
+            _logger = logger;
         }
 
         public IConfiguration Configuration { get; }
@@ -32,10 +40,22 @@ namespace YCodeLab
                 configuration.RootPath = "ClientApp/build";
             });
 
+            services.AddSingleton<IHttpWebRequestFactory, HttpWebRequestFactory>();
+            services.AddSingleton<IHAPDocumentFactory, HAPDocumentFactory>();
+            services.AddSingleton<ICodeProjectApiService, CodeProjectApiService>();
+            services.AddHostedService(p => p.GetService<ICodeProjectApiService>());
+            services.AddSingleton<CodeProjectSiteService>();
+
             services.AddEntityFrameworkNpgsql();
             services.AddDbContext<YCodeLabDbContext>((serviceProvider, optionsBuilder) =>
+            {
+                var conn = Configuration.GetConnectionString("ycodelab-db");
+                if (string.IsNullOrEmpty(conn))
+                    conn = Environment.GetEnvironmentVariable("Y_CODE_LAB_DB");
+                _logger.LogInformation("Database: {Database}", conn);
                 ((DbContextOptionsBuilder<YCodeLabDbContext>)optionsBuilder)
-                    .UseNpgsql(Configuration.GetConnectionString("ycodelab-db")));
+                    .UseNpgsql(conn);
+            });
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

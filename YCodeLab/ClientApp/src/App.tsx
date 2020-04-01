@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Route } from 'react-router';
 import Layout from './components/Layout';
 import Home from './components/Home';
+import ThirdPartyLibDevs from './components/ThirdPartyLibDevs';
 import WebAppDevs from './components/WebAppDevs';
 import TechWritings from './components/TechWritings';
 import VideoGameDevs from './components/VideoGameDevs';
@@ -22,6 +23,7 @@ export default class App extends React.Component {
       <Layout>
           <Route exact path='/' component={Home} />
           <Route path='/profile' component={Profile} />
+          <Route path='/third-party-lib-devs' component={ThirdPartyLibDevs} />
           <Route path='/web-app-devs' component={WebAppDevs} />
           <Route path='/tech-writings' component={TechWritings} />
           <Route path='/video-game-devs' component={VideoGameDevs} />

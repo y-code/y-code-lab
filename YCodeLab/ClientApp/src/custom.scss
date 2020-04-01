@@ -25,6 +25,16 @@ code {
 
 .main-content-container {
   min-height: calc(100vh - 90px);
+
+  .header {
+    @extend .font-marck-script;
+    @extend .text-center;
+  }
+
+  h1 {
+    @extend .header;
+    font-size: 4em;
+  }
 }
 
 .main-content-message {

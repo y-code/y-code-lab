@@ -2,11 +2,11 @@ import React from 'react';
 
 import './Rating.scss';
 
-const _formatter: Intl.NumberFormat = new Intl.NumberFormat('en-US');
+// const _formatter: Intl.NumberFormat = new Intl.NumberFormat('en-US');
 
 export const Rating: React.FunctionComponent<{
   rate: number,
-  votes: number,
+  votes: string,
   className: string,
 }> = function(props){
   const [ rate, setRate ] = React.useState(props.rate);
@@ -23,7 +23,7 @@ export const Rating: React.FunctionComponent<{
         return stars;
       })()}
       <div className="votes">
-        {`(${_formatter.format(votes)} votes)`}
+        {`(${votes} votes)`}
       </div>
     </div>
   );

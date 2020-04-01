@@ -37,7 +37,7 @@ const Notifications: React.FunctionComponent = props => {
   return (
     <Container>
       <Alert color='warning' isOpen={isAlertingJobSeeking} toggle={() => setAlertingJobSeeking(!isAlertingJobSeeking)}>
-        I'm currently looking for a Software Engineer role. Please visit <Link to="/profile">Profile page</Link> and <Link to="/contact-me">contact me</Link>.
+        I'm currently looking for a Software Engineer role. Please visit <Link to="/profile">Profile page</Link> and <Link to="/contact-me">Contact ME</Link>.
       </Alert>
     </Container>
   );

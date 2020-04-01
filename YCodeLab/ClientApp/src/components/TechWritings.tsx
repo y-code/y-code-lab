@@ -1,73 +1,109 @@
 import * as React from 'react';
-import { Card, CardHeader, CardBody } from 'reactstrap';
+import { Card, CardHeader, CardBody, Col, Row } from 'reactstrap';
 import { Rating } from './Rating';
 
 import './TechWritings.scss';
+import * as CodeProjectApi from '../store/CodeProjectApi';
+import { ApplicationState } from '../store';
+import { connect } from 'react-redux';
 
-export default class TechWritings extends React.PureComponent<{
-}, {
-}> {
+class TechWritings extends React.PureComponent<
+    { codeProjectApi: CodeProjectApi.CodeProjectApiState } & typeof CodeProjectApi.actionCreators,
+    { }> {
   private _formatter: Intl.NumberFormat = new Intl.NumberFormat('en-US');
   
-  public render() {
-    let data: WritingInfo[] = [
-      {
-        url: "https://www.codeproject.com/Tips/5249190/JsonConverter-Attribute-in-ASP-NET-Core-3-0-Web-AP",
-        title: "JsonConverter Attribute in ASP.NET Core 3.0 Web API",
-        summary: "ASP.NET Core 3.0 uses a built-in JSON converter from System.Text.Json "
-          + "so that JsonConverter attribute from Newtonsoft.Json does not work by default.",
-        rating: 5,
-        votes: 4,
-        views: 1770,
-        publishedDate: "23 Oct 2019",
-      },
-      {
-        url: "https://www.codeproject.com/Tips/1271126/Build-Issue-with-Ruby-in-macOS-Bundler-Installatio",
-        title: "Build Issue with Ruby in macOS --- Bundler Installation and Bootstrap `docs` Script Run",
-        summary: "Tutorial about how to add authentication functionalities "
-          + "to your existing ASP.NET Core project using Microsoft.AspNetCore.Identity.UI package.",
-        rating: 0,
-        votes: 0,
-        views: 1260,
-        publishedDate: "11 Dec 2018",
-      },
-      {
-        url: "https://www.codeproject.com/Articles/1265638/ASP-NET-Core-Authentication-UI-Installation",
-        title: "ASP.NET Core - Authentication UI Installation",
-        summary: "Tutorial about how to add authentication functionalities "
-          + "to your existing ASP.NET Core project using Microsoft.AspNetCore.Identity.UI package.",
-        rating: 5,
-        votes: 4,
-        views: 9951,
-        publishedDate: "10 Nov 2018",
-      },
-      {
-        url: "https://www.codeproject.com/Tips/5249190/JsonConverter-Attribute-in-ASP-NET-Core-3-0-Web-AP",
-        title: "Utilities for Enumeration Field Attribute",
-        summary: "Enumeration fields typically require a mapping "
-          + "to human-friendly names and/or code when we display it on UI or "
-          + "output to some persistence. This utility code in this article helps "
-          + "to code such mapping inside enumeration declaration by an attributes.",
-        rating: 2,
-        votes: 4,
-        views: 5250,
-        publishedDate: "12 Jul 2018",
-      },
+  public componentDidMount() {
+    this.ensureDataFetched();
+  }
+
+  public componentDidUpdate() {
+    // this.ensureDataFetched();
+  }
+
+  private ensureDataFetched() {
+    (this.props as typeof CodeProjectApi.actionCreators).requestGetMyArticles();
+    (this.props as typeof CodeProjectApi.actionCreators).requestGetMyBlogPosts();
+    (this.props as typeof CodeProjectApi.actionCreators).requestGetMyTips();
+  }
+
+  aggregateWritingInfoArray<T>(
+      data: WritingInfo[],
+      additionalData: T[],
+      getUrl: (d: T) => string,       getTitle: (d: T) => string,
+      getSummary: (d: T) => string,   getRating: (d: T) => number,
+      getVotes: (d: T) => string,     getViews: (d: T) => string,
+      getPublishedDate: (d: T) => string) : WritingInfo[] {
+    return [
+      ...data,
+      ...additionalData.map(a => ({
+        url: getUrl(a),         title: getTitle(a), summary: getSummary(a),
+        rating: getRating(a),   votes: getVotes(a), views: getViews(a),
+        publishedDate: getPublishedDate(a),
+      } as WritingInfo))
     ];
+  }
+
+  aggregateWritingInfoArrayWithArticles(data: WritingInfo[], additionalData: CodeProjectApi.CodeProjectArticle[]){
+    return this.aggregateWritingInfoArray<CodeProjectApi.CodeProjectArticle> (
+      data,                     additionalData,
+      d => d.link,              d => d.title,   d => d.summary,
+      d => d.rating as number,  d => d.votes,   d => d.views,
+      d => d.modifiedDate,
+    );
+  }
+
+  aggregateWritingInfoArrayWithBlogPosts(data: WritingInfo[], additionalData: CodeProjectApi.CodeProjectBlogPost[]){
+    return this.aggregateWritingInfoArray<CodeProjectApi.CodeProjectBlogPost> (
+      data,                     additionalData,
+      d => d.link,              d => d.title,   d => d.summary,
+      d => d.rating as number,  d => d.votes,   d => d.views,
+      d => d.modifiedDate,
+    );
+  }
+
+  aggregateWritingInfoArrayWithTips(data: WritingInfo[], additionalData: CodeProjectApi.CodeProjectTip[]){
+    return this.aggregateWritingInfoArray<CodeProjectApi.CodeProjectTip> (
+      data,                     additionalData,
+      d => d.link,              d => d.title,   d => d.summary,
+      d => d.rating as number,  d => d.votes,   d => d.views,
+      d => d.modifiedDate,
+    );
+  }
+
+  public render() {
+    let data: WritingInfo[] = [];
+
+    if (this.props.codeProjectApi
+        && this.props.codeProjectApi.myArticles
+        && this.props.codeProjectApi.myArticles.result)
+        data = this.aggregateWritingInfoArrayWithArticles(data, this.props.codeProjectApi.myArticles.result);
+
+    if (this.props.codeProjectApi
+        && this.props.codeProjectApi.myBlogPosts
+        && this.props.codeProjectApi.myBlogPosts.result)
+        data = this.aggregateWritingInfoArrayWithBlogPosts(data, this.props.codeProjectApi.myBlogPosts.result);
+
+    if (this.props.codeProjectApi
+        && this.props.codeProjectApi.myTips
+        && this.props.codeProjectApi.myTips.result)
+        data = this.aggregateWritingInfoArrayWithTips(data, this.props.codeProjectApi.myTips.result);
+
     let cards = data.map(w => (
-      <Card>
-        <CardHeader>
-          <h3><a href={w.url}>{w.title}</a></h3>
-          <div className="writing-props-row">
-            <Rating rate={w.rating} votes={w.votes} className="col-6 col-lg-3 col-xl-2"/>
-            <div className="col-6 col-lg-2">Views: {this._formatter.format(w.views)}</div>
-            <div className="col-12 col-lg-4">Publish Date: {w.publishedDate}</div>
-          </div>
-        </CardHeader>
-        <CardBody>
-          {w.summary}
-        </CardBody>
-      </Card>
+      <Col lg={6}>
+        <Card>
+          <CardHeader>
+            <h3><a href={w.url}>{w.title}</a></h3>
+            <div className="writing-props-row">
+              <Rating rate={w.rating} votes={w.votes} className="col-6 col-lg-6 col-xl-6"/>
+              <div className="col-6 col-lg-6">Views: {w.views}</div>
+              <div className="col-12 col-lg-12">Publish Date: {w.publishedDate}</div>
+            </div>
+          </CardHeader>
+          <CardBody>
+            {w.summary}
+          </CardBody>
+        </Card>
+      </Col>
     ));
     return (
       <div className="tech-writings-page">
@@ -78,7 +114,9 @@ export default class TechWritings extends React.PureComponent<{
         <div>
           I'm actively writing articles on CodeProject.com. The followings are the articles I've ever published on the website.
         </div>
-        {cards}
+        <Row>
+          {cards}
+        </Row>
       </div>
     );
   }
@@ -89,7 +127,12 @@ interface WritingInfo {
   title: string,
   summary: string,
   rating: number,
-  votes: number,
-  views: number,
+  votes: string,
+  views: string,
   publishedDate: string,
 }
+
+export default connect(
+    (state: ApplicationState) => ({ codeProjectApi: state.codeProjectApi }),
+    CodeProjectApi.actionCreators
+)(TechWritings as any);
