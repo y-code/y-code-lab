@@ -4,7 +4,11 @@
 
 @import url('https://fonts.googleapis.com/css?family=Marck+Script&display=swap');
 
-/* Provide sufficient contrast against white background */
+body {
+  padding-top: 4.5em;
+  font-family: "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 a {
   color: #0366d6;
 }
@@ -62,4 +66,34 @@ code {
     }
   }
 
+}
+
+.col-center {
+  display: flex;
+  justify-content: center;
+}
+
+.col-left {
+    display: flex;
+    justify-content: left;
+}
+
+.youtube-video {
+  width: 440px;
+  height: 248px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+@include media-breakpoint-up(sm) {
+  .youtube-video {
+    width: 560px;
+    height: 315px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .youtube-video {
+    margin-bottom: 0px;
+  }
 }

@@ -22,19 +22,33 @@ class Home extends React.Component<{
       <div className='home-page'>
         <h1 className='site-name'>Y-code Lab</h1>
         <div className='greeting-container'>
-          <p>Welcome to Yas's lab! It is the place I showcase my works. Please feel free to look around. I would be grateful if you could leave a comment.</p>
+          <p>Welcome to Yas's Lab! It is a place I showcase my works. Please feel free to look around. I would be grateful if you could <Link to="/contact-me">leave a comment.</Link></p>
         </div>
-        <Container>
-          <Row>
+        <Container className="menu">
+          <Row className='justify-content-center'>
             <Col sm={12} md={12} lg={4}
               className='site-category-col'
-              onClick={() => this.goTo('/web-app-devs')}>
+              onClick={() => this.goTo('/my-projects')}>
               <Row className='justify-content-center'>
-                <div className='web-app-devs-icon-frame text-center'>
-                  <img className='web-app-devs-icon' src="/web-apps-icon.jpg"/>
+                <div className='my-projects-icon-frame text-center'>
+                  <img className='my-projects-icon' src="/happyfl-big.png"/>
                 </div>
                 <Col xs={12} className='text-center'>
-                  <h2 className='site-category-name'>Web Apps</h2>
+                  <h2 className='site-category-name'>My Projects</h2>
+                </Col>
+                <Col xs={12}>
+                </Col>
+              </Row>
+            </Col>
+            <Col sm={12} md={6} lg={4}
+              className='site-category-col'
+              onClick={() => this.goTo('/contributions-in-3rd-party')}>
+              <Row className='justify-content-center'>
+                <div className='devs-in-3rd-party-icon-frame'>
+                  <img className='devs-in-3rd-party-icon' src="/contributions-in-3rd-party-icon.png"/>
+                </div>
+                <Col xs={12}>
+                  <h2 className='site-category-name'>Contributions in 3rd Party</h2>
                 </Col>
                 <Col xs={12}>
                 </Col>

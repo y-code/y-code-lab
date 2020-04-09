@@ -72,48 +72,64 @@ class TechWritings extends React.PureComponent<
 
   public render() {
     let data: WritingInfo[] = [];
+    let cards: JSX.Element[];
 
-    if (this.props.codeProjectApi
-        && this.props.codeProjectApi.myArticles
-        && this.props.codeProjectApi.myArticles.result)
-        data = this.aggregateWritingInfoArrayWithArticles(data, this.props.codeProjectApi.myArticles.result);
+    if (this.props.codeProjectApi.myArticles.isLoading
+      || this.props.codeProjectApi.myBlogPosts.isLoading
+      || this.props.codeProjectApi.myTips.isLoading) {
+      
+      cards = [ <Col className="col-center"><img src="/bean-eater-1s-200px.png"/></Col> ];
 
-    if (this.props.codeProjectApi
-        && this.props.codeProjectApi.myBlogPosts
-        && this.props.codeProjectApi.myBlogPosts.result)
-        data = this.aggregateWritingInfoArrayWithBlogPosts(data, this.props.codeProjectApi.myBlogPosts.result);
+    } else {
 
-    if (this.props.codeProjectApi
-        && this.props.codeProjectApi.myTips
-        && this.props.codeProjectApi.myTips.result)
-        data = this.aggregateWritingInfoArrayWithTips(data, this.props.codeProjectApi.myTips.result);
+      if (this.props.codeProjectApi
+          && this.props.codeProjectApi.myArticles
+          && this.props.codeProjectApi.myArticles.result)
+          data = this.aggregateWritingInfoArrayWithArticles(data, this.props.codeProjectApi.myArticles.result);
 
-    let cards = data.map(w => (
-      <Col lg={6}>
-        <Card>
-          <CardHeader>
-            <h3><a href={w.url}>{w.title}</a></h3>
-            <div className="writing-props-row">
-              <Rating rate={w.rating} votes={w.votes} className="col-6 col-lg-6 col-xl-6"/>
-              <div className="col-6 col-lg-6">Views: {w.views}</div>
-              <div className="col-12 col-lg-12">Publish Date: {w.publishedDate}</div>
-            </div>
-          </CardHeader>
-          <CardBody>
-            {w.summary}
-          </CardBody>
-        </Card>
-      </Col>
-    ));
+      if (this.props.codeProjectApi
+          && this.props.codeProjectApi.myBlogPosts
+          && this.props.codeProjectApi.myBlogPosts.result)
+          data = this.aggregateWritingInfoArrayWithBlogPosts(data, this.props.codeProjectApi.myBlogPosts.result);
+
+      if (this.props.codeProjectApi
+          && this.props.codeProjectApi.myTips
+          && this.props.codeProjectApi.myTips.result)
+          data = this.aggregateWritingInfoArrayWithTips(data, this.props.codeProjectApi.myTips.result);
+
+      cards = data.map(w => (
+        <Col lg={6}>
+          <Card>
+            <CardHeader>
+              <h3><a href={w.url}>{w.title}</a></h3>
+              <div className="writing-props-row">
+                <Rating rate={w.rating} votes={w.votes} className="col-6 col-lg-6 col-xl-6"/>
+                <div className="col-6 col-lg-6">Views: {w.views}</div>
+                <div className="col-12 col-lg-12">Publish Date: {w.publishedDate}</div>
+              </div>
+            </CardHeader>
+            <CardBody>
+              {w.summary}
+            </CardBody>
+          </Card>
+        </Col>
+      ));
+
+    }
+
     return (
       <div className="tech-writings-page">
-        <h1 className="site-category-name">Technical Writings</h1>
-        <div>
-          I sometimes have time to write an article. I've been helped many times by people through their sharing knowledge, discoveries and experiences, and I thought I should repay such bits of help that I've got from the society. In recent years, when I discover something during my software developments, and if it appears not much documented anywhere, I'm trying to leave my discovery somewhere in public. I'm thinking such a contribution is a way how I can repay to the developers society.
-        </div>
-        <div>
-          I'm actively writing articles on CodeProject.com. The followings are the articles I've ever published on the website.
-        </div>
+        <Row>
+          <Col>
+            <h1 className="site-category-name">Technical Writings</h1>
+            <p>
+              I've been helped many times by people through their sharing knowledge, discoveries and experiences, and I thought I should repay such helps I've got from the software developers society. So, I have time to write articles when I discover something during my software developments to contribute to the software developers society.
+            </p>
+            <p>
+              I'm actively writing articles on CodeProject.com. The followings are the articles I've ever published on the website.
+            </p>
+          </Col>
+        </Row>
         <Row>
           {cards}
         </Row>

@@ -6,8 +6,8 @@
 .home-page {
 
   .greeting-container {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     margin-left: 0px;
     margin-right: 0px;
   }
@@ -43,6 +43,10 @@
     }
   }
 
+  .menu {
+    margin-bottom: 20px;
+  }
+
   .image-cropper {
     width: 160px;
     height: 160px;
@@ -57,11 +61,11 @@
     margin-bottom: 10px;
   }
 
-  .web-app-devs-icon-frame {
+  .my-projects-icon-frame {
     @extend .icon-frame;
   }
 
-  .web-app-devs-icon {
+  .my-projects-icon {
     width: 160px;
   }
 
@@ -75,6 +79,19 @@
     width: 170px;
     top: -5px;
     left: -1px;
+  }
+
+  .devs-in-3rd-party-icon-frame {
+    @extend .image-cropper;
+    @extend .icon-frame;
+    border-radius: 0%;
+  }
+
+  .devs-in-3rd-party-icon {
+    position: absolute;
+    width: 160px;
+    top: 0px;
+    left: 0px;
   }
 
   .blender-unity-icon-frame {

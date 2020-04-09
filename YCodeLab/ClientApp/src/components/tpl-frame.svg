@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="200"
+     height="200"
+     version="1.0">
+    <style type="text/css">
+        text {
+            font-size: 10px;
+            font-family: "Monaco", "MS Gothic", consolas;
+        }
+    </style>
+    <!--<path d="M 0 0 V 100 H 100 V 0 H 0"
+          stroke="green"
+          stroke-width="3"
+          fill="transparent" />-->
+    <text x="0" y="15" fill="black" content-value="param(s)">zxcv</text>
+    <path d="M 0 10 H 20 V 90 H 10"
+          id="text_path_1"
+          fill="transparent" />
+    <path d="M 10 100 V 80 H 90 V 90"
+          id="text_path_2"
+          fill="transparent" />
+    <path d="M 100 90 H 80 V 10 H 90"
+          id="text_path_3"
+          fill="transparent" />
+    <path d="M 90 0 V 20 H 10 V 10"
+          id="text_path_4"
+          fill="transparent" />
+    <text>
+        <textPath id="frame_text_1"
+                  xlink:href="#text_path_1"
+                  fill="green"
+                  startOffset="0">
+                  asdf
+        </textPath>
+        <textPath id="frame_text_2"
+                  xlink:href="#text_path_2"
+                  fill="green"
+                  startOffset="0">
+                  asdf
+        </textPath>
+        <textPath id="frame_text_3"
+                  xlink:href="#text_path_3"
+                  fill="green"
+                  startOffset="0">
+                  asdf
+        </textPath>
+        <textPath id="frame_text_4"
+                  xlink:href="#text_path_4"
+                  fill="green"
+                  startOffset="0">
+                  asdf
+        </textPath>
+    </text>
+    <script type="text/javascript">
+    //<![CDATA[
+        const svg = document.documentElement;
+        const view = {
+//            width: svg.width.baseVal.value,
+//            height: svg.height.baseVal.value,
+            width: svg.getAttribute('width'),
+            height: svg.getAttribute('height'),
+        };
+        //svg.setAttribute('viewBox', `0 0 ${view.width} ${view.height}`);
+
+        //svg.setAttribute('width', view.width);
+        //svg.setAttribute('height', view.height);
+
+        console.log(`svg size: ${view.width}, ${view.height} (${svg.getAttribute('viewBox')})`);
+
+        let textPath = new Array(4);
+        textPath[0] = document.getElementById('text_path_1');
+        textPath[1] = document.getElementById('text_path_2');
+        textPath[2] = document.getElementById('text_path_3');
+        textPath[3] = document.getElementById('text_path_4');
+        textPath[0].setAttribute('d', `M 0 10 H 20 V ${view.height - 10} H 10`);
+        textPath[1].setAttribute('d', `M 10 ${view.height} V ${view.height - 20} H ${view.width - 10} V ${view.height - 10}`);
+        textPath[2].setAttribute('d', `M ${view.width} ${view.height - 10} H ${view.width - 20} V 10 H ${view.width - 10}`);
+        textPath[3].setAttribute('d', `M ${view.width - 10} 0 V 20 H 10 V 10`);
+        let frameText = new Array(4);
+        frameText[0] = document.getElementById('frame_text_1');
+        frameText[1] = document.getElementById('frame_text_2');
+        frameText[2] = document.getElementById('frame_text_3');
+        frameText[3] = document.getElementById('frame_text_4');
+        let offset = 0;
+        let text = `
+1234567890
+qwertyuiopasdfghjklzxcvbnm
+qwertyuiopasdfghjklzxcvbnm
+qwertyuiopasdfghjklzxcvbnm
+qwertyuiopasdfghjklzxcvbnm
+qwertyuiopasdfghjklzxcvbnm
+`;
+        text += `
+ｱｲｳｴｵｧｨｩｪｫｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾗﾘﾙﾚﾛﾜｦﾝｬｭｮ
+`;
+        text = text.trim().replace(/[\s\r\n]/g, '');
+        let buf = new Array(4);
+        for (let j = 0; j < buf.length; j++)
+            for (let i = 0; i < text.length; i++)
+                buf[j] += text.substr(Math.floor(Math.random() * text.length), 1);
+
+        function update() {
+            //frameText.setAttribute('startOffset', '' + offset);
+            //offset++;
+            for (let j = 0; j < buf.length; j++) {
+                for (let i = 0; i < text.length; i++) {
+                    if (Math.random() * 20 > 19)
+                        buf[j] = buf[j].substr(0, i) + text.substr(Math.floor(Math.random() * text.length), 1) + buf[j].substr(i + 1, buf[j].length - i - 1);
+                }
+                frameText[j].innerHTML = buf[j];
+            }
+            setTimeout(update, 200);
+        }
+
+        update();
+    //]]>
+    </script>
+</svg>

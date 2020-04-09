@@ -21,7 +21,7 @@
       "environmentVariables": {
         "ADMIN_TOKEN": "test-admin",
         "Y_CODE_LAB_DB": "Server=localhost;Port=6543;User Id=postgres;Password=postgres;Database=ycodelab;pooling=true;maxpoolsize=30;",
-        "CPP": "test-admin",
+        "CPP": "maido2134",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:8080"
