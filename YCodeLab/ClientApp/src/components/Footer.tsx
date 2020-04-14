@@ -25,7 +25,7 @@ export default function(props: { children?: React.ReactNode }) {
               </div>
             </div>
             <div className='profile-content-col text-light'>
-              <h2>Yas Ikeda</h2>
+              <h2 className='text-light'>Yas Ikeda</h2>
               <p>
                 I'm a Software Engineer experienced in enterprise system development. I'm most skilled in Web System Development while increasing knowledge in Video Game Development these days.
               </p>

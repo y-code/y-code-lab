@@ -6,6 +6,8 @@ import bgImg from './tpl-frame.svg';
 import bgImg2 from './GitHub-Mark-120px-plus.png';
 import bgImg3 from './rip.svg';
 
+import linkInjector from '../utilities/linkInjector';
+
 interface Props {
 }
 interface State {
@@ -135,50 +137,6 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
     return original.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
   }
 
-  private injectLinks(original: (string|JSX.Element)[], links: { [key:string]: string }) : (string|JSX.Element)[] {
-    let buf: (string|JSX.Element)[] = original;
-    for (let linkKey in links)
-      buf = this.injectLink(buf, linkKey, links[linkKey]);
-    buf = buf.map(b => {
-      if (typeof(b) === 'string')
-        return <>{b}</>
-      else
-        return b;
-    })
-    return buf;
-  }
-
-  private injectLink(original: (string|JSX.Element)[], linkKey: string, linkUrl: string) : (string|JSX.Element)[] {
-    let result : (string|JSX.Element)[] = [];
-
-    for (let line of original) {
-      if (typeof(line) === 'string') {
-        let tmp = `#${line}#`;
-        let fragments = tmp.split(linkKey);
-        if (fragments.length < 2)
-          result.push(line);
-        else {
-          for (let i = 0; i < fragments.length; i++) {
-            let fragment = fragments[i];
-            if (i === 0)
-              fragment = fragment.substr(1, fragment.length - 1);
-            else if (i === fragments.length - 1)
-              fragment = fragment.substr(0, fragment.length - 1);
-            else
-              fragment = fragment;
-            result.push(fragment);
-            if (i < fragments.length - 1)
-              result.push(<a href={linkUrl}>{linkKey}</a>);
-          }
-        }
-      } else {
-        result.push(line);
-      }
-    }
-
-    return result;
-  }
-
   render() {
     return (
       <div className="page-contributions-in-3rd-party">
@@ -212,7 +170,7 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
                         {
                           i.description.map(d =>
                             <p>
-                              {this.injectLinks([ d ], i.links)}
+                              {linkInjector.inject([ d ], i.links)}
                             </p>
                           )
                         }

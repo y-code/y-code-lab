@@ -12,6 +12,7 @@ export default function(props: {}){
     <header className="nav-menu">
       <Navbar className="fixed-top navbar-expand-lg navbar-toggleable-lg border-bottom box-shadow mb-3 navbar-dark bg-primary">
         <Container>
+          <img className="favicon" src="/favicon-32.png"/>
           <NavbarBrand tag={Link} to="/" className="text-light">Y-code Lab</NavbarBrand>
           <NavbarToggler onClick={() => setIsNavOpen(!isNavOpen)} className="mr-2"/>
           <Collapse className="d-lg-inline-flex flex-lg-row-reverse" isOpen={isNavOpen} navbar>

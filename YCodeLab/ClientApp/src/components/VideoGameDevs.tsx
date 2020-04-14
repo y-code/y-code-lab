@@ -3,12 +3,15 @@ import * as React from 'react';
 import './VideoGameDevs.scss';
 import { Row, Col, Badge } from 'reactstrap';
 
+import linkInjector from '../utilities/linkInjector';
+
 interface VideoGameDevItem {
   name: string,
   actionTypes: ('3D Game'|'3D Modeling'|'Online Multiplayer'|'3D Animation'|'ShaderLab'|'Algorithm'|'Vector Geometry')[],
   status: ('Prototype'|'In Development'|'Released'),
   videoId: string,
   description: string[],
+  linkToItchio: string,
   links: { [key:string]: string },
 }
 
@@ -31,10 +34,13 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
           status: 'In Development',
           videoId: '3L3cToPfDqg',
           description: [
-            'Babble Warriors Colosseum are my attempts at online multiplayer game development. I\'ve been developing them with UNet HLAPI, but now it is deprecated, and new online game solutions are available. I will have to migrate those games to a new framework.',
-            'By the way, in Babble Warriors Colosseum, I also put efforts in 3D character modelling, especially in clothing and rigging.',
+            'Babble Warriors Colosseum is one of my attempts at online multiplayer game development. Please have a look at the work I\'ve ever done in the demo video. You can play the game at itchi.io in WebGL version and Standalone version. Unfortunately, UNet Matchmaking does not work in WebGL platform. Please download PC version to enjoy the multiplayer mode.',
+            'I\'ve been developing with UNet HLAPI, but now it is deprecated. New online game solutions are available, and I\'m learning the new ones and thinking about how to migrate this game to a new framework.',
+            'In this development, I also put efforts in 3D character modelling, especially in clothing and rigging. Please also take a close look at the player avatar.',
           ],
+          linkToItchio: 'https://y-code.itch.io/babble-warriors',
           links: {
+            'Babble Warriors Colosseum': 'https://y-code.itch.io/babble-warriors',
           }
         },
         {
@@ -47,7 +53,9 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
             'This game generates walls in the maze in random when a game starts so that the maze is always unique. The goal location is calculated based on the breadth-first search to be the farthest from the start location.',
             'However, the control of the opponent character was a more challenging problem than the pathfinding. Because the maze is composed of hexagons, the opponent character could hit a wall and stick on it if it would try to go straight onto the next tile depending on from where it starts. Therefore, I needed to calculate opponent control to adjust the moving direction when there\'s a wall on the way.',
           ],
+          linkToItchio: 'https://y-code.itch.io/dungeons-of-mazes',
           links: {
+            'Tower of Maze': 'https://y-code.itch.io/dungeons-of-mazes',
           }
         },
         {
@@ -58,7 +66,9 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
           description: [
             'In Cube Dojo, intuitive control was a challenging problem. I\'m satisfied with my implementation of the rotation control of each layer of cubes. A player can rotate a layer by drag and drop operation, or touch and swipe action in mobile devices. I\'m currently improving view angle rotation control to make it more intuitive.',
           ],
+          linkToItchio: 'https://y-code.itch.io/cuber-dojo',
           links: {
+            'Cube Dojo': 'https://y-code.itch.io/cuber-dojo',
           }
         },
         {
@@ -70,7 +80,9 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
             'KotoDama is still at the very beginning of development, and I have only finished avatar action and some model design. This time, I attempted to utilize the simulation methods of Blender to add natural movements into animation.',
             'Besides, I also tried modelling a realistic tree for this game world. I\'m pretty satisfied with the result.',
           ],
+          linkToItchio: 'https://y-code.itch.io/kotodama',
           links: {
+            'KotoDama': 'https://y-code.itch.io/kotodama',
           }
         },
         {
@@ -81,7 +93,9 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
           description: [
             'Humanoid Avatar Demo is a demo for one of my humanoid model with rigging and animation. I tried to reduce the vertices of the model polygon while keeping the quality in animation. It was also challenging to set up colliders over the humanoid body which moves around during animation.',
           ],
+          linkToItchio: 'https://y-code.itch.io/humanoid-avatar-sample',
           links: {
+            'Humanoid Avatar Demo': 'https://y-code.itch.io/humanoid-avatar-sample',
           }
         },
         {
@@ -92,7 +106,9 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
           description: [
             'Fairy Dungeon was just a demo to test a shader that my kid and I designed and developed together. In my kid\'s game development project, the video game he designed required an unusual rendering, and we found that creating a custom shader can be a solution for it. It was the first time for me, and also for my kid, to write code in ShaderLab language. So, I made a simple video game so as for my kid to test the shader before using it in his video game.',
           ],
+          linkToItchio: 'https://y-code.itch.io/fairy-dungeon',
           links: {
+            'Fairy Dungeon': 'https://y-code.itch.io/fairy-dungeon',
           }
         },
       ]
@@ -130,7 +146,10 @@ function VideoGameDev(props: { data: VideoGameDevItem }) {
   return (
     <Row className="section">
       <Col xs={12}>
-        <h2>{data.name}</h2>
+        <h2>
+          {data.name}
+          {data.linkToItchio ? <a href={data.linkToItchio} target="_blank"><img src="https://img.icons8.com/metro/26/000000/external-link.png" style={{ width: "20px", marginLeft: "10px" }}/></a> : null }
+        </h2>
       </Col>
       <Col xs={12}className="col-tags">
         <>
@@ -145,7 +164,10 @@ function VideoGameDev(props: { data: VideoGameDevItem }) {
         />
       </Col>
       <Col>
-        {(() => data.description.map(p => (<p>{p}</p>)))()}
+        {
+          (() => data.description.map(p =>
+            (<p>{linkInjector.inject([ p ], data.links)}</p>)))()
+        }
       </Col>
     </Row>
   );

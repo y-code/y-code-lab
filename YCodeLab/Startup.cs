@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,8 @@ namespace YCodeLab
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddResponseCaching();
+
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
@@ -76,6 +79,24 @@ namespace YCodeLab
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseResponseCaching();
+            app.Use(async (context, next) =>
+            {
+                var headers = context.Response.GetTypedHeaders();
+                headers.CacheControl
+                    = new Microsoft.Net.Http.Headers.CacheControlHeaderValue
+                    {
+                        Public = true,
+                        NoCache = true,
+                        MaxAge = TimeSpan.FromSeconds(10),
+                        MustRevalidate = true,
+                        NoTransform = true,
+                    };
+                headers.Expires
+                    = new DateTimeOffset(DateTime.Now + TimeSpan.FromSeconds(10));
+                await next();
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -89,7 +110,23 @@ namespace YCodeLab
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            app.UseSpaStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = response =>
+                {
+                    var headers = response.Context.Response.GetTypedHeaders();
+                    headers.CacheControl = new Microsoft.Net.Http.Headers.CacheControlHeaderValue
+                    {
+                        Public = true,
+                        NoCache = true,
+                        MaxAge = TimeSpan.FromSeconds(10),
+                        MustRevalidate = true,
+                        NoTransform = true,
+                    };
+                    headers.Expires
+                        = new DateTimeOffset(DateTime.Now + TimeSpan.FromSeconds(10));
+                }
+            });
 
             app.UseRouting();
 

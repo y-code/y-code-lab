@@ -8,10 +8,19 @@ html { font-size: 14px; }
 
 .nav-menu {
 
+  .favicon {
+    width: 32px;
+    height: 32px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    margin-right: 8px;
+  }
+
   a.navbar-brand {
-      white-space: normal;
-      text-align: center;
-      word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
   }
 
   .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
