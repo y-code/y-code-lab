@@ -13,10 +13,12 @@ it('renders without crashing', () => {
     });
     const store = storeFake({}) as any;
 
+    const base = document.createElement('div');
+    document.body.appendChild(base);
     ReactDOM.render(
         <Provider store={store}>
             <MemoryRouter>
                 <App/>
             </MemoryRouter>
-        </Provider>, document.createElement('div'));
+        </Provider>, base);
 });
