@@ -6,7 +6,6 @@ import ContributionsIn3rdParty from './components/ContributionsIn3rdParty';
 import MyProjects from './components/MyProjects';
 import TechWritings from './components/TechWritings';
 import VideoGameDevs from './components/VideoGameDevs';
-// import Profile from './components/Profile';
 import ContactMe from './components/ContactMe';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
@@ -35,6 +34,7 @@ export default class App extends React.Component {
       <ScrollToTop>
         <Layout>
             <Route exact path='/' component={Home} />
+            <Route exact path='/Home' component={Home} />
             {/* <Route path='/profile' component={Profile} /> */}
             <Route path='/contributions-in-3rd-party' component={ContributionsIn3rdParty} />
             <Route path='/my-projects' component={MyProjects} />
