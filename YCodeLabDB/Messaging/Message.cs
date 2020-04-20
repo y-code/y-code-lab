@@ -11,18 +11,22 @@ namespace YCodeLab.DB.Messaging
     {
         [Column("message_id"), Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long? Id { get; set; }
+
         [Column("sender_name")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter your name.")]
         [FullName(ErrorMessage = "Please enter your first name and last name. Optionally, you can include your middle name.")]
         public string SenderName { get; set; }
+
         [Column("sender_email")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter your email address.")]
         [EmailAddress(ErrorMessage = "This email address looks not valid. Please check your email address.")]
         public string SenderEmail { get; set; }
+
         [Column("content")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter some message.")]
-        [MaxLength(10, ErrorMessage = "Your message is too long. Please input 1000 characters or less.")]
+        [MaxLength(1000, ErrorMessage = "Your message is too long. Please input 1000 characters or less.")]
         public string Content { get; set; }
+
         [Column("created_time")]
         public DateTime? CreatedTime { get; set; }
 

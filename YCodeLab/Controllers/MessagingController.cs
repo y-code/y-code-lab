@@ -30,13 +30,13 @@ namespace YCodeLab.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<ApiResponse> Messages([FromBody] Message message, bool onlyValidation = false)
+        public async Task<ApiResponse> Messages([FromBody] Message message, bool submit = false)
         {
             const string failureMessage = "Hi, I'm Yas, the owner of this website. "
                     + "I'm sorry but there was an issue and the system failed to send your message. "
                     + "I will solve this issue as soon as possible.";
 
-            if (onlyValidation)
+            if (!submit)
                 return new PostMessagesResponse { Status = ApiResponseStatus.Success };
 
             try

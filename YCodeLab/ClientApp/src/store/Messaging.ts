@@ -43,9 +43,9 @@ type KnownAction
   | extractAction<typeof createReceiveSaveMessageResultAction>;
 
 export const actionCreators = {
-  requestSaveMessage: (data: Message, isValidationOnly: boolean = false): AppThunkAction<KnownAction> => (dispatch, getState) => {
+  requestSaveMessage: (data: Message, submit: boolean): AppThunkAction<KnownAction> => (dispatch, getState) => {
     var state = getState();
-    fetch(`/api/Messaging/Messages${isValidationOnly ? '?onlyValidation=true' : ''}`, {
+    fetch(`/api/Messaging/Messages${submit ? '?submit=true' : ''}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)

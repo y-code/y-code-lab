@@ -14,8 +14,8 @@ class ContactMeState {
   content: string = "";
 }
 
-export default class ContactMe extends React.PureComponent<ContactMeProperties & typeof actionCreators, ContactMeState> {
-  constructor(props: ContactMeProperties & typeof actionCreators) {
+export default class ContactMe extends React.PureComponent<ContactMeProperties, ContactMeState> {
+  constructor(props: ContactMeProperties) {
     super(props);
     this.state = new ContactMeState();
   }
@@ -39,10 +39,17 @@ let ContactMeForm: React.FunctionComponent<{
   const [ isContentValid, setIsContentValid ] = React.useState(undefined as boolean | undefined);
   const [ isAllValid, setIsAllValid ] = React.useState(false);
 
-  React.useEffect(() => {
-    console.log(`[DEBUG] Effect is being executed. Loading state: ${(props as MessagingState).saveMessage.isLoading}`);
+  const {
+    requestSaveMessage
+  } = props as typeof actionCreators;
+  const {
+    saveMessage
+  } = props as MessagingState;
 
-    let result = (props as MessagingState).saveMessage.result;
+  React.useEffect(() => {
+    console.log(`[DEBUG] Effect is being executed. Loading state: ${saveMessage.isLoading}`);
+
+    let result = saveMessage.result;
     if (result && result.errors) {
       setIsSenderNameValid(!result.errors.senderName);
       setIsSenderEmailValid(!result.errors.senderEmail);
@@ -59,14 +66,15 @@ let ContactMeForm: React.FunctionComponent<{
 
   const instantValidation = React.useMemo(() => {
     console.log(`[DEBUG] A field was updated`);
-    if (!((props) as MessagingState).saveMessage.result)
+    if (!saveMessage.result)
       return;
-    if ((props as typeof actionCreators).requestSaveMessage) {
-      (props as typeof actionCreators).requestSaveMessage({
+    if (requestSaveMessage) {
+      requestSaveMessage({
         senderName,
         senderEmail,
         content
-      });
+      },
+      false);
     }
   }, [ senderName, senderEmail, content ]);
 
@@ -74,36 +82,38 @@ let ContactMeForm: React.FunctionComponent<{
 
   const handleSubmit: React.FormEventHandler = e => {
     e.preventDefault();
-    if ((props as typeof actionCreators).requestSaveMessage)
-      (props as typeof actionCreators).requestSaveMessage({
+
+    if (requestSaveMessage)
+      requestSaveMessage({
         senderName,
         senderEmail,
         content
-      });
+      },
+      true);
   }
 
   let feedbackForSenderName: ReactElement[] = [];
   let feedbackForSenderEmail: ReactElement[] = [];
   let feedbackForContent: ReactElement[] = [];
   let feedbackKey = 0;
-  if ((props as MessagingState).saveMessage.result
-    && (props as MessagingState).saveMessage.result.errors) {
-    if ((props as MessagingState).saveMessage.result.errors.senderName) {
-      for (let error of (props as MessagingState).saveMessage.result.errors.senderName.errors) {
+  if (saveMessage.result
+    && saveMessage.result.errors) {
+    if (saveMessage.result.errors.senderName) {
+      for (let error of saveMessage.result.errors.senderName.errors) {
         feedbackForSenderName.push(
           <div key={feedbackKey++}>{error.errorMessage}</div>
         )
       }
     }
-    if ((props as MessagingState).saveMessage.result.errors.senderEmail) {
-      for (let error of (props as MessagingState).saveMessage.result.errors.senderEmail.errors) {
+    if (saveMessage.result.errors.senderEmail) {
+      for (let error of saveMessage.result.errors.senderEmail.errors) {
         feedbackForSenderEmail.push(
           <div key={feedbackKey++}>{error.errorMessage}</div>
         )
       }
     }
-    if ((props as MessagingState).saveMessage.result.errors.content) {
-      for (let error of (props as MessagingState).saveMessage.result.errors.content.errors) {
+    if (saveMessage.result.errors.content) {
+      for (let error of saveMessage.result.errors.content.errors) {
         feedbackForContent.push(
           <div key={feedbackKey++}>{error.errorMessage}</div>
         )
@@ -111,12 +121,12 @@ let ContactMeForm: React.FunctionComponent<{
     }
   }
 
-  if ((props as MessagingState).saveMessage.result
-    && (props as MessagingState).saveMessage.result.message) {
+  if (saveMessage.result
+    && saveMessage.result.message) {
     return (
       <div className="main-content-message">
-        <div className={`${(props as MessagingState).saveMessage.result.status == "Success" ? "text-info" : "text-danger"}`}>
-          {(props as MessagingState).saveMessage.result.message}
+        <div className={`${saveMessage.result.status == "Success" ? "text-info" : "text-danger"}`}>
+          {saveMessage.result.message}
         </div>
       </div>
     );
@@ -160,7 +170,7 @@ let ContactMeForm: React.FunctionComponent<{
               <div className="row justify-content-between">
                 <Label for="content">Message</Label>
                 <div
-                  className={isContentValid === undefined ? "text-info" : isContentValid ? "text-success" : "text-danger"}>
+                  className={isContentValid === undefined ? "text-info" : (isContentValid || isAllValid) ? "text-success" : "text-danger"}>
                   {contentLength} / 1,000
                 </div>
               </div>
