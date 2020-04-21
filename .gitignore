@@ -358,5 +358,5 @@ MigrationBackup/
 *_dev.cs
 *_dev.Designer.cs
 
-HappyFL/_PublishedWebsites/NetCoreWebApp/
+YCodeLabDBFactory/appsettings.Release.json
 out/
