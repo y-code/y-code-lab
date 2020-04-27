@@ -1,5 +1,4 @@
-import { Reducer } from 'redux';
-import { createAction, Action, ActionFunction1, handleActions } from 'redux-actions';
+import { createAction, Action, ActionFunction1, handleActions, ReducerMap, Reducer } from 'redux-actions';
 import { AppThunkAction } from '.';
 
 export interface MessagingState {
@@ -33,14 +32,19 @@ export interface SaveMessageResult {
 
 export type ApiResultStatus = "Success" | "Failure";
 
-const createRequestSaveMessageAction = createAction('[Messaging] Request save message', (data: Message) => data);
-const createReceiveSaveMessageResultAction = createAction('[Messaging] Receive save message result', (data: SaveMessageResult) => data);
+const ACTION_MESSAGING_REQUEST_SAVE_MESSAGE = "[Messaging] Request save message";
+const ACTION_MESSAGING_RECEIVE_SAVE_MESSAGE_RESULT = "[Messaging] Receive save message result";
+
+export const actions = {
+  requestSaveMessage: createAction(ACTION_MESSAGING_REQUEST_SAVE_MESSAGE, (data: Message) => data),
+  receiveSaveMessageResult: createAction(ACTION_MESSAGING_RECEIVE_SAVE_MESSAGE_RESULT, (data: SaveMessageResult) => data),
+};
 
 type extractAction<Type> = Type extends ActionFunction1<infer X, infer Y> ? Y : never;
 
-type KnownAction
-  = extractAction<typeof createRequestSaveMessageAction>
-  | extractAction<typeof createReceiveSaveMessageResultAction>;
+export type KnownAction
+  = extractAction<typeof actions.requestSaveMessage>
+  | extractAction<typeof actions.receiveSaveMessageResult>;
 
 export const actionCreators = {
   requestSaveMessage: (data: Message, submit: boolean): AppThunkAction<KnownAction> => (dispatch, getState) => {
@@ -53,27 +57,28 @@ export const actionCreators = {
       .then(response => {
         response.json().then(data => {
           let result = data as SaveMessageResult;
-          dispatch(createReceiveSaveMessageResultAction(result));
+          dispatch(actions.receiveSaveMessageResult(result));
         })
       })
-    dispatch(createRequestSaveMessageAction(data));
+    dispatch(actions.requestSaveMessage(data));
   },
 }
 
-export const reducer = handleActions<MessagingState, Message | SaveMessageResult>(
-  {
-    '[Messaging] Request save message': ((state, action) => ({
-      saveMessage: {
-        isLoading: true,
-      },
-    })) as Reducer<MessagingState, any>,
-    '[Messaging] Receive save message result': ((state, action) => ({
-      saveMessage: {
-        isLoading: false,
-        result: action.payload
-      },
-    })) as Reducer<MessagingState, any>
+const reducerMap: ReducerMap<MessagingState, Message & SaveMessageResult> = {};
+reducerMap[ACTION_MESSAGING_REQUEST_SAVE_MESSAGE] = ((state, action) => ({
+  saveMessage: {
+    isLoading: true,
   },
+})) as Reducer<MessagingState, Message>
+reducerMap[ACTION_MESSAGING_RECEIVE_SAVE_MESSAGE_RESULT] = ((state, action) => ({
+  saveMessage: {
+    isLoading: false,
+    result: action.payload
+  },
+})) as Reducer<MessagingState, SaveMessageResult>
+
+export const reducer = handleActions<MessagingState, Message & SaveMessageResult>(
+  reducerMap,
   {
     saveMessage: {
       isLoading: false,

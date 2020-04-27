@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 import { render, cleanup } from '@testing-library/react';
+import configureTestStore from './store/configureTestStore';
 
 describe('App', () => {
   beforeEach(() => {
@@ -10,19 +11,13 @@ describe('App', () => {
   });
 
   it('renders without crashing', () => {
-      const storeFake = (state: any) => ({
-          default: () => {},
-          subscribe: () => {},
-          dispatch: () => {},
-          getState: () => ({ ...state })
-      });
-      const store = storeFake({}) as any;
+    const { testStore, stethoscope } = configureTestStore();
 
-      render(
-          <Provider store={store}>
-              <MemoryRouter>
-                  <App/>
-              </MemoryRouter>
-          </Provider>);
+    render(
+      <Provider store={testStore}>
+        <MemoryRouter>
+          <App/>
+        </MemoryRouter>
+      </Provider>);
   });
 });

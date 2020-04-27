@@ -2,6 +2,8 @@ import * as WeatherForecasts from './WeatherForecasts';
 import * as Counter from './Counter';
 import * as Messaging from './Messaging';
 import * as CodeProjectApi from './CodeProjectApi';
+import type * as MessagingType from './Messaging';
+import type * as CodeProjectApiType from './CodeProjectApi';
 
 // The top-level state object
 export interface ApplicationState {
@@ -26,3 +28,13 @@ export const reducers = {
 export interface AppThunkAction<TAction> {
     (dispatch: (action: TAction) => void, getState: () => ApplicationState): void;
 }
+
+export type KnownAction
+  = MessagingType.KnownAction
+  | CodeProjectApiType.KnownAction;
+
+export type {
+  Message,
+  SaveMessageResult,
+  ValidationErrorInfo
+} from './Messaging';

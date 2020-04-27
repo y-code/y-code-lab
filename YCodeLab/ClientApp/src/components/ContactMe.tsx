@@ -47,26 +47,26 @@ let ContactMeForm: React.FunctionComponent<{
   } = props as MessagingState;
 
   React.useEffect(() => {
-    console.log(`[DEBUG] Effect is being executed. Loading state: ${saveMessage.isLoading}`);
-
-    let result = saveMessage.result;
-    if (result && result.errors) {
-      setIsSenderNameValid(!result.errors.senderName);
-      setIsSenderEmailValid(!result.errors.senderEmail);
-      setIsContentValid(!result.errors.content);
-
-      setIsAllValid(
-        isSenderNameValid as boolean
-        && isSnderEmailValid as boolean
-        && isContentValid as boolean);
-    } else {
-      setIsAllValid(true);
+    if (saveMessage) {
+      let result = saveMessage.result;
+      if (result && result.errors) {
+        setIsSenderNameValid(!result.errors.senderName);
+        setIsSenderEmailValid(!result.errors.senderEmail);
+        setIsContentValid(!result.errors.content);
+  
+        setIsAllValid(
+          isSenderNameValid as boolean
+          && isSnderEmailValid as boolean
+          && isContentValid as boolean);
+      } else {
+        setIsAllValid(true);
+      }
     }
   });
 
   const instantValidation = React.useMemo(() => {
     console.log(`[DEBUG] A field was updated`);
-    if (!saveMessage.result)
+    if (!saveMessage || !saveMessage.result)
       return;
     if (requestSaveMessage) {
       requestSaveMessage({
@@ -96,8 +96,7 @@ let ContactMeForm: React.FunctionComponent<{
   let feedbackForSenderEmail: ReactElement[] = [];
   let feedbackForContent: ReactElement[] = [];
   let feedbackKey = 0;
-  if (saveMessage.result
-    && saveMessage.result.errors) {
+  if (saveMessage && saveMessage.result && saveMessage.result.errors) {
     if (saveMessage.result.errors.senderName) {
       for (let error of saveMessage.result.errors.senderName.errors) {
         feedbackForSenderName.push(
@@ -121,8 +120,7 @@ let ContactMeForm: React.FunctionComponent<{
     }
   }
 
-  if (saveMessage.result
-    && saveMessage.result.message) {
+  if (saveMessage && saveMessage.result && saveMessage.result.message) {
     return (
       <div className="main-content-message">
         <div className={`${saveMessage.result.status == "Success" ? "text-info" : "text-danger"}`}>
@@ -142,7 +140,7 @@ let ContactMeForm: React.FunctionComponent<{
               type="text"
               value={senderName}
               className={appendIsValidClass("", isSenderNameValid, isAllValid)}
-              onChange={e => setSenderName(e.currentTarget.value)}/>
+              onChange={e => setSenderName(e.currentTarget.value)} />
             <div className="valid-feedback">
               Looks good!
             </div>
@@ -189,11 +187,12 @@ let ContactMeForm: React.FunctionComponent<{
           </FormGroup>
           <FormGroup>
             <Button
+              id="sendButton"
               type="button"
               className="form-control"
               color="primary"
               disabled={!isAllValid}
-              onClick={handleSubmit}>
+              onClick={e => handleSubmit(e)}>
               Send
             </Button>
           </FormGroup>

@@ -74,7 +74,7 @@ const createReceiveGetMyTipsResultAction = createAction('[CodeProjectApi] Receiv
 
 type ExtractAction<Type> = Type extends ActionFunction1<infer XMLDocument, infer Y> ? Y : never;
 
-type KnownAction
+export type KnownAction
   = ExtractAction<typeof createRequestGetMyArticlesAction>
   | ExtractAction<typeof createReceiveGetMyArticlesResultAction>
   | ExtractAction<typeof createRequestGetMyBlogPostsAction>
