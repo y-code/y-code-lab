@@ -28,16 +28,44 @@ code {
 }
 
 .main-content-container {
-  min-height: calc(100vh - 90px);
+  min-height: 0px;
 
   .header {
     @extend .font-marck-script;
     @extend .text-center;
   }
 
-  h1 {
-    @extend .header;
-    font-size: 4em;
+  // h1 {
+  //   @extend .header;
+  //   font-size: 4em;
+  // }
+}
+
+h1 {
+  @extend .font-marck-script;
+  @extend .text-center;
+  font-size: 4em;
+  margin-bottom: 1em;
+}
+
+.introduction-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+@include media-breakpoint-up(lg) {
+  .introduction-container {
+    margin-left: 120px;
+    margin-right: 120px;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .introduction-container {
+    margin-left: 220px;
+    margin-right: 220px;
   }
 }
 
@@ -54,10 +82,49 @@ code {
   }
 }
 
+.page-section {
+  min-width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+@include media-breakpoint-up(lg) {
+  .page-section {
+    padding-top: 6em;
+    padding-bottom: 6em;
+  }
+}
+
+.table-of-contents {
+  @extend .page-section;
+  @extend .text-center;
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .h2 {
+    @extend .font-marck-script;
+    font-size: 2em;
+  }
+
+  .h3 {
+    font-family: "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.6em;
+  }
+}
+
 @include media-breakpoint-up(md) {
 
   .main-content-container {
-    min-height: calc(100vh - 100px);
+    min-height: 0px;
   }
   
   .main-content-message {
@@ -78,6 +145,11 @@ code {
     justify-content: left;
 }
 
+.anchor {
+  position: relative;
+  top: -60px;
+}
+
 .youtube-video {
   width: 440px;
   height: 248px;
@@ -95,5 +167,27 @@ code {
 @include media-breakpoint-up(lg) {
   .youtube-video {
     margin-bottom: 0px;
+  }
+}
+
+pre {
+  font-family: "Consolas", "Monaco", "Lucida Console";
+  font-size: 0.9em;
+  background-color: rgb(59, 59, 59);
+  color: lightgray;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+@include media-breakpoint-up(lg) {
+  pre {
+    margin-left: 5em;
+    margin-right: 5em;
   }
 }

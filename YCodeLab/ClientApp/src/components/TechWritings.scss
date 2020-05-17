@@ -16,6 +16,20 @@
     font-size: 1.4em;
   }
 
+  @include media-breakpoint-up(lg) {
+    .page-section {
+      padding-top: 2em;
+      padding-bottom: 2em;
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .page-section {
+      padding-top: 6em;
+      padding-bottom: 6em;
+    }
+  }
+
   .writing-props-row {
     @extend .row;
     margin-right: 0px;

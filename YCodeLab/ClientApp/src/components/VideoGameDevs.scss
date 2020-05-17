@@ -24,26 +24,50 @@
     }
   }
 
-  .section {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    /* height: calc(100vh / 2); */
-    /* min-height: 355px; */
-    /* height: 420px; */
-  }
+  // .section {
+  //   margin-top: 0px;
+  //   margin-bottom: 0px;
+  //   padding-top: 20px;
+  //   padding-bottom: 20px;
+  //   /* height: calc(100vh / 2); */
+  //   /* min-height: 355px; */
+  //   /* height: 420px; */
+  // }
 
-  .section:nth-child(odd) {
+  // .section:nth-child(odd) {
+  //   flex-direction: row;
+  //   background-color: #e7faf5;
+  // }
+
+  // .section:nth-child(even) {
+  //   flex-direction: row-reverse;
+  //   background-color: inherit;
+  // }
+  
+  .page-section:nth-child(odd) {
+    flex-direction: row;
+    background-color: inherit;
+  }
+  
+  .page-section:nth-child(even) {
     flex-direction: row;
     background-color: #e7faf5;
   }
 
-  .section:nth-child(even) {
-    flex-direction: row-reverse;
-    background-color: inherit;
+  @include media-breakpoint-up(lg) {
+    .page-section {
+      padding-top: 2em;
+      padding-bottom: 2em;
+    }
   }
 
+  @include media-breakpoint-up(xl) {
+    .page-section {
+      padding-top: 6em;
+      padding-bottom: 6em;
+    }
+  }
+    
   .col-tags {
     @extend .col-center;
 

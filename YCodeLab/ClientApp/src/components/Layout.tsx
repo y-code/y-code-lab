@@ -23,9 +23,9 @@ export default class Layout extends React.Component<{
       <React.Fragment>
         <NavMenu/>
         <Notifications/>
-        <Container className='main-content-container'>
+        {/* <Container className='main-content-container'> */}
           {this.props.children}
-        </Container>
+        {/* </Container> */}
         <Footer/>
       </React.Fragment>
     );

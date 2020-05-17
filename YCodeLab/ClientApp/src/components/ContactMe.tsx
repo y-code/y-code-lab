@@ -1,5 +1,5 @@
 import React, { ReactElement, Dispatch, SetStateAction, useCallback } from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, Container } from 'reactstrap';
 import { Message, actionCreators, SaveMessageState, MessagingState } from '../store/Messaging';
 import { string } from 'prop-types';
 import { connect } from 'react-redux';
@@ -122,81 +122,89 @@ let ContactMeForm: React.FunctionComponent<{
 
   if (saveMessage && saveMessage.result && saveMessage.result.message) {
     return (
-      <div className="main-content-message">
-        <div className={`${saveMessage.result.status == "Success" ? "text-info" : "text-danger"}`}>
-          {saveMessage.result.message}
+      <div className="contact-me-page">
+        <div className="page-section">
+          <Container>
+            <div className={`${saveMessage.result.status == "Success" ? "text-info" : "text-danger"}`}>
+              {saveMessage.result.message}
+            </div>
+          </Container>
         </div>
       </div>
     );
   } else {
     return (
       <div className="contact-me-page">
-        <h1 className="site-category-name">Contact ME</h1>
-        <Form>
-          <FormGroup>
-            <Label for="senderName">Your Name</Label>
-            <Input
-              id="senderName"
-              type="text"
-              value={senderName}
-              className={appendIsValidClass("", isSenderNameValid, isAllValid)}
-              onChange={e => setSenderName(e.currentTarget.value)} />
-            <div className="valid-feedback">
-              Looks good!
-            </div>
-            <div className="invalid-feedback">
-              {feedbackForSenderName}
-            </div>
-          </FormGroup>
-          <FormGroup>
-            <Label for="senderEmail">Your Email</Label>
-            <Input
-              id="senderEmail"
-              type="text"
-              value={senderEmail}
-              className={appendIsValidClass("", isSnderEmailValid, isAllValid)}
-              onChange={e => setSenderEmail(e.currentTarget.value)}/>
-            <div className="valid-feedback">
-              Looks good!
-            </div>
-            <div className="invalid-feedback">
-              {feedbackForSenderEmail}
-            </div>
-          </FormGroup>
-          <FormGroup>
-            <div className="container-fluid">
-              <div className="row justify-content-between">
-                <Label for="content">Message</Label>
-                <div
-                  className={isContentValid === undefined ? "text-info" : (isContentValid || isAllValid) ? "text-success" : "text-danger"}>
-                  {contentLength} / 1,000
+        <div className="page-section">
+          <h1 className="site-category-name">Contact ME</h1>
+          <Container>
+            <Form>
+              <FormGroup>
+                <Label for="senderName">Your Name</Label>
+                <Input
+                  id="senderName"
+                  type="text"
+                  value={senderName}
+                  className={appendIsValidClass("", isSenderNameValid, isAllValid)}
+                  onChange={e => setSenderName(e.currentTarget.value)} />
+                <div className="valid-feedback">
+                  Looks good!
                 </div>
-              </div>
-            </div>
-            <textarea
-              id="content"
-              className={appendIsValidClass("form-control", isContentValid, isAllValid)}
-              value={content}
-              onChange={e => setContent(e.currentTarget.value)}/>
-            <div className="valid-feedback">
-              Looks good!
-            </div>
-            <div className="invalid-feedback">
-              {feedbackForContent}
-            </div>
-          </FormGroup>
-          <FormGroup>
-            <Button
-              id="sendButton"
-              type="button"
-              className="form-control"
-              color="primary"
-              disabled={!isAllValid}
-              onClick={e => handleSubmit(e)}>
-              Send
-            </Button>
-          </FormGroup>
-        </Form>
+                <div className="invalid-feedback">
+                  {feedbackForSenderName}
+                </div>
+              </FormGroup>
+              <FormGroup>
+                <Label for="senderEmail">Your Email</Label>
+                <Input
+                  id="senderEmail"
+                  type="text"
+                  value={senderEmail}
+                  className={appendIsValidClass("", isSnderEmailValid, isAllValid)}
+                  onChange={e => setSenderEmail(e.currentTarget.value)}/>
+                <div className="valid-feedback">
+                  Looks good!
+                </div>
+                <div className="invalid-feedback">
+                  {feedbackForSenderEmail}
+                </div>
+              </FormGroup>
+              <FormGroup>
+                <div className="container-fluid">
+                  <div className="row justify-content-between">
+                    <Label for="content">Message</Label>
+                    <div
+                      className={isContentValid === undefined ? "text-info" : (isContentValid || isAllValid) ? "text-success" : "text-danger"}>
+                      {contentLength} / 1,000
+                    </div>
+                  </div>
+                </div>
+                <textarea
+                  id="content"
+                  className={appendIsValidClass("form-control", isContentValid, isAllValid)}
+                  value={content}
+                  onChange={e => setContent(e.currentTarget.value)}/>
+                <div className="valid-feedback">
+                  Looks good!
+                </div>
+                <div className="invalid-feedback">
+                  {feedbackForContent}
+                </div>
+              </FormGroup>
+              <FormGroup>
+                <Button
+                  id="sendButton"
+                  type="button"
+                  className="form-control"
+                  color="primary"
+                  disabled={!isAllValid}
+                  onClick={e => handleSubmit(e)}>
+                  Send
+                </Button>
+              </FormGroup>
+            </Form>
+          </Container>
+        </div>
       </div>
     );
   }

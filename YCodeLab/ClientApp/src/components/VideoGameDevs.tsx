@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import './VideoGameDevs.scss';
-import { Row, Col, Badge } from 'reactstrap';
+import { Row, Col, Badge, Container } from 'reactstrap';
 
 import linkInjector from '../utilities/linkInjector';
 
@@ -118,7 +118,6 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
   public render() {
     return (
       <div className="video-game-devs-page">
-        <h1>Video Game Developments</h1>
         <Introduction {...this.props}/>
         {(() => this.state.items.map(item => <VideoGameDev data={item} />))()}
       </div>
@@ -128,47 +127,52 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
 
 function Introduction(props: any) {
   return (
-    <Row className="intro">
-      <Col>
-        <p>
+    <div className="page-section">
+      <h1>Video Game Developments</h1>
+      <Container>
+        <p className="introduction-container">
           I've been enjoying Video Game Development in my spare time for recent years. I develop 3D video games by Unity game engine and create 3D models by Blender.
         </p>
-        <p>
+        <p className="introduction-container">
           There are several personal development projects ongoing in parallel.
         </p>
-      </Col>
-    </Row>
+      </Container>
+    </div>
   );
 }
 
 function VideoGameDev(props: { data: VideoGameDevItem }) {
   const { data } = props;
   return (
-    <Row className="section">
-      <Col xs={12}>
-        <h2>
-          {data.name}
-          {data.linkToItchio ? <a href={data.linkToItchio} target="_blank"><img src="https://img.icons8.com/metro/26/000000/external-link.png" style={{ width: "20px", marginLeft: "10px" }}/></a> : null }
-        </h2>
-      </Col>
-      <Col xs={12}className="col-tags">
-        <>
-          {(() => data.actionTypes.map(actionType => <Badge color="primary">{actionType}</Badge>))()}
-          <Badge color="info">{data.status}</Badge>
-        </>
-      </Col>
-      <Col md={12} lg={7} xl={6} min={560} className="col-center">
-        <iframe className="youtube-video" src={`https://www.youtube.com/embed/${data.videoId}`}
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          frameBorder="0" allowFullScreen
-        />
-      </Col>
-      <Col>
-        {
-          (() => data.description.map(p =>
-            (<p>{linkInjector.inject([ p ], data.links)}</p>)))()
-        }
-      </Col>
-    </Row>
+    <div className="page-section">
+      <Container>
+        <Row>
+          <Col xs={12}>
+            <h2>
+              {data.name}
+              {data.linkToItchio ? <a href={data.linkToItchio} target="_blank"><img src="https://img.icons8.com/metro/26/000000/external-link.png" style={{ width: "20px", marginLeft: "10px" }}/></a> : null }
+            </h2>
+          </Col>
+          <Col xs={12}className="col-tags">
+            <>
+              {(() => data.actionTypes.map(actionType => <Badge color="primary">{actionType}</Badge>))()}
+              <Badge color="info">{data.status}</Badge>
+            </>
+          </Col>
+          <Col md={12} lg={7} xl={6} min={560} className="col-center">
+            <iframe className="youtube-video" src={`https://www.youtube.com/embed/${data.videoId}`}
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              frameBorder="0" allowFullScreen
+            />
+          </Col>
+          <Col>
+            {
+              (() => data.description.map(p =>
+                (<p>{linkInjector.inject([ p ], data.links)}</p>)))()
+            }
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }

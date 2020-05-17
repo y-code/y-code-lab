@@ -33,6 +33,11 @@ namespace YCodeLab
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("LinkedIn", builder => builder.WithOrigins("https://nz.linkedin.com"));
+            });
+
             services.AddResponseCaching();
 
             services.AddControllersWithViews();

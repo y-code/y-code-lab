@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardHeader, CardBody, Col, Row } from 'reactstrap';
+import { Card, CardHeader, CardBody, Col, Row, Container } from 'reactstrap';
 import { Rating } from './Rating';
 
 import './TechWritings.scss';
@@ -101,7 +101,7 @@ class TechWritings extends React.PureComponent<
         <Col lg={6}>
           <Card>
             <CardHeader>
-              <h3><a href={w.url}>{w.title}</a></h3>
+              <h3><a href={w.url} target="_blank">{w.title}</a></h3>
               <div className="writing-props-row">
                 <Rating rate={w.rating} votes={w.votes} className="col-6 col-lg-6 col-xl-6"/>
                 <div className="col-6 col-lg-6">Views: {w.views}</div>
@@ -119,20 +119,24 @@ class TechWritings extends React.PureComponent<
 
     return (
       <div className="tech-writings-page">
-        <Row>
-          <Col>
-            <h1 className="site-category-name">Technical Writings</h1>
-            <p>
+        <div className="page-section">
+          <h1 className="site-category-name">Technical Writings</h1>
+          <Container>
+            <p className="introduction-container">
               I've been helped many times by people through their sharing knowledge, discoveries and experiences, and I thought I should repay such helps I've got from the software developers society. So, I have time to write articles when I discover something during my software developments to contribute to the software developers society.
             </p>
-            <p>
+            <p className="introduction-container">
               I'm actively writing articles on CodeProject.com. The followings are the articles I've ever published on the website.
             </p>
-          </Col>
-        </Row>
-        <Row>
-          {cards}
-        </Row>
+          </Container>
+        </div>
+        <div className="page-section">
+          <Container>
+            <Row>
+            {cards}
+            </Row>
+          </Container>
+        </div>
       </div>
     );
   }
