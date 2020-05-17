@@ -152,7 +152,7 @@ export default class MyProjects extends React.PureComponent<{
               </a>
             </p>
             <p>
-              When you want to test a React component after an operation that dispatches a Redux action, you need to make it sure that before your test code goes on, all the React components connected to the Redux store are thoroughly updated based on the new state. We can easily assure it with act() provided by [React Test Utility](https://reactjs.org/docs/test-utils.html#act) or [Testing Library for React](https://testing-library.com/docs/react-testing-library/api#act). However, it cannot help when a test target operation dispatches Redux actions asynchronously.
+              When you want to test a React component after an operation that dispatches a Redux action, you need to make it sure that before your test code goes on, all the React components connected to the Redux store are thoroughly updated based on the new state. We can easily assure it with act() provided by <a href="https://reactjs.org/docs/test-utils.html#act">React Test Utility</a> or <a href="https://testing-library.com/docs/react-testing-library/api#act">Testing Library for React</a>. However, it cannot help when a test target operation dispatches Redux actions asynchronously.
             </p>
             <p>
               That's where React-Redux Stethoscope comes to help you. It can target specific Redux actions, and run test code after each action entirely takes effect on all the React components. Test code becomes like below.
@@ -182,7 +182,7 @@ export default class MyProjects extends React.PureComponent<{
               </pre>
             </p>
             <p>
-              Please find more details at [npmjs.com](https://www.npmjs.com/package/react-redux-stethoscope)
+              Please find more details at <a href="https://www.npmjs.com/package/react-redux-stethoscope">npmjs.com</a>
             </p>
           </Container>
         </div>
