@@ -16,10 +16,11 @@ export const Rating: React.FunctionComponent<{
     <div className={`rating-component ${props.className}`}>
       {(() => {
         let stars = [] as any[];
-        for (let i = 0; i < rate; i++)
-          stars.push(<div className="star">⭐</div>);
+        let i = 0
+        for (; i < rate;)
+          stars.push(<div key={i++} className="star">⭐</div>);
         while (stars.length < 5)
-          stars.push(<div className="star">★</div>);
+          stars.push(<div key={i++} className="star">★</div>);
         return stars;
       })()}
       <div className="votes">

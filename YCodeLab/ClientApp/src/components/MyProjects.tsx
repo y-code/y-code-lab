@@ -12,50 +12,48 @@ export default class MyProjects extends React.PureComponent<{
     return (
       <div className="page-my-projects">
         <div className='table-of-contents'>
-          <Container>
-            <h1>My Projects</h1>
+          <h1>My Projects</h1>
 
-            <ul className="h2">
-              <li><HashLink to="#web-app-dev">Web Application Developments</HashLink></li>
-              <ul className="h3">
-                <li>
-                  <HashLink to="#ycode-lab">
-                    <div style={{ marginRight: "10px", backgroundImage: "url(/favicon.png)", backgroundRepeat: "no-repeat", backgroundPositionY: "center", display: "inline", width: "16px", height: "16px"}}>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
-                    Y-code Lab
-                  </HashLink>
-                </li>
-                <li>
-                  <HashLink to="#happyfl">
-                    <div style={{ marginRight: "10px", backgroundImage: "url(https://happyfl.apphb.com/favicon.png)", backgroundRepeat: "no-repeat", backgroundPositionY: "center", backgroundSize: "16px", display: "inline", width: "16px", height: "16px"}}>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
-                    HappyFL
-                  </HashLink>
-                </li>
-              </ul>
-              <li><HashLink to="#lib-dev">Library Developments</HashLink></li>
-              <ul className="h3">
-                <li>
-                  <HashLink to="#react-redux-stethoscope">
-                    <img src="https://badge.fury.io/js/react-redux-stethoscope.svg" alt="npm version" height="18" />
-                    &nbsp;
-                    React-Redux Stethoscope
-                  </HashLink>
-                </li>
-                <li>
-                  <HashLink to="#reactstrap-paginationbar">
-                    <img src="https://badge.fury.io/js/reactstrap-paginationbar.svg" alt="npm version" height="18" />
-                    &nbsp;
-                    Reactstrap Paginationbar
-                  </HashLink>
-                </li>
-              </ul>
-              <li><HashLink to="#video-game-dev">Video Game Developments</HashLink></li>
-              <li><HashLink to="#tech-writings">Technical Writings</HashLink></li>
+          <ul className="h2">
+            <li><HashLink to="#web-app-dev">Web Application Developments</HashLink></li>
+            <ul className="h3">
+              <li>
+                <HashLink to="#ycode-lab">
+                  <div style={{ marginRight: "10px", backgroundImage: "url(/favicon.png)", backgroundRepeat: "no-repeat", backgroundPositionY: "center", display: "inline", width: "16px", height: "16px"}}>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                  Y-code Lab
+                </HashLink>
+              </li>
+              <li>
+                <HashLink to="#happyfl">
+                  <div style={{ marginRight: "10px", backgroundImage: "url(https://happyfl.apphb.com/favicon.png)", backgroundRepeat: "no-repeat", backgroundPositionY: "center", backgroundSize: "16px", display: "inline", width: "16px", height: "16px"}}>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                  HappyFL
+                </HashLink>
+              </li>
             </ul>
-          </Container>
+            <li><HashLink to="#lib-dev">Library Developments</HashLink></li>
+            <ul className="h3">
+              <li>
+                <HashLink to="#react-redux-stethoscope">
+                  <img src="https://badge.fury.io/js/react-redux-stethoscope.svg" alt="npm version" height="18" />
+                  &nbsp;
+                  React-Redux Stethoscope
+                </HashLink>
+              </li>
+              <li>
+                <HashLink to="#reactstrap-paginationbar">
+                  <img src="https://badge.fury.io/js/reactstrap-paginationbar.svg" alt="npm version" height="18" />
+                  &nbsp;
+                  Reactstrap Paginationbar
+                </HashLink>
+              </li>
+            </ul>
+            <li><HashLink to="#video-game-dev">Video Game Developments</HashLink></li>
+            <li><HashLink to="#tech-writings">Technical Writings</HashLink></li>
+          </ul>
         </div>
 
         <a className="anchor" id="web-app-dev"/>
@@ -157,8 +155,7 @@ export default class MyProjects extends React.PureComponent<{
             <p>
               That's where React-Redux Stethoscope comes to help you. It can target specific Redux actions, and run test code after each action entirely takes effect on all the React components. Test code becomes like below.
             </p>
-            <p>
-              <pre>
+            <pre>
 {`await stethoscope.listenAsync({
   act: () => {
     wrapper.getAllByText('↺')[0].click()
@@ -179,8 +176,7 @@ export default class MyProjects extends React.PureComponent<{
     },
   ]
 })`}
-              </pre>
-            </p>
+            </pre>
             <p>
               Please find more details at <a href="https://www.npmjs.com/package/react-redux-stethoscope">npmjs.com</a>
             </p>

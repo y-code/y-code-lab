@@ -65,7 +65,6 @@ let ContactMeForm: React.FunctionComponent<{
   });
 
   const instantValidation = React.useMemo(() => {
-    console.log(`[DEBUG] A field was updated`);
     if (!saveMessage || !saveMessage.result)
       return;
     if (requestSaveMessage) {

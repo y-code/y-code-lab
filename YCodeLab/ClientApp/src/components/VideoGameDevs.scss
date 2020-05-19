@@ -24,33 +24,17 @@
     }
   }
 
-  // .section {
-  //   margin-top: 0px;
-  //   margin-bottom: 0px;
-  //   padding-top: 20px;
-  //   padding-bottom: 20px;
-  //   /* height: calc(100vh / 2); */
-  //   /* min-height: 355px; */
-  //   /* height: 420px; */
-  // }
-
-  // .section:nth-child(odd) {
-  //   flex-direction: row;
-  //   background-color: #e7faf5;
-  // }
-
-  // .section:nth-child(even) {
-  //   flex-direction: row-reverse;
-  //   background-color: inherit;
-  // }
-  
-  .page-section:nth-child(odd) {
-    flex-direction: row;
+  .page-section:nth-child(4n+1) {
+    .row {
+      flex-direction: row;
+    }
     background-color: inherit;
   }
   
-  .page-section:nth-child(even) {
-    flex-direction: row;
+  .page-section:nth-child(4n+3) {
+    .row {
+      flex-direction: row-reverse;
+    }
     background-color: #e7faf5;
   }
 

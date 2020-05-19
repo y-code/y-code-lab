@@ -4,9 +4,17 @@
 
 @import url('https://fonts.googleapis.com/css?family=Marck+Script&display=swap');
 
-body {
-  padding-top: 4.5em;
+.font-common {
   font-family: "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.font-marck-script {
+  font-family: 'Marck Script', cursive;
+}
+
+body {
+  @extend .font-common;
+  padding-top: 4.5em;
 }
 
 a {
@@ -23,10 +31,6 @@ code {
   border-color: #1861ac;
 }
 
-.font-marck-script {
-  font-family: 'Marck Script', cursive;
-}
-
 .main-content-container {
   min-height: 0px;
 
@@ -34,11 +38,6 @@ code {
     @extend .font-marck-script;
     @extend .text-center;
   }
-
-  // h1 {
-  //   @extend .header;
-  //   font-size: 4em;
-  // }
 }
 
 h1 {
@@ -102,6 +101,8 @@ h1 {
   @extend .text-center;
 
   ul {
+    margin-left: 0px;
+    padding-left: 0px;
     list-style: none;
   }
 
@@ -111,13 +112,13 @@ h1 {
   }
 
   .h2 {
-    @extend .font-marck-script;
-    font-size: 2em;
+    @extend .font-common;
+    font-size: 1.6em;
   }
 
   .h3 {
-    font-family: "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.6em;
+    @extend .font-common;
+    font-size: 0.7em;
   }
 }
 

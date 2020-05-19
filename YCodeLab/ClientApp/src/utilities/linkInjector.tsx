@@ -1,4 +1,5 @@
-import React from "react";
+import React from "react"
+import { v1 as uuid } from 'uuid'
 
 function inject(original: (string|JSX.Element)[], links: { [key:string]: string }) : (string|JSX.Element)[] {
   let buf: (string|JSX.Element)[] = original;
@@ -6,7 +7,7 @@ function inject(original: (string|JSX.Element)[], links: { [key:string]: string 
     buf = injectLink(buf, linkKey, links[linkKey]);
   buf = buf.map(b => {
     if (typeof(b) === 'string')
-      return <>{b}</>
+      return <span key={uuid()}>{b}</span>
     else
       return b;
   })
@@ -33,7 +34,7 @@ function injectLink(original: (string|JSX.Element)[], linkKey: string, linkUrl: 
             fragment = fragment;
           result.push(fragment);
           if (i < fragments.length - 1)
-            result.push(<a href={linkUrl}>{linkKey}</a>);
+            result.push(<a key={uuid()} href={linkUrl}>{linkKey}</a>);
         }
       }
     } else {

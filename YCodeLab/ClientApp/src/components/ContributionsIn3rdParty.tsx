@@ -83,12 +83,12 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
             ],
           },
           {
-            id: 'npgsql-enhancement',
+            id: 'bootstrap-combobox-enhancement',
             libName: 'danielfarrell/bootstrap-combobox',
             logo: 'https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg',
             items: [
               {
-                id: 'npgsql-enhancement-0',
+                id: 'bootstrap-combobox-enhancement-0',
                 actionType: 'enhancement',
                 status: 'released in 1.2.0',
                 title: 'support Bootstrap 4',
@@ -182,31 +182,29 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
     return (
       <div className="page-contributions-in-3rd-party">
         <div className="table-of-contents">
-          <Container>
-            <h1>Contributions in Third-Party Software</h1>
-            <ul className="h2">
-              {
-                (() => {
-                  let items: Array<JSX.Element> = [];
-                  if (this.state && this.state.thirdPartyLib && this.state.thirdPartyLib.items && this.state.thirdPartyLib.items.length) {
-                    for (let i of this.state.thirdPartyLib.items) {
-                      items.push(<li><HashLink to={`#${i.id}`}>{i.libName}</HashLink></li>);
-                      items.push(
-                        <ul className="h3">
-                          {
-                            i.items.map(i2 => (
-                              <li>{i2.title}</li>
-                            ))
-                          }
-                        </ul>
-                      );
-                    }
+          <h1>Contributions in Third-Party Software</h1>
+          <ul className="h2">
+            {
+              (() => {
+                let items: Array<JSX.Element> = [];
+                if (this.state && this.state.thirdPartyLib && this.state.thirdPartyLib.items && this.state.thirdPartyLib.items.length) {
+                  for (let i of this.state.thirdPartyLib.items) {
+                    items.push(<li key={`h2-${i.id}`}><HashLink to={`#${i.id}`}>{i.libName}</HashLink></li>);
+                    items.push(
+                      <ul key={`h3-items-${i.id}`} className="h3">
+                        {
+                          i.items.map(i2 => (
+                            <li key={`h3-${i2.id}`}>{i2.title}</li>
+                          ))
+                        }
+                      </ul>
+                    );
                   }
-                  return items;
-                })()
-              }
-            </ul>
-          </Container>
+                }
+                return items;
+              })()
+            }
+          </ul>
         </div>
         <div className="page-section">
           {
@@ -214,11 +212,11 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
               let items: Array<JSX.Element> = [];
               if (this.state && this.state.thirdPartyLib && this.state.thirdPartyLib.items && this.state.thirdPartyLib.items.length)
                 for (let i of this.state.thirdPartyLib.items) {
-                  items.push(<a className="anchor" id={i.id} />)
+                  items.push(<a key={`anchor-${i.id}`} className="anchor" id={i.id} />)
                   items.push(
-                    <div className='page-section'>
+                    <div key={`item-${i.id}`} className='page-section'>
                       <Container>
-                        <Row>
+                        <Row key={`item-header-${i.id}`}>
                           <Col md={12} lg={2} className="col-logo">
                             <img className='logo' src={i.logo} />
                           </Col>
@@ -228,7 +226,7 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
                         </Row>
                         {
                           i.items.map(item => (
-                            <Row>
+                            <Row key={`subitem-${i.id}-${item.id}`}>
                               <Col md={0} lg={2}>
                               </Col>
                               <Col md={12} lg={10}>
@@ -236,8 +234,8 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
                                 <Badge color="info">{item.status}</Badge>
                                 <h3>{item.title}</h3>
                                 {
-                                  item.description.map(d =>
-                                    <p>
+                                  item.description.map((d, i) =>
+                                    <p key={`description-${item.id}-${i}`}>
                                       {linkInjector.inject([ d ], item.links)}
                                     </p>
                                   )
@@ -247,16 +245,17 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
                                     let items: Array<JSX.Element> = [];
                                     if (item.links)
                                       for (var l in item.links)
-                                        items.push(<div>{l}: <a href={item.links[l]}>{item.links[l]}</a></div>)
+                                        items.push(<div key={`link-${item.id}-${l}`}>{l}: <a href={item.links[l]}>{item.links[l]}</a></div>)
                                     return items;
                                   })()}
                                 </small>
                               </Col>
                             </Row>
                           ))
-                      }
-                    </Container>
-                  </div>);
+                        }
+                      </Container>
+                    </div>
+                  );
                 }
               return items;
             })()

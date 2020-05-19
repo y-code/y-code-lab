@@ -4,8 +4,10 @@ import './VideoGameDevs.scss';
 import { Row, Col, Badge, Container } from 'reactstrap';
 
 import linkInjector from '../utilities/linkInjector';
+import { HashLink } from 'react-router-hash-link';
 
 interface VideoGameDevItem {
+  id: string,
   name: string,
   actionTypes: ('3D Game'|'3D Modeling'|'Online Multiplayer'|'3D Animation'|'ShaderLab'|'Algorithm'|'Vector Geometry')[],
   status: ('Prototype'|'In Development'|'Released'),
@@ -29,6 +31,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
     this.state = {
       items: [
         {
+          id: "bwc",
           name: 'Babble Warriors Colosseum',
           actionTypes: [ 'Online Multiplayer', '3D Game', '3D Animation' ],
           status: 'In Development',
@@ -44,6 +47,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
           }
         },
         {
+          id: "tower-of-maze",
           name: 'Tower of Maze',
           actionTypes: [ 'Algorithm', 'Vector Geometry', '3D Game'],
           status: 'In Development',
@@ -59,6 +63,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
           }
         },
         {
+          id: "cube-dojo",
           name: 'Cube Dojo',
           actionTypes: [ 'Vector Geometry', '3D Game' ],
           status: 'Prototype',
@@ -72,6 +77,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
           }
         },
         {
+          id: "koto-dama",
           name: 'KotoDama',
           actionTypes: [ '3D Game', '3D Animation' ],
           status: 'Prototype',
@@ -86,6 +92,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
           }
         },
         {
+          id: "avatar-demo",
           name: 'Humanoid Avatar Demo',
           actionTypes: [ '3D Game', '3D Modeling', '3D Animation' ],
           status: 'Prototype',
@@ -99,6 +106,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
           }
         },
         {
+          id: "fairy-dungeon",
           name: 'Fairy Dungeon',
           actionTypes: [ 'ShaderLab', '3D Game', '3D Modeling' ],
           status: 'Prototype',
@@ -118,16 +126,23 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
   public render() {
     return (
       <div className="video-game-devs-page">
-        <Introduction {...this.props}/>
-        {(() => this.state.items.map(item => <VideoGameDev data={item} />))()}
+        <Introduction data={this.state.items}/>
+        {(() => {
+          let elements = []
+          for (let item of this.state.items) {
+            elements.push(<a key={`anchor-${item.id}`} className="anchor" id={item.id} />)
+            elements.push(<VideoGameDev key={`item-${item.id}`} data={item} />)
+          }
+          return elements
+        })()}
       </div>
     );
   }
 }
 
-function Introduction(props: any) {
+function Introduction(props: { data: VideoGameDevItem[] }) {
   return (
-    <div className="page-section">
+    <div className="table-of-contents">
       <h1>Video Game Developments</h1>
       <Container>
         <p className="introduction-container">
@@ -137,6 +152,9 @@ function Introduction(props: any) {
           There are several personal development projects ongoing in parallel.
         </p>
       </Container>
+      <ul className="h2">
+        {(() => props.data.map(item => <li key={`h2-${item.id}`}><HashLink to={`#${item.id}`}>{item.name}</HashLink></li>))()}
+      </ul>
     </div>
   );
 }
@@ -155,7 +173,7 @@ function VideoGameDev(props: { data: VideoGameDevItem }) {
           </Col>
           <Col xs={12}className="col-tags">
             <>
-              {(() => data.actionTypes.map(actionType => <Badge color="primary">{actionType}</Badge>))()}
+              {(() => data.actionTypes.map((actionType, i) => <Badge key={`badge-${data.id}-${i}`} color="primary">{actionType}</Badge>))()}
               <Badge color="info">{data.status}</Badge>
             </>
           </Col>
@@ -167,8 +185,8 @@ function VideoGameDev(props: { data: VideoGameDevItem }) {
           </Col>
           <Col>
             {
-              (() => data.description.map(p =>
-                (<p>{linkInjector.inject([ p ], data.links)}</p>)))()
+              (() => data.description.map((d, i) =>
+                (<p key={`description-${data.id}-${i}`}>{linkInjector.inject([ d ], data.links)}</p>)))()
             }
           </Col>
         </Row>

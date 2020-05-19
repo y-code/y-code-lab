@@ -78,7 +78,7 @@ class TechWritings extends React.PureComponent<
       || this.props.codeProjectApi.myBlogPosts.isLoading
       || this.props.codeProjectApi.myTips.isLoading) {
       
-      cards = [ <Col className="col-center"><img src="/bean-eater-1s-200px.png"/></Col> ];
+      cards = [ <Col key="loading" className="col-center"><img src="/bean-eater-1s-200px.png"/></Col> ];
 
     } else {
 
@@ -98,7 +98,7 @@ class TechWritings extends React.PureComponent<
           data = this.aggregateWritingInfoArrayWithTips(data, this.props.codeProjectApi.myTips.result);
 
       cards = data.map(w => (
-        <Col lg={6}>
+        <Col key={`item-${w.url}`} lg={6}>
           <Card>
             <CardHeader>
               <h3><a href={w.url} target="_blank">{w.title}</a></h3>
@@ -133,7 +133,7 @@ class TechWritings extends React.PureComponent<
         <div className="page-section">
           <Container>
             <Row>
-            {cards}
+              {cards}
             </Row>
           </Container>
         </div>

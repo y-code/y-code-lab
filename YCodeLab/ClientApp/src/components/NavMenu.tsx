@@ -8,7 +8,12 @@ export default function(props: {}){
   const [ isStackOverflowIconTooltipOpen, setIsStackOverflowIconTooltipOpen ] = React.useState(false);
   const [ isGitHubTooltipOpen, setIsGitHubTooltipOpen ] = React.useState(false);
 
-  const toggle = () => setIsNavOpen(!isNavOpen)
+  const toggle = (target: EventTarget) => setIsNavOpen(!isNavOpen)
+
+  const toggleOnLink = (target: EventTarget) => {
+    if ((target as HTMLElement).clientWidth === (target as HTMLElement).parentElement?.parentElement?.clientWidth)
+      setIsNavOpen(!isNavOpen)
+  }
 
   return (
     <header className="nav-menu">
@@ -16,35 +21,35 @@ export default function(props: {}){
         <Container>
           <img className="favicon" src="/favicon-32.png"/>
           <NavbarBrand tag={Link} to="/" className="text-light">Y-code Lab</NavbarBrand>
-          <NavbarToggler onClick={toggle} className="mr-2"/>
+          <NavbarToggler onClick={e => toggle(e.target)} className="mr-2"/>
           <Collapse className="d-lg-inline-flex flex-lg-row-reverse" isOpen={isNavOpen} navbar>
             <ul className="navbar-nav flex-grow">
               <NavItem>
-                <NavLink tag={Link} className="text-light" to="/" onClick={toggle}>Home</NavLink>
+                <NavLink tag={Link} className="text-light" to="/" onClick={e => toggleOnLink(e.target)}>Home</NavLink>
               </NavItem>
               <NavItem>
-                  <NavLink tag={Link} className="text-light" to="/my-projects" onClick={toggle}>My Projects</NavLink>
+                  <NavLink tag={Link} className="text-light" to="/my-projects" onClick={e => toggleOnLink(e.target)}>My Projects</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-light" to="/contributions-in-3rd-party" onClick={toggle}>Devs in 3rd Party</NavLink>
+                <NavLink tag={Link} className="text-light" to="/contributions-in-3rd-party" onClick={e => toggleOnLink(e.target)}>Devs in 3rd Party</NavLink>
               </NavItem>
               <NavItem>
-                  <NavLink tag={Link} className="text-light" to="/video-game-devs" onClick={toggle}>Video Game Devs</NavLink>
+                  <NavLink tag={Link} className="text-light" to="/video-game-devs" onClick={e => toggleOnLink(e.target)}>Video Game Devs</NavLink>
               </NavItem>
               <NavItem>
-                  <NavLink tag={Link} className="text-light" to="/tech-writings" onClick={toggle}>Writings</NavLink>
+                  <NavLink tag={Link} className="text-light" to="/tech-writings" onClick={e => toggleOnLink(e.target)}>Writings</NavLink>
               </NavItem>
               {/* <NavItem>
-                <NavLink tag={Link} className="text-light" to="/profile" onClick={toggle}>Profile</NavLink>
+                <NavLink tag={Link} className="text-light" to="/profile" onClick={e => toggleOnLink(e.target)}>Profile</NavLink>
               </NavItem> */}
               <NavItem>
-                  <NavLink tag={Link} className="text-light" to="/contact-me" onClick={toggle}>Contact ME</NavLink>
+                  <NavLink tag={Link} className="text-light" to="/contact-me" onClick={e => toggleOnLink(e.target)}>Contact ME</NavLink>
               </NavItem>
               {/* <NavItem>
-                <NavLink tag={Link} className="text-light" to="/counter" onClick={toggle}>Counter</NavLink>
+                <NavLink tag={Link} className="text-light" to="/counter" onClick={e => toggleOnLink(e.target)}>Counter</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-light" to="/fetch-data" onClick={toggle}>Fetch data</NavLink>
+                <NavLink tag={Link} className="text-light" to="/fetch-data" onClick={e => toggleOnLink(e.target)}>Fetch data</NavLink>
               </NavItem> */}
               <NavItem>
                 <a id="stack-overflow-icon"

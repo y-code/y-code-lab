@@ -4,7 +4,7 @@ import NavMenu from './NavMenu';
 import Footer from './Footer';
 
 import './Layout.scss';
-import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 export default class Layout extends React.Component<{
   children?: React.ReactNode
@@ -36,9 +36,9 @@ const Notifications: React.FunctionComponent = props => {
   const [ isAlertingJobSeeking, setAlertingJobSeeking ] = React.useState(true);
   return (
     <Container>
-      {/* <Alert color='warning' isOpen={isAlertingJobSeeking} toggle={() => setAlertingJobSeeking(!isAlertingJobSeeking)}>
-        I'm currently looking for a Software Engineer role. Please visit <Link to="/profile">Profile page</Link> and <Link to="/contact-me">Contact ME</Link>.
-      </Alert> */}
+      <Alert className="text-center" color='info' isOpen={isAlertingJobSeeking} toggle={() => setAlertingJobSeeking(!isAlertingJobSeeking)}>
+      📦📦📦&nbsp;&nbsp;&nbsp;<b><HashLink to="/my-projects#react-redux-stethoscope">React-Redux Stethoscope</HashLink></b> is now available at <b>npm</b>!!&nbsp;&nbsp;&nbsp;📦📦📦
+      </Alert>
     </Container>
   );
 }
