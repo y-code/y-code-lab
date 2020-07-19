@@ -37,7 +37,7 @@ const Notifications: React.FunctionComponent = props => {
   return (
     <Container>
       <Alert className="text-center" color='info' isOpen={isAlertingJobSeeking} toggle={() => setAlertingJobSeeking(!isAlertingJobSeeking)}>
-      📦📦📦&nbsp;&nbsp;&nbsp;<b><HashLink to="/my-projects#react-redux-stethoscope">React-Redux Stethoscope</HashLink></b> is now available at <b>npm</b>!!&nbsp;&nbsp;&nbsp;📦📦📦
+      📦📦📦&nbsp;&nbsp;&nbsp;<b><HashLink to="/my-projects#aspnet-api-group-versioning">ASP.NET API Group Versioning</HashLink></b> is now available at <b>nuget.org</b>!!&nbsp;&nbsp;&nbsp;📦📦📦
       </Alert>
     </Container>
   );

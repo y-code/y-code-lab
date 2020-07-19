@@ -236,7 +236,7 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
                                 {
                                   item.description.map((d, i) =>
                                     <p key={`description-${item.id}-${i}`}>
-                                      {linkInjector.inject([ d ], item.links)}
+                                      {linkInjector.inject(d, item.links)}
                                     </p>
                                   )
                                 }
