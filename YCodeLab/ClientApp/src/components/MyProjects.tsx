@@ -132,10 +132,10 @@ class MyProjects extends React.PureComponent<Props & typeof actionCreators, Stat
   }
 }
 
-export function generateNavItem(project: ProjectInfo, nuget: NuGetInfo) : JSX.Element {
+export function generateNavItem(project: ProjectInfo, nuget: NuGetInfo, baseUrl: string = "") : JSX.Element {
   return (
     <li key={`nav-item-${project.id}`}>
-      <a href={`#${project.id}`}>
+      <a href={`${baseUrl}#${project.id}`}>
         {
           project.logo ? [ <img key={`nav-logo-${project.id}`} src={project.logo} alt={project.logoAlt} style={{ margin: 10, height: 18 }}/> ] : []
         }

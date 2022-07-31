@@ -1,0 +1,103 @@
+@import '../bootstrap.scss';
+@import 'bootstrap/scss/_variables.scss';
+@import 'bootstrap/scss/mixins/_breakpoints.scss';
+@import '../custom.scss';
+
+.footer {
+
+  .footer-container {
+    @extend .container;
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  .profile-img-col {
+    @extend .text-center;
+    flex: 100%;
+    padding-bottom: 20px;
+
+    @extend .col-center;
+  }
+
+  .profile-content-col {
+    @extend .col-sm-12;
+  }
+
+  @include media-breakpoint-up(lg) {
+
+    .profile-img-col {
+      flex: none;
+      padding-right: 20px;
+    }
+
+    .profile-content-col {
+      flex: 2;
+    }
+
+  }
+
+  .image-cropper {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .profile-img {
+    width: 200px;
+  }
+
+  .links-col {
+    @extend .text-right;
+    flex: 100%;
+    padding-top: 20px;
+
+    .navbar-nav {
+      flex-direction: row;
+
+      .nav-item {
+        @extend .col-4;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .links-col {
+      flex: 100%;
+      
+      .navbar-nav {
+        flex-direction: row;
+
+        .nav-item {
+            @extend .col-md-3;
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    .links-col {
+      flex: 1;
+      
+      .navbar-nav {
+        flex-direction: column;
+
+        .nav-item {
+            @extend .col-lg-12;
+        }
+      }
+    }
+  }
+
+  .LI-profile-badge {
+    > div {
+      @extend .col-left;
+    }
+
+    .LI-badge-container {
+      background-color: #bdbbb3;
+    }
+  }
+
+}

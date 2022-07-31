@@ -10,9 +10,14 @@ import ContactMe from './components/ContactMe';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 
+import SJHome from './components/strawberry-joystick/SJHome';
+import SJProjects from './components/strawberry-joystick/SJProjects';
+import SJPrivacyPolicy from './components/strawberry-joystick/SJPrivacyPolicy';
+
 import './custom.scss'
 import Layout2 from './layout-2/Layout2';
 import { useParams } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
 // class ScrollToTopWithoutRouter extends React.Component<RouteComponentProps<any>, any> {
 //   componentDidUpdate(prevProps: Readonly<RouteComponentProps<any>>) {
@@ -49,6 +54,10 @@ const _TechWritings = (props: any) => <TechWritings {...useHooks(props)}/>
 const _VideoGameDevs = (props: any) => <VideoGameDevs {...useHooks(props)}/>
 const _ContactMe = (props: any) => <ContactMe {...useHooks(props)}/>
 
+const _SJHome = (props: any) => <SJHome {...useHooks(props)}/>
+const _SJProjects = (props: any) => <SJProjects {...useHooks(props)}/>
+const _SJPrivacyPolicy = (props: any) => <SJPrivacyPolicy {...useHooks(props)}/>
+
 export default class App extends React.Component {
 
   componentDidMount() {
@@ -69,6 +78,11 @@ export default class App extends React.Component {
             <Route path='contact-me' element={<_ContactMe/>} />
             {/* <Route key='counter' element={Counter} />
             <Route key='fetch-data/:startDateIndex?' element={FetchData} /> */}
+          </Route>
+          <Route path='/strawberry-joystick' element={<Layout2/>}>
+            <Route path='' element={<_SJHome/>} />
+            <Route path='projects' element={<_SJProjects/>} />
+            <Route path='privacy-policy' element={<_SJPrivacyPolicy/>} />
           </Route>
         </Routes>
       </BrowserRouter>

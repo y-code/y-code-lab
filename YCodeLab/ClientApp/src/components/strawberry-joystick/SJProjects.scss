@@ -1,0 +1,34 @@
+@import '../../custom.scss';
+@import '../../bootstrap.scss';
+
+.page-sj-projects {
+
+  h2 {
+    @extend .font-marck-script;
+    @extend .text-center;
+    font-size: 3em;
+  }
+
+  .table-of-contents {
+    .h2 {
+      @extend .font-marck-script;
+      font-size: 2em;
+    }
+
+    .h3 {
+      font-size: 0.6em;
+    }
+  }
+
+  .page-section-game-apps {
+    background-image: linear-gradient(-180deg, rgb(241, 255, 254) 0%, rgb(248, 255, 255) 100%);
+  }
+
+  .badge {
+    margin-right: 4px;
+  }
+
+  .image {
+    max-width: 100%;
+  }
+}
