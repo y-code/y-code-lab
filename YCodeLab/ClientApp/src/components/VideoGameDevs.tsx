@@ -4,7 +4,7 @@ import './VideoGameDevs.scss';
 import { Row, Col, Badge, Container } from 'reactstrap';
 
 import linkInjector from '../utilities/linkInjector';
-import { HashLink } from 'react-router-hash-link';
+import { RoutingProps } from '../App';
 
 interface VideoGameDevItem {
   id: string,
@@ -17,7 +17,7 @@ interface VideoGameDevItem {
   links: { [key:string]: string },
 }
 
-interface Props {
+interface Props extends RoutingProps {
 }
 
 interface State {
@@ -153,7 +153,7 @@ function Introduction(props: { data: VideoGameDevItem[] }) {
         </p>
       </Container>
       <ul className="h2">
-        {(() => props.data.map(item => <li key={`h2-${item.id}`}><HashLink to={`#${item.id}`}>{item.name}</HashLink></li>))()}
+        {(() => props.data.map(item => <li key={`h2-${item.id}`}><a href={`#${item.id}`}>{item.name}</a></li>))()}
       </ul>
     </div>
   );

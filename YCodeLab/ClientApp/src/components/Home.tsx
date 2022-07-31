@@ -1,20 +1,16 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Alert, Container, Row, Col } from 'reactstrap';
-import { Link, Router } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import './Home.scss';
+import { RoutingProps } from '../App';
 
-const onClickCategoryCol = () => {
+class Home extends React.Component<RoutingProps> {
 
-};
-
-class Home extends React.Component<{
-  history: any,
-}, {
-}> {
   goTo(path: string) {
-    var history = this.props.history.push(path);
+    if (this.props.navigate)
+      this.props.navigate(path);
   }
 
   render () {

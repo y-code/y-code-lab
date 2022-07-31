@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { HashLink } from 'react-router-hash-link'
 
 import './MyProjects.scss'
 import { Container, Row, Col, Badge } from 'reactstrap'
@@ -8,9 +7,10 @@ import { Link } from 'react-router-dom'
 import linkInjector from '../utilities/linkInjector'
 import { ApplicationState } from '../store'
 import { actionCreators, MyProjectsState } from '../store/MyProjects'
-import type { ProjectInfo, NuGetInfo } from '../store'
+import { RoutingProps } from '../App'
+import { NuGetInfo, ProjectInfo } from '../models/ProjectInfo'
 
-interface Props {
+interface Props extends RoutingProps {
   myProjects: MyProjectsState
 }
 
@@ -73,16 +73,16 @@ class MyProjects extends React.PureComponent<Props & typeof actionCreators, Stat
           <h1>My Projects</h1>
 
           <ul className="h2">
-            <li><HashLink to="#web-app-dev">Web Application Developments</HashLink></li>
+            <li><a href="#web-app-dev">Web Application Developments</a></li>
             <ul className="h3">
               {webAppDevNavItems}
             </ul>
-            <li><HashLink to="#lib-dev">Library Developments</HashLink></li>
+            <li><a href="#lib-dev">Library Developments</a></li>
             <ul className="h3">
               {libDevNavItems}
             </ul>
-            <li><HashLink to="#video-game-dev">Video Game Developments</HashLink></li>
-            <li><HashLink to="#tech-writings">Technical Writings</HashLink></li>
+            <li><a href="#video-game-dev">Video Game Developments</a></li>
+            <li><a href="#tech-writings">Technical Writings</a></li>
           </ul>
         </div>
 
@@ -132,10 +132,10 @@ class MyProjects extends React.PureComponent<Props & typeof actionCreators, Stat
   }
 }
 
-function generateNavItem(project: ProjectInfo, nuget: NuGetInfo) : JSX.Element {
+export function generateNavItem(project: ProjectInfo, nuget: NuGetInfo) : JSX.Element {
   return (
     <li key={`nav-item-${project.id}`}>
-      <HashLink to={`#${project.id}`}>
+      <a href={`#${project.id}`}>
         {
           project.logo ? [ <img key={`nav-logo-${project.id}`} src={project.logo} alt={project.logoAlt} style={{ margin: 10, height: 18 }}/> ] : []
         }
@@ -146,7 +146,7 @@ function generateNavItem(project: ProjectInfo, nuget: NuGetInfo) : JSX.Element {
         {
           project.nugetPackage ? [ <img key={`nav-nuget-badge-${project.id}`} src={`https://img.shields.io/badge/NuGet-${escapeInVersion(nuget.versions[nuget.versions.length - 1])}-blue?style=plastic&logo=nuget`} alt="npm version" style={{ margin: 10, height: 18 }} /> ] : []
         }
-      </HashLink>
+      </a>
     </li>
   )
 }
@@ -159,7 +159,7 @@ function escapeInVersion(version: string) : string {
   return result
 }
 
-function generatePageSection(item: ProjectInfo, nuget: NuGetInfo) : JSX.Element[] {
+export function generatePageSection(item: ProjectInfo, nuget: NuGetInfo) : JSX.Element[] {
   let elements: JSX.Element[] = [];
 
   let cssClassPageSection = "";
@@ -170,7 +170,17 @@ function generatePageSection(item: ProjectInfo, nuget: NuGetInfo) : JSX.Element[
     case "LibDev":
       cssClassPageSection = "page-section-lib-dev"
       break
-  }
+      case "GameApp":
+        cssClassPageSection = "page-section-video-game"
+        break
+    }
+
+    const getSublogoStyle = () => { switch (item.subLogo) {
+    case '/google-play-badge.png':
+      return { width: "160px", marginLeft: "10px" };
+    default:
+      return { width: "26px", marginLeft: "10px" };
+  }}
 
   elements.push(<a key={`anchor-${item.id}`} className="anchor" id={item.id}/>)
   elements.push(
@@ -179,7 +189,9 @@ function generatePageSection(item: ProjectInfo, nuget: NuGetInfo) : JSX.Element[
         <h3>
           { item.logo ? [ <img key={`logo-${item.id}`} src={item.logo} style={{ margin: 10, height: 32 }} /> ] : [] }
           {item.name}
-          <a key={`sublogo-${item.id}`} href={item.subLogoLink} target="_blank"><img src={item.subLogo} style={{ width: "26px", marginLeft: "10px" }}/></a>
+          <a key={`sublogo-${item.id}`} href={item.subLogoLink} target="_blank">
+            <img src={item.subLogo} style={getSublogoStyle()}/>
+          </a>
         </h3>
         <Row>
           <Col>

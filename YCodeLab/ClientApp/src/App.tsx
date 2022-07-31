@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, RouteComponentProps, withRouter } from 'react-router';
+import { NavigateFunction, Params, Route, Routes, useNavigate } from 'react-router';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import ContributionsIn3rdParty from './components/ContributionsIn3rdParty';
@@ -11,40 +11,67 @@ import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 
 import './custom.scss'
+import Layout2 from './layout-2/Layout2';
+import { useParams } from 'react-router';
 
-class ScrollToTopWithoutRouter extends React.Component<RouteComponentProps<any>, any> {
-  componentDidUpdate(prevProps: Readonly<RouteComponentProps<any>>) {
-    if (this.props.location !== prevProps.location) {
-      window.scrollTo(0, 0)
-    }
-  }
-  render(): JSX.Element {
-    return <>{this.props.children}</>;
+// class ScrollToTopWithoutRouter extends React.Component<RouteComponentProps<any>, any> {
+//   componentDidUpdate(prevProps: Readonly<RouteComponentProps<any>>) {
+//     if (this.props.location !== prevProps.location) {
+//       window.scrollTo(0, 0)
+//     }
+//   }
+//   render(): JSX.Element {
+//     return <>{this.props.children}</>;
+//   }
+// }
+// var ScrollToTop = withRouter(ScrollToTopWithoutRouter);
+
+export interface RoutingProps {
+  navigate?: NavigateFunction,
+  param?: Readonly<Params<string>>
+}
+
+function useHooks(props: any) : {
+  navigate: NavigateFunction,
+  param: Readonly<Params<string>>
+} {
+  return {
+    ...props,
+    navigate: useNavigate(),
+    params: useParams(),
   }
 }
-var ScrollToTop = withRouter(ScrollToTopWithoutRouter);
+
+const _Home = (props: any) => <Home {...useHooks(props)}/>;
+const _ContributionsIn3rdParty = (props: any) => <ContributionsIn3rdParty {...useHooks(props)}/>
+const _MyProjects = (props: any) => <MyProjects {...useHooks(props)}/>
+const _TechWritings = (props: any) => <TechWritings {...useHooks(props)}/>
+const _VideoGameDevs = (props: any) => <VideoGameDevs {...useHooks(props)}/>
+const _ContactMe = (props: any) => <ContactMe {...useHooks(props)}/>
 
 export default class App extends React.Component {
+
   componentDidMount() {
     document.body.classList.add('bg-light');
   }
 
   render() {
     return (
-      <ScrollToTop>
-        <Layout>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/Home' component={Home} />
-            {/* <Route path='/profile' component={Profile} /> */}
-            <Route path='/contributions-in-3rd-party' component={ContributionsIn3rdParty} />
-            <Route path='/my-projects' component={MyProjects} />
-            <Route path='/tech-writings' component={TechWritings} />
-            <Route path='/video-game-devs' component={VideoGameDevs} />
-            <Route path='/contact-me' component={ContactMe} />
-            <Route path='/counter' component={Counter} />
-            <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
-        </Layout>
-      </ScrollToTop>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Layout/>}>
+            <Route path='' element={<_Home/>} />
+            <Route path='Home' element={<_Home/>} />
+            <Route path='contributions-in-3rd-party' element={<_ContributionsIn3rdParty/>} />
+            <Route path='my-projects' element={<_MyProjects/>} />
+            <Route path='tech-writings' element={<_TechWritings/>} />
+            <Route path='video-game-devs' element={<_VideoGameDevs/>} />
+            <Route path='contact-me' element={<_ContactMe/>} />
+            {/* <Route key='counter' element={Counter} />
+            <Route key='fetch-data/:startDateIndex?' element={FetchData} /> */}
+          </Route>
+        </Routes>
+      </BrowserRouter>
     );
   }
 }

@@ -1,6 +1,7 @@
 import { createAction, Action, ActionFunction1, handleActions, ReducerMap, Reducer } from 'redux-actions';
 import { AppThunkAction } from '.';
 import { stat } from 'fs';
+import { NuGetInfo, ProjectInfo } from '../models/ProjectInfo';
 
 const data: ProjectInfo[] = [
   {
@@ -229,34 +230,9 @@ export interface Project {
   nuget: NuGetInfoState,
 }
 
-export interface ProjectInfo {
-  id: string,
-  name: string,
-  category: ("WebAppDev"|"LibDev"),
-  logo?: string,
-  logoAlt?: string,
-  subLogo?: string,
-  subLogoLink?: string,
-  languages: ('.NET C#'|'JavaScript'|'TypeScript'|'Sass')[],
-  tags: string[],
-  description: string[],
-  links: { [key:string]: string },
-  routerLinks: { [key:string]: string },
-  video?: string,
-  image?: string,
-  codeSample?: string,
-  codeSandbox?: string,
-  npmBadge?: string,
-  nugetPackage?: string,
-}
-
 interface NuGetInfoState {
   isLoading: boolean,
   data: NuGetInfo,
-}
-
-export interface NuGetInfo {
-  versions: string[],
 }
 
 const ACTION_MY_PROJECTS_REQUEST_PROJECTS = "[MyProjects] Request projects";

@@ -6,9 +6,10 @@ import './TechWritings.scss';
 import * as CodeProjectApi from '../store/CodeProjectApi';
 import { ApplicationState } from '../store';
 import { connect } from 'react-redux';
+import { RoutingProps } from '../App';
 
 class TechWritings extends React.PureComponent<
-    { codeProjectApi: CodeProjectApi.CodeProjectApiState } & typeof CodeProjectApi.actionCreators,
+    RoutingProps & { codeProjectApi: CodeProjectApi.CodeProjectApiState } & typeof CodeProjectApi.actionCreators,
     { }> {
   private _formatter: Intl.NumberFormat = new Intl.NumberFormat('en-US');
   

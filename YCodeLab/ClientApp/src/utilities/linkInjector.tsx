@@ -1,6 +1,5 @@
 import React from "react"
 import { v1 as uuid } from 'uuid'
-import { HashLink } from 'react-router-hash-link';
 
 function inject(original: ((string|JSX.Element)[]|string), links: { [key:string]: string }, routerLinks?: { [key:string]: string }) : (string|JSX.Element)[] {
   let buf: (string|JSX.Element)[] = typeof(original) === "string" ? [ original ] : original;
@@ -12,7 +11,7 @@ function inject(original: ((string|JSX.Element)[]|string), links: { [key:string]
 
   for (let linkKey in routerLinks) {
     buf = injectLink(buf, linkKey, routerLinks[linkKey],
-      (key, url) => <HashLink key={uuid()} to={url}>{key}</HashLink>);
+      (key, url) => <a key={uuid()} href={url}>{key}</a>);
   }
 
   buf = buf.map(b => {
