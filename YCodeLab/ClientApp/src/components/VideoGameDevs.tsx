@@ -153,7 +153,7 @@ function Introduction(props: { data: VideoGameDevItem[] }) {
         </p>
       </Container>
       <ul className="h2">
-        {(() => props.data.map(item => <li key={`h2-${item.id}`}><a href={`#${item.id}`}>{item.name}</a></li>))()}
+        {(() => props.data.map(item => <li key={`h2-${item.id}`}><a href={`/video-game-devs#${item.id}`}>{item.name}</a></li>))()}
       </ul>
     </div>
   );

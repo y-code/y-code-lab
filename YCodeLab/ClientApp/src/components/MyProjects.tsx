@@ -46,7 +46,7 @@ class MyProjects extends React.PureComponent<Props & typeof actionCreators, Stat
           case "WebAppDev":
             webAppDevNavItems = [
               ...webAppDevNavItems,
-              generateNavItem(project, nuget),
+              generateNavItem(project, nuget, "/my-projects"),
             ]
             webAppDevSections = [
               ...webAppDevSections,
@@ -56,7 +56,7 @@ class MyProjects extends React.PureComponent<Props & typeof actionCreators, Stat
           case "LibDev":
             libDevNavItems = [
               ...libDevNavItems,
-              generateNavItem(project, nuget),
+              generateNavItem(project, nuget, "/my-projects"),
             ]
             libDevSections = [
               ...libDevSections,
@@ -73,16 +73,16 @@ class MyProjects extends React.PureComponent<Props & typeof actionCreators, Stat
           <h1>My Projects</h1>
 
           <ul className="h2">
-            <li><a href="#web-app-dev">Web Application Developments</a></li>
+            <li><a href="/my-projects#web-app-dev">Web Application Developments</a></li>
             <ul className="h3">
               {webAppDevNavItems}
             </ul>
-            <li><a href="#lib-dev">Library Developments</a></li>
+            <li><a href="/my-projects#lib-dev">Library Developments</a></li>
             <ul className="h3">
               {libDevNavItems}
             </ul>
-            <li><a href="#video-game-dev">Video Game Developments</a></li>
-            <li><a href="#tech-writings">Technical Writings</a></li>
+            <li><a href="/my-projects#video-game-dev">Video Game Developments</a></li>
+            <li><a href="/my-projects#tech-writings">Technical Writings</a></li>
           </ul>
         </div>
 

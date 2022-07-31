@@ -190,7 +190,7 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
                 let items: Array<JSX.Element> = [];
                 if (this.state && this.state.thirdPartyLib && this.state.thirdPartyLib.items && this.state.thirdPartyLib.items.length) {
                   for (let i of this.state.thirdPartyLib.items) {
-                    items.push(<li key={`h2-${i.id}`}><a href={`#${i.id}`}>{i.libName}</a></li>);
+                    items.push(<li key={`h2-${i.id}`}><a href={`/contributions-in-3rd-party#${i.id}`}>{i.libName}</a></li>);
                     items.push(
                       <ul key={`h3-items-${i.id}`} className="h3">
                         {
