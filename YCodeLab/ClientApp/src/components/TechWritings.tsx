@@ -1,143 +1,86 @@
 import * as React from 'react';
-import { Card, CardHeader, CardBody, Col, Row, Container } from 'reactstrap';
+import { Card, CardHeader, CardBody } from 'reactstrap';
 import { Rating } from './Rating';
 
 import './TechWritings.scss';
-import * as CodeProjectApi from '../store/CodeProjectApi';
-import { ApplicationState } from '../store';
-import { connect } from 'react-redux';
-import { RoutingProps } from '../App';
 
-class TechWritings extends React.PureComponent<
-    RoutingProps & { codeProjectApi: CodeProjectApi.CodeProjectApiState } & typeof CodeProjectApi.actionCreators,
-    { }> {
+export default class TechWritings extends React.PureComponent<{
+}, {
+}> {
   private _formatter: Intl.NumberFormat = new Intl.NumberFormat('en-US');
   
-  public componentDidMount() {
-    this.ensureDataFetched();
-  }
-
-  public componentDidUpdate() {
-    // this.ensureDataFetched();
-  }
-
-  private ensureDataFetched() {
-    (this.props as typeof CodeProjectApi.actionCreators).requestGetMyArticles();
-    (this.props as typeof CodeProjectApi.actionCreators).requestGetMyBlogPosts();
-    (this.props as typeof CodeProjectApi.actionCreators).requestGetMyTips();
-  }
-
-  aggregateWritingInfoArray<T>(
-      data: WritingInfo[],
-      additionalData: T[],
-      getUrl: (d: T) => string,       getTitle: (d: T) => string,
-      getSummary: (d: T) => string,   getRating: (d: T) => number,
-      getVotes: (d: T) => string,     getViews: (d: T) => string,
-      getPublishedDate: (d: T) => string) : WritingInfo[] {
-    return [
-      ...data,
-      ...additionalData.map(a => ({
-        url: getUrl(a),         title: getTitle(a), summary: getSummary(a),
-        rating: getRating(a),   votes: getVotes(a), views: getViews(a),
-        publishedDate: getPublishedDate(a),
-      } as WritingInfo))
-    ];
-  }
-
-  aggregateWritingInfoArrayWithArticles(data: WritingInfo[], additionalData: CodeProjectApi.CodeProjectArticle[]){
-    return this.aggregateWritingInfoArray<CodeProjectApi.CodeProjectArticle> (
-      data,                     additionalData,
-      d => d.link,              d => d.title,   d => d.summary,
-      d => d.rating as number,  d => d.votes,   d => d.views,
-      d => d.modifiedDate,
-    );
-  }
-
-  aggregateWritingInfoArrayWithBlogPosts(data: WritingInfo[], additionalData: CodeProjectApi.CodeProjectBlogPost[]){
-    return this.aggregateWritingInfoArray<CodeProjectApi.CodeProjectBlogPost> (
-      data,                     additionalData,
-      d => d.link,              d => d.title,   d => d.summary,
-      d => d.rating as number,  d => d.votes,   d => d.views,
-      d => d.modifiedDate,
-    );
-  }
-
-  aggregateWritingInfoArrayWithTips(data: WritingInfo[], additionalData: CodeProjectApi.CodeProjectTip[]){
-    return this.aggregateWritingInfoArray<CodeProjectApi.CodeProjectTip> (
-      data,                     additionalData,
-      d => d.link,              d => d.title,   d => d.summary,
-      d => d.rating as number,  d => d.votes,   d => d.views,
-      d => d.modifiedDate,
-    );
-  }
-
   public render() {
-    let data: WritingInfo[] = [];
-    let cards: JSX.Element[];
-
-    if (this.props.codeProjectApi.myArticles.isLoading
-      || this.props.codeProjectApi.myBlogPosts.isLoading
-      || this.props.codeProjectApi.myTips.isLoading) {
-      
-      cards = [ <Col key="loading" className="col-center"><img src="/bean-eater-1s-200px.png"/></Col> ];
-
-    } else {
-
-      if (this.props.codeProjectApi
-          && this.props.codeProjectApi.myArticles
-          && this.props.codeProjectApi.myArticles.result)
-          data = this.aggregateWritingInfoArrayWithArticles(data, this.props.codeProjectApi.myArticles.result);
-
-      if (this.props.codeProjectApi
-          && this.props.codeProjectApi.myBlogPosts
-          && this.props.codeProjectApi.myBlogPosts.result)
-          data = this.aggregateWritingInfoArrayWithBlogPosts(data, this.props.codeProjectApi.myBlogPosts.result);
-
-      if (this.props.codeProjectApi
-          && this.props.codeProjectApi.myTips
-          && this.props.codeProjectApi.myTips.result)
-          data = this.aggregateWritingInfoArrayWithTips(data, this.props.codeProjectApi.myTips.result);
-
-      cards = data.map(w => (
-        <Col key={`item-${w.url}`} lg={6}>
-          <Card>
-            <CardHeader>
-              <h3><a href={w.url} target="_blank">{w.title}</a></h3>
-              <div className="writing-props-row">
-                <Rating rate={w.rating} votes={w.votes} className="col-6 col-lg-6 col-xl-6"/>
-                <div className="col-6 col-lg-6">Views: {w.views}</div>
-                <div className="col-12 col-lg-12">Publish Date: {w.publishedDate}</div>
-              </div>
-            </CardHeader>
-            <CardBody>
-              {w.summary}
-            </CardBody>
-          </Card>
-        </Col>
-      ));
-
-    }
-
+    let data: WritingInfo[] = [
+      {
+        url: "https://www.codeproject.com/Tips/5249190/JsonConverter-Attribute-in-ASP-NET-Core-3-0-Web-AP",
+        title: "JsonConverter Attribute in ASP.NET Core 3.0 Web API",
+        summary: "ASP.NET Core 3.0 uses a built-in JSON converter from System.Text.Json "
+          + "so that JsonConverter attribute from Newtonsoft.Json does not work by default.",
+        rating: 5,
+        votes: 4,
+        views: 1770,
+        publishedDate: "23 Oct 2019",
+      },
+      {
+        url: "https://www.codeproject.com/Tips/1271126/Build-Issue-with-Ruby-in-macOS-Bundler-Installatio",
+        title: "Build Issue with Ruby in macOS --- Bundler Installation and Bootstrap `docs` Script Run",
+        summary: "Tutorial about how to add authentication functionalities "
+          + "to your existing ASP.NET Core project using Microsoft.AspNetCore.Identity.UI package.",
+        rating: 0,
+        votes: 0,
+        views: 1260,
+        publishedDate: "11 Dec 2018",
+      },
+      {
+        url: "https://www.codeproject.com/Articles/1265638/ASP-NET-Core-Authentication-UI-Installation",
+        title: "ASP.NET Core - Authentication UI Installation",
+        summary: "Tutorial about how to add authentication functionalities "
+          + "to your existing ASP.NET Core project using Microsoft.AspNetCore.Identity.UI package.",
+        rating: 5,
+        votes: 4,
+        views: 9951,
+        publishedDate: "10 Nov 2018",
+      },
+      {
+        url: "https://www.codeproject.com/Tips/5249190/JsonConverter-Attribute-in-ASP-NET-Core-3-0-Web-AP",
+        title: "Utilities for Enumeration Field Attribute",
+        summary: "Enumeration fields typically require a mapping "
+          + "to human-friendly names and/or code when we display it on UI or "
+          + "output to some persistence. This utility code in this article helps "
+          + "to code such mapping inside enumeration declaration by an attributes.",
+        rating: 2,
+        votes: 4,
+        views: 5250,
+        publishedDate: "12 Jul 2018",
+      },
+    ];
+    let cards = data.map(w => (
+      <Card>
+        <CardHeader>
+          <h3><a href={w.url}>{w.title}</a></h3>
+          <div className="writing-props-row">
+            {/*
+            <Rating rate={w.rating} votes={w.votes} className="col-6 col-lg-3 col-xl-2"/>
+            <div className="col-6 col-lg-2">Views: {this._formatter.format(w.views)}</div>
+            */}
+            <div className="col-12 col-lg-4">Publish Date: {w.publishedDate}</div>
+          </div>
+        </CardHeader>
+        <CardBody>
+          {w.summary}
+        </CardBody>
+      </Card>
+    ));
     return (
       <div className="tech-writings-page">
-        <div className="page-section">
-          <h1 className="site-category-name">Technical Writings</h1>
-          <Container>
-            <p className="introduction-container">
-              I've been helped many times by people through their sharing knowledge, discoveries and experiences, and I thought I should repay such helps I've got from the software developers society. So, I have time to write articles when I discover something during my software developments to contribute to the software developers society.
-            </p>
-            <p className="introduction-container">
-              I'm actively writing articles on CodeProject.com. The followings are the articles I've ever published on the website.
-            </p>
-          </Container>
+        <h1 className="site-category-name">Technical Writings</h1>
+        <div>
+          I sometimes have time to write an article. I've been helped many times by people through their sharing knowledge, discoveries and experiences, and I thought I should repay such bits of help that I've got from the society. In recent years, when I discover something during my software developments, and if it appears not much documented anywhere, I'm trying to leave my discovery somewhere in public. I'm thinking such a contribution is a way how I can repay to the developers society.
         </div>
-        <div className="page-section">
-          <Container>
-            <Row>
-              {cards}
-            </Row>
-          </Container>
+        <div>
+          I'm actively writing articles on CodeProject.com. The followings are the articles I've ever published on the website.
         </div>
+        {cards}
       </div>
     );
   }
@@ -148,12 +91,7 @@ interface WritingInfo {
   title: string,
   summary: string,
   rating: number,
-  votes: string,
-  views: string,
+  votes: number,
+  views: number,
   publishedDate: string,
 }
-
-export default connect(
-    (state: ApplicationState) => ({ codeProjectApi: state.codeProjectApi }),
-    CodeProjectApi.actionCreators
-)(TechWritings as any);

@@ -1,0 +1,32 @@
+.header {
+  @extend .footer;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+}
+
+.footer {
+  color: var(--bs-light);
+}
+
+.footer-sticky {
+  @extend .footer;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
+.footer-main {
+  @extend .footer;
+}
+
+.sj-layout {
+  flex: 1 1 auto;
+  padding-top: 80px;
+
+  background-color: gray;
+}
+
+.sj-home {
+  background-color: red;
+}

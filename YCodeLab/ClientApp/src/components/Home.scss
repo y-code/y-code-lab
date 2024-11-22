@@ -3,7 +3,7 @@
 @import 'bootstrap/scss/_variables.scss';
 @import 'bootstrap/scss/mixins/_breakpoints.scss';
 
-.home-page {
+.ycl-home-page {
 
   .site-name {
     @extend .font-marck-script;
@@ -22,8 +22,24 @@
     }
   }
 
-  .menu {
+  .site-category-container {
     margin-bottom: 20px;
+  }
+
+  .site-category-col {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+
+    .btn {
+      flex: 1 1 100%;
+      height: 300px;
+
+      border: 0px;
+
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .image-cropper {
@@ -83,9 +99,9 @@
     width: 180px;
   }
 
-  .site-category-col:hover {
-    box-shadow: 3px 3px 2px grey;
-    border: 1px solid grey;
-  }
+  // .site-category-col:hover {
+  //   box-shadow: 3px 3px 2px grey;
+  //   border: 1px solid grey;
+  // }
 
 }

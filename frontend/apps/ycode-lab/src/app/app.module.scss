@@ -1,0 +1,312 @@
+// Import Bootstrap's functions and variables first
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+
+// Fonts ///////////////////////////////////////////
+@import url('https://fonts.googleapis.com/css?family=Marck+Script&display=swap');
+
+.font-common {
+  font-family: "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.font-marck-script {
+  font-family: 'Marck Script', cursive;
+}
+////////////////////////////////////////////////////
+
+.header {
+  @extend .footer;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 200;
+}
+
+.footer {
+  color: var(--bs-light);
+}
+
+.footer-sticky {
+  @extend .footer;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
+.footer-main {
+  @extend .footer;
+
+  padding-bottom: 2rem;
+
+  .footer-profile-img-col {
+    img {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 50%;
+      margin: 20px;
+    }
+  }
+}
+
+.ycode-lab-layout {
+  flex: 1 1 auto;
+  padding-top: 80px;
+
+  .home {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      @extend .font-marck-script;
+      text-align: center;
+      font-size: 6rem;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 10rem;
+      }
+    }
+
+    .home-intro-container {
+      max-width: 600px;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .home-site-category-container {
+      margin-bottom: 20px;
+
+      button {
+        flex: 1 0 400px;
+        height: 320px;
+        border: 0px;
+
+        display: flex;
+
+        @include media-breakpoint-down(xxl) {
+          flex: 1 0 240px;
+          flex-direction: column;
+        }
+
+        h2 {
+          @extend .font-marck-script;
+          width: 200px;
+        }
+
+        img {
+          width: 140px;
+        }
+  
+        .home-site-category-blender-unity-icon {
+          position: relative;
+          top: -30px;
+        }
+      }
+    }
+  }
+
+  .tech-writings {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      @extend .font-marck-script;
+      text-align: center;
+      font-size: 4rem;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 6rem;
+      }
+    }
+
+    .tech-writings-intro-container {
+      max-width: 800px;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tech-writing-item {
+      background-color: #ffedc0;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      &:nth-child(2n) {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .my-projects {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+
+    h1 {
+      @extend .font-marck-script;
+      text-align: center;
+      font-size: 4rem;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 6rem;
+      }
+    }
+
+    > ul {
+      padding: 1rem 0rem;
+      text-align: center;
+      list-style-type: none;
+
+      > li {
+        @extend .font-marck-script;
+        font-size: 1.8rem;
+      }
+
+      > ul {
+        list-style-type: none;
+
+        > li {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .my-projects-section {
+      padding: 4rem 0rem 0rem;
+      h2 {
+        @extend .font-marck-script;
+        font-size: 1.8rem;
+        text-align: center;
+      }
+    }
+
+    .my-projects-section-web-app-dev {
+      @extend .my-projects-section;
+      background-image: linear-gradient(-180deg, #ffecec, #fff5f5)
+    }
+
+    .my-projects-section-lib-dev {
+      @extend .my-projects-section;
+      background-image: linear-gradient(-180deg, #ebfee9, #f6fff5)
+    }
+
+    .my-projects-section-video-game {
+      @extend .my-projects-section;
+      background-image: linear-gradient(-180deg, #fce4e4, #fff1f1)
+    }
+
+    .my-project {
+      background-image: linear-gradient(-180deg,#fff1fb,#fff8fd);
+      padding: 1.6rem 0rem;
+    }
+
+    .my-project-code-snippet {
+      pre {
+        background-color: #2d2d2d; /* Dark background */
+        color: #f8f8f2; /* Light text color */
+        font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+        font-size: 14px; /* Adjust font size as needed */
+        line-height: 1.5; /* Better line spacing */
+        padding: 16px; /* Space around the text */
+        border-radius: 8px; /* Rounded corners */
+        overflow-x: auto; /* Scroll horizontally for long code */
+        // white-space: pre-wrap; /* Wrap long lines */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        border: 1px solid #444; /* Border for distinction */
+      }
+    }
+
+    .my-project-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        border-radius: 8px;
+      }
+    }
+
+    .my-project-video {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      iframe {
+        min-width: 400px;
+        min-height: 225px;
+        border-radius: 8px;
+
+        @include media-breakpoint-down(md) {
+          min-width: 480px;
+          min-height: 270px;
+        }
+      }
+    }
+  }
+
+  .video-game-devs {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      @extend .font-marck-script;
+      text-align: center;
+      font-size: 4rem;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 6rem;
+      }
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .video-game-devs-intro-container {
+      max-width: 800px;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .video-game-devs-item {
+      background-color: #e7faf5;
+      padding: 1.6rem 0rem;
+
+      &:nth-child(2n) {
+        background-color: transparent;
+      }
+    }
+
+    .video-game-devs-play-link {
+      a {
+        font-size: 1.5rem;
+
+        img {
+          width: 1.2rem;
+        }
+      }
+    }
+
+    .video-game-devs-demo-video {
+      width: 440px;
+      height: 248px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+
+      @include media-breakpoint-up(sm) {
+        width: 560px;
+        height: 315px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+}
