@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
+import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Outlet } from 'react-router-dom';
+import { useScrollableStickyFooter } from '@ycode-lab/common';
+import { SjFooterContent, SJFooterTop } from "./sj-footer";
 
 import styles from "./strawberry-joystick.module.scss";
-import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
-import { Outlet } from "react-router-dom";
-import { useScrollableStickyFooter } from "@ycode-lab/common";
 
 /* eslint-disable-next-line */
 export interface StrawberryJoystickProps {}
@@ -18,8 +19,8 @@ export function StrawberryJoystick(props: StrawberryJoystickProps) {
     <React.Fragment>
       <Navbar color="dark" dark expand="lg" className={styles['header']}>
         <NavbarBrand href="/strawberry-joystick">
-          <img alt="logo" src="/assets/logo-strawberry-joystick-32.png" style={{ height: 32, width: 32 }} />
-          Ycode Lab
+          <img alt="logo" src="/assets/logo-strawberry-joystick-32.png" className={styles['header-logo']} />
+          Strawberry Joystick
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="me-2" />
         <Collapse isOpen={collapsed} navbar>
@@ -40,17 +41,11 @@ export function StrawberryJoystick(props: StrawberryJoystickProps) {
         <Outlet/>
       </div>
       <footer className={'bg-dark ' + styles['footer-sticky']} ref={stickyFooterRef}>
-        <Container className={styles['footer-content']}>
-          <div>Footer Content</div>
-        </Container>
+        <SJFooterTop/>
       </footer>
       <footer className={'bg-dark ' + styles['footer-main']} ref={footerRef}>
-        <Container className={styles['footer-content']}>
-          <p>Footer Content</p>
-        </Container>
-        <Container>
-          <div>Additional Footer Info</div>
-        </Container>
+        <SJFooterTop/>
+        <SjFooterContent/>
       </footer>
     </React.Fragment>
   );

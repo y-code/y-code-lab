@@ -1,4 +1,4 @@
-import { v1 as uuid } from 'uuid'
+import { v1 as uuid } from 'uuid';
 
 export function injectLink(original: ((string|JSX.Element)[]|string), links: { [key:string]: string }, routerLinks?: { [key:string]: string }) : (string|JSX.Element)[] {
   let buf: (string|JSX.Element)[] = typeof(original) === "string" ? [ original ] : original;

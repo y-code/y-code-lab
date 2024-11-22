@@ -1,16 +1,19 @@
+export type ProjectCategory = 'WebAppDev'|'LibDev'|'GameApp';
+export type ProjectLanguage = '.NET C#'|'JavaScript'|'TypeScript'|'Sass';
+
 export interface ProjectInfo {
   id: string,
   name: string,
-  category: ("WebAppDev"|"LibDev"|"GameApp"),
+  category: ProjectCategory,
   logo?: string,
   logoAlt?: string,
   subLogo?: string,
   subLogoLink?: string,
-  languages: ('.NET C#'|'JavaScript'|'TypeScript'|'Sass')[],
+  languages: ProjectLanguage[],
   tags: string[],
   description: string[],
-  links: { [key:string]: string },
-  routerLinks: { [key:string]: string },
+  links: Record<string, string>,
+  routerLinks: Record<string, string>,
   video?: string,
   image?: string,
   codeSample?: string,

@@ -1,7 +1,7 @@
-import React from "react";
-import { injectLink, NuGetInfo, ProjectInfo, requestProjectsAsync, RoutingProps, useAppDispatch, useAppSelector, useRoutingHooks } from "@ycode-lab/common";
+import React from 'react';
+import { injectLink, NuGetInfo, ProjectInfo, requestProjectsAsync, RoutingProps, useAppDispatch, useAppSelector, useRoutingHooks } from '@ycode-lab/common';
+import { Badge, Col, Container, Row } from 'reactstrap';
 import styles from './app.module.scss';
-import { Badge, Col, Container, Row } from "reactstrap";
 
 interface Props extends RoutingProps {}
 
@@ -82,13 +82,6 @@ function _MyProjects(props: Props) {
       </div>
 
       {libDevSections}
-
-      <div className={styles['my-project']}>
-
-      </div>
-      <div className={styles['my-project']}>
-
-      </div>
     </div>
   );
 }
@@ -125,35 +118,37 @@ function escapeInVersion(version: string) : string {
 export function generatePageSection(item: ProjectInfo, nuget?: NuGetInfo) : JSX.Element[] {
   const elements: JSX.Element[] = [];
 
-  let cssClassPageSection = "";
+  let cssClassPageSection = '';
   switch (item.category) {
-    case "WebAppDev":
-      cssClassPageSection = "my-projects-section-web-app-dev"
-      break
-    case "LibDev":
-      cssClassPageSection = "my-projects-section-lib-dev"
-      break
-      case "GameApp":
-        cssClassPageSection = "my-projects-section-video-game"
-        break
-    }
+    case 'WebAppDev':
+      cssClassPageSection = 'my-projects-section-web-app-dev';
+      break;
+    case 'LibDev':
+      cssClassPageSection = 'my-projects-section-lib-dev';
+      break;
+    case 'GameApp':
+      cssClassPageSection = 'my-projects-section-video-game';
+      break;
+  };
 
-    const getSublogoStyle = () => { switch (item.subLogo) {
-    case '/google-play-badge.png':
-      return { width: "160px", marginLeft: "10px" };
-    default:
-      return { width: "26px", marginLeft: "10px" };
-  }}
+  const getSublogoStyle = () => {
+    switch (item.subLogo) {
+      case '/assets/google-play-badge.png':
+        return `${styles['my-project-sublogo']} ${styles['google-play']}`;
+      default:
+        return styles['my-project-sublogo'];
+    }
+  };
 
   elements.push(<a key={`anchor-${item.id}`} className="anchor" id={item.id}/>)
   elements.push(
     <div key={`item-${item.id}`} className={styles[cssClassPageSection]}>
       <Container>
         <h3>
-          { item.logo ? [ <img key={`logo-${item.id}`} src={item.logo} style={{ margin: 10, height: 32 }} /> ] : [] }
+          { item.logo ? [ <img key={`logo-${item.id}`} src={item.logo} className={styles['my-project-logo']} /> ] : [] }
           {item.name}
           <a key={`sublogo-${item.id}`} href={item.subLogoLink} target="_blank">
-            <img src={item.subLogo} style={getSublogoStyle()}/>
+            <img src={item.subLogo} className={getSublogoStyle()}/>
           </a>
         </h3>
         <Row>
@@ -215,7 +210,7 @@ export function generatePageSection(item: ProjectInfo, nuget?: NuGetInfo) : JSX.
           {
             item.video ? [
               <Col key={`col-${item.id}-video`} md={12} lg={6} className={styles['my-project-video']}>
-                <iframe className="youtube-video" src={item.video}
+                <iframe src={item.video}
                   frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
@@ -225,9 +220,7 @@ export function generatePageSection(item: ProjectInfo, nuget?: NuGetInfo) : JSX.
           {
             item.image ? [
               <Col key={`col-${item.id}-image`} md={12} lg={6} className={styles['my-project-image']}>
-                <div>
-                  <img className="image" src={item.image} />
-                </div>
+                <img src={item.image} />
               </Col>
             ] : []
           }

@@ -1,6 +1,6 @@
 import { injectLink, RoutingProps, useRoutingHooks } from '@ycode-lab/common';
-import styles from './app.module.scss';
 import { Badge, Col, Container, Row } from 'reactstrap';
+import styles from './app.module.scss';
 
 interface VideoGameDevItem {
   id: string,

@@ -1,4 +1,4 @@
-import { NavigateFunction, Params, useNavigate, useParams } from "react-router-dom"
+import { NavigateFunction, Params, useNavigate, useParams } from 'react-router-dom'
 
 export interface RoutingProps {
   navigate?: NavigateFunction,

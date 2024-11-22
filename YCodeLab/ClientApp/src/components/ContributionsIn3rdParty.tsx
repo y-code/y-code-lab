@@ -1,5 +1,5 @@
-import React from "react";
-import { Row, Col, Badge, Container } from "reactstrap";
+import React from 'react';
+import { Row, Col, Badge, Container } from 'reactstrap';
 
 import './ContributionsIn3rdParty.scss';
 import bgImg from './tpl-frame.svg';

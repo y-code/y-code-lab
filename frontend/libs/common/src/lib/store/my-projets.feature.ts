@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { NuGetInfo, ProjectInfo } from "../model/my-projects.model";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { NuGetInfo, ProjectInfo } from '../model/my-projects.model';
 
 const data: ProjectInfo[] = [
   {
@@ -8,7 +8,7 @@ const data: ProjectInfo[] = [
     category: "WebAppDev",
     logo: "/assets/favicon-32.png",
     logoAlt: "logo image",
-    subLogo: "/GitHub-Mark-64px.png",
+    subLogo: "/assets/GitHub-Mark-64px.png",
     subLogoLink: "https://github.com/y-code/y-code-lab",
     languages: [ ".NET C#", "TypeScript", "Sass" ],
     tags: [ "ASP.NET Core", "React", "Redux" ],
@@ -56,7 +56,7 @@ const data: ProjectInfo[] = [
     category: "LibDev",
     logo: "https://github.com/y-code/aspnet-api-group-versioning/raw/master/doc/images/icon.png",
     logoAlt: "logo image",
-    subLogo: "/GitHub-Mark-64px.png",
+    subLogo: "/assets/GitHub-Mark-64px.png",
     subLogoLink: "https://github.com/y-code/aspnet-api-group-versioning",
     languages: [ ".NET C#" ],
     tags: [ "ASP.NET", "Web API", "API Versioning" ],
@@ -76,7 +76,7 @@ const data: ProjectInfo[] = [
     id: "template-rest-api",
     name: "ASP.NET Core Web API Template with API Documentation",
     category: "LibDev",
-    subLogo: "/GitHub-Mark-64px.png",
+    subLogo: "/assets/GitHub-Mark-64px.png",
     subLogoLink: "https://github.com/y-code/template-rest-api",
     languages: [ ".NET C#" ],
     tags: [ "ASP.NET", "Web API", "Swagger", "OpenAPI" ],
@@ -95,7 +95,7 @@ const data: ProjectInfo[] = [
     category: "LibDev",
     logo: "https://github.com/y-code/testrail-client-for-test-code/raw/master/src/TestRailClient.V2/Images/icon.png",
     logoAlt: "logo image",
-    subLogo: "/GitHub-Mark-64px.png",
+    subLogo: "/assets/GitHub-Mark-64px.png",
     subLogoLink: "https://github.com/y-code/template-rest-api",
     languages: [ ".NET C#" ],
     tags: [ "NUnit", "Testing Library" ],
@@ -114,7 +114,7 @@ const data: ProjectInfo[] = [
     category: "LibDev",
     logo: "https://github.com/y-code/testrail-client-for-test-code/raw/master/src/TestRailClient.V2.NUnit/Images/icon.png",
     logoAlt: "logo image",
-    subLogo: "/GitHub-Mark-64px.png",
+    subLogo: "/assets/GitHub-Mark-64px.png",
     subLogoLink: "https://github.com/y-code/testrail-client-for-test-code",
     languages: [ ".NET C#" ],
     tags: [ "NUnit", "Testing Library" ],
@@ -133,7 +133,7 @@ const data: ProjectInfo[] = [
     category: "LibDev",
     logo: "https://github.com/y-code/uri-convert/raw/master/doc/images/icon.png",
     logoAlt: "logo image",
-    subLogo: "/GitHub-Mark-64px.png",
+    subLogo: "/assets/GitHub-Mark-64px.png",
     subLogoLink: "https://github.com/y-code/testrail-client-for-test-code",
     languages: [ ".NET C#" ],
     tags: [ "Component Model" ],
@@ -150,7 +150,7 @@ const data: ProjectInfo[] = [
     id: "react-redux-stethoscope",
     name: "React-Redux Stethoscope",
     category: "LibDev",
-    subLogo: "/GitHub-Mark-64px.png",
+    subLogo: "/assets/GitHub-Mark-64px.png",
     subLogoLink: "https://github.com/y-code/react-redux-stethoscope",
     languages: [ "TypeScript" ],
     tags: [ "React", "Redux", "Testing Library" ],
@@ -192,7 +192,7 @@ const data: ProjectInfo[] = [
     id: "reactstrap-paginationbar",
     name: "Reactstrap Paginationbar",
     category: "LibDev",
-    subLogo: "/GitHub-Mark-64px.png",
+    subLogo: "/assets/GitHub-Mark-64px.png",
     subLogoLink: "https://github.com/y-code/reactstrap-paginationbar",
     languages: [ "JavaScript" ],
     tags: [ "React", "Bootstrap" ],

@@ -1,6 +1,5 @@
-import React from "react";
-import { Col, Container, Row, Tooltip } from "reactstrap";
-
+import React from 'react';
+import { Col, Container, Row, Tooltip } from 'reactstrap';
 import styles from "./app.module.scss";
 
 export function FooterTop() {
@@ -26,13 +25,10 @@ export function FooterContent() {
         </Col>
         <Col sm={12} md={8} lg={6} xl={6} xxl={6}>
           <p>
-            I'm a Software Engineer experienced in enterprise system development. I'm most skilled in Web System Development while increasing knowledge in Video Game Development these days.
-          </p>
-          <p>
-            As well as I love coding, I have a keen interest in the way how to develop and apply computer systems to improve business processes effectively. In some projects in the past, I worked as a business analyst and worked in Business Process Analysis and Systems design.
+            I'm a Software Engineer experienced in enterprise system development. I'm most skilled in web system development and enjoy video game development in my spare time.
           </p>
           <div>
-            In recent years, I gained more knowledge in Project Management and Test Strategy. I've been practising the implementation of effective and also efficient Quality Assurance process under Agile Project Management from the aspect of Development Process and Test Automation.
+            While I love coding, I am keenly interested in designing and developing quality systems effectively and efficiently. While documentation is essential in development processes, its management and maintenance are time-consuming and thus costly for businesses. Through past experiments in enterprise projects, I have found that UML and ArchiMate are cost-effective while encouraging and aiding discussions and communications well. These days, I'm using some utilities from TOGAF to make feature design and implementation planning profitable.
           </div>
         </Col>
         <Col sm={12} md={12} lg={3} xl={3} className='profile-content-col text-light'>

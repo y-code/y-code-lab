@@ -2,7 +2,7 @@ import { RouteObject } from 'react-router-dom';
 import StrawberryJoystick from './strawberry-joystick';
 import { SJHome } from './sj-home';
 import { SJPrivacyPolicy } from './sj-privacy-policy';
-import { SJProjects } from './sj-game-apps';
+import { SJProjects } from './sj-projects';
 
 export const sjRouter: Array<RouteObject> = [
   {

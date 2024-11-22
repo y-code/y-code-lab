@@ -1,10 +1,9 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
-
-import styles from "./app.module.scss";
-import { useScrollableStickyFooter } from "@ycode-lab/common";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { useScrollableStickyFooter } from '@ycode-lab/common';
 import { FooterContent, FooterTop } from "./footer";
+import styles from "./app.module.scss";
 
 interface Props {}
 
@@ -18,7 +17,7 @@ export function YcodeLabLayout(props: Props) {
     <React.Fragment>
       <Navbar color="dark" dark expand="lg" className={styles['header']}>
         <NavbarBrand href="/">
-          <img alt="logo" src="/assets/favicon-32.png" style={{ height: 32, width: 32 }} />
+          <img alt="logo" src="/assets/favicon-32.png" className={styles['header-logo']} />
           Ycode Lab
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="me-2" />
@@ -35,9 +34,6 @@ export function YcodeLabLayout(props: Props) {
             </NavItem>
             <NavItem>
               <NavLink href="/tech-writings">Technical Writings</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/strawberry-joystick">Strawberry Joystick</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

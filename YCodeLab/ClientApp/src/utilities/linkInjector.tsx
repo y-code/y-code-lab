@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { v1 as uuid } from 'uuid'
 
 function inject(original: ((string|JSX.Element)[]|string), links: { [key:string]: string }, routerLinks?: { [key:string]: string }) : (string|JSX.Element)[] {

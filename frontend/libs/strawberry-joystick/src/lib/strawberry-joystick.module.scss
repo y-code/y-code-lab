@@ -1,8 +1,26 @@
+// Import Bootstrap's functions and variables first
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+
+// Fonts ///////////////////////////////////////////
+@import url('https://fonts.googleapis.com/css?family=Marck+Script&display=swap');
+
+.font-marck-script {
+  font-family: 'Marck Script', cursive;
+}
+////////////////////////////////////////////////////
+
 .header {
   @extend .footer;
   position: fixed;
   top: 0px;
   width: 100%;
+
+  .header-logo {
+    width: 32px;
+    margin: 0rem 1rem;
+  }
 }
 
 .footer {
@@ -18,15 +36,245 @@
 
 .footer-main {
   @extend .footer;
+
+  padding-bottom: 2rem;
+
+  .footer-profile-img-col {
+    img {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 50%;
+      margin: 20px;
+    }
+  }
+
+  h2 {
+    @include media-breakpoint-down(md) {
+      text-align: center;
+    }
+  }
 }
 
 .sj-layout {
   flex: 1 1 auto;
   padding-top: 80px;
 
-  background-color: gray;
-}
+  .sj-home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.sj-home {
-  background-color: red;
+    h1 {
+      @extend .font-marck-script;
+      text-align: center;
+      font-size: 6rem;
+      max-width: 700px;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 4rem;
+        max-width: 500px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        font-size: 8rem;
+      }
+    }
+
+    .sj-home-intro-container {
+      max-width: 600px;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sj-home-site-category-container {
+      margin-bottom: 20px;
+
+      button {
+        flex: 1 0 400px;
+        height: 320px;
+        border: 0px;
+
+        display: flex;
+
+        @include media-breakpoint-down(xxl) {
+          flex: 1 0 240px;
+          flex-direction: column;
+        }
+
+        h2 {
+          @extend .font-marck-script;
+          width: 200px;
+        }
+
+        img {
+          width: 140px;
+        }
+
+        .sj-home-site-category-blender-unity-icon {
+          position: relative;
+          top: -30px;
+        }
+      }
+    }
+  }
+
+  .sj-projects {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      @extend .font-marck-script;
+      text-align: center;
+      font-size: 4rem;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 6rem;
+      }
+    }
+
+    > ul {
+      padding: 1rem 0rem;
+      text-align: center;
+      list-style-type: none;
+
+      > li {
+        @extend .font-marck-script;
+        font-size: 1.8rem;
+      }
+
+      > ul {
+        list-style-type: none;
+
+        > li {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .sj-projects-section {
+      padding: 4rem 0rem 1.6rem;
+
+      h2 {
+        @extend .font-marck-script;
+        font-size: 1.8rem;
+        text-align: center;
+      }
+    }
+
+    .sj-projects-section-game-app {
+      @extend .sj-projects-section;
+    }
+
+    .sj-project {
+      background-image: linear-gradient(-180deg,#fff1fb,#fff8fd);
+      padding: 1.6rem 0rem;
+    }
+
+    .sj-project-logo {
+      margin: 10px;
+      height: 32px;
+    }
+
+    .sj-project-sublogo {
+      width: 26px;
+      margin-left: 10px;
+
+      &.google-play {
+        width: 160px;
+      }
+    }
+
+    .sj-project-code-snippet {
+      pre {
+        background-color: #2d2d2d; /* Dark background */
+        color: #f8f8f2; /* Light text color */
+        font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+        font-size: 14px; /* Adjust font size as needed */
+        line-height: 1.5; /* Better line spacing */
+        padding: 16px; /* Space around the text */
+        border-radius: 8px; /* Rounded corners */
+        overflow-x: auto; /* Scroll horizontally for long code */
+        // white-space: pre-wrap; /* Wrap long lines */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        border: 1px solid #444; /* Border for distinction */
+      }
+    }
+
+    .sj-project-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        border-radius: 8px;
+        max-width: 450px;
+
+        @include media-breakpoint-down(lg) {
+          max-width: 90%;
+        }
+      }
+    }
+
+    .sj-project-video {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      iframe {
+        min-width: 400px;
+        min-height: 225px;
+        border-radius: 8px;
+
+        @include media-breakpoint-down(md) {
+          min-width: 480px;
+          min-height: 270px;
+        }
+      }
+    }
+  }
+
+  .sj-privacy-policy {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      @extend .font-marck-script;
+      text-align: center;
+      font-size: 4rem;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 6rem;
+      }
+    }
+
+    > ul {
+      padding: 1rem 0rem;
+      text-align: center;
+      list-style-type: none;
+
+      > li {
+        font-size: 1.4rem;
+      }
+    }
+
+    .sj-privacy-policy-section {
+      padding: 4rem 0rem 1.6rem;
+
+      h2 {
+        font-size: 1.8rem;
+        text-align: center;
+      }
+
+      h3 {
+        font-size: 1.4rem;
+      }
+
+      h4 {
+        font-size: 1.2rem;
+      }
+    }    
+  }
 }
