@@ -1,0 +1,71 @@
+// Import Bootstrap's functions and variables first
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+// Override Bootstrap variables here
+$primary: #ff5733;
+$font-family-base: Lato, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+$headings-font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, $font-family-base;
+
+// Override container width variables
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 960px,
+  xxl: 960px
+);
+
+$white: #ffffff;
+
+$theme-colors: (
+    "light":      #e6e8f5,
+    "dark":       #254846,
+    "primary":    #ed292c,
+    "secondary":  #dc925a,
+    "info":       #ffca3f,
+    "success":    #6fc200,
+    "warning":    #ffca8b,
+    "danger":     #ff076c,
+);
+
+@import 'bootstrap/scss/bootstrap';
+
+html {
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  tab-size: 4;
+  scroll-behavior: smooth;
+}
+
+body {
+  line-height: inherit;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  font-family: $headings-font-family;
+}
+
+.hidden {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}

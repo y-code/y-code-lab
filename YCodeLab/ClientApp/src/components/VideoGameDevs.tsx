@@ -4,12 +4,12 @@ import './VideoGameDevs.scss';
 import { Row, Col, Badge, Container } from 'reactstrap';
 
 import linkInjector from '../utilities/linkInjector';
-import { HashLink } from 'react-router-hash-link';
+import { RoutingProps } from '../App';
 
 interface VideoGameDevItem {
   id: string,
   name: string,
-  actionTypes: ('3D Game'|'3D Modeling'|'Online Multiplayer'|'3D Animation'|'ShaderLab'|'Algorithm'|'Vector Geometry')[],
+  actionTypes: ('C#'|'3D Game'|'3D Modeling'|'Online Multiplayer'|'3D Animation'|'ShaderLab'|'Algorithm'|'Vector Geometry')[],
   status: ('Prototype'|'In Development'|'Released'),
   videoId: string,
   description: string[],
@@ -17,7 +17,7 @@ interface VideoGameDevItem {
   links: { [key:string]: string },
 }
 
-interface Props {
+interface Props extends RoutingProps {
 }
 
 interface State {
@@ -33,7 +33,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
         {
           id: "bwc",
           name: 'Babble Warriors Colosseum',
-          actionTypes: [ 'Online Multiplayer', '3D Game', '3D Animation' ],
+          actionTypes: [ 'C#', 'Online Multiplayer', '3D Game', '3D Animation' ],
           status: 'In Development',
           videoId: '3L3cToPfDqg',
           description: [
@@ -49,7 +49,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
         {
           id: "tower-of-maze",
           name: 'Tower of Maze',
-          actionTypes: [ 'Algorithm', 'Vector Geometry', '3D Game'],
+          actionTypes: [ 'C#', 'Algorithm', 'Vector Geometry', '3D Game'],
           status: 'In Development',
           videoId: '-GQ1SAOzkWQ',
           description: [
@@ -65,7 +65,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
         {
           id: "cube-dojo",
           name: 'Cube Dojo',
-          actionTypes: [ 'Vector Geometry', '3D Game' ],
+          actionTypes: [ 'C#', 'Vector Geometry', '3D Game' ],
           status: 'Prototype',
           videoId: 'txrMp1yyNeA',
           description: [
@@ -79,7 +79,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
         {
           id: "koto-dama",
           name: 'KotoDama',
-          actionTypes: [ '3D Game', '3D Animation' ],
+          actionTypes: [ 'C#', '3D Game', '3D Animation' ],
           status: 'Prototype',
           videoId: 'sXcFglOtCRo',
           description: [
@@ -94,7 +94,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
         {
           id: "avatar-demo",
           name: 'Humanoid Avatar Demo',
-          actionTypes: [ '3D Game', '3D Modeling', '3D Animation' ],
+          actionTypes: [ 'C#', '3D Game', '3D Modeling', '3D Animation' ],
           status: 'Prototype',
           videoId: 'i6IsGgb_ZF0',
           description: [
@@ -108,7 +108,7 @@ export default class VideoGameDevs extends React.PureComponent<Props, State> {
         {
           id: "fairy-dungeon",
           name: 'Fairy Dungeon',
-          actionTypes: [ 'ShaderLab', '3D Game', '3D Modeling' ],
+          actionTypes: [ 'C#', 'ShaderLab', '3D Game', '3D Modeling' ],
           status: 'Prototype',
           videoId: 'DcrcgEQ1lb8',
           description: [
@@ -153,7 +153,7 @@ function Introduction(props: { data: VideoGameDevItem[] }) {
         </p>
       </Container>
       <ul className="h2">
-        {(() => props.data.map(item => <li key={`h2-${item.id}`}><HashLink to={`#${item.id}`}>{item.name}</HashLink></li>))()}
+        {(() => props.data.map(item => <li key={`h2-${item.id}`}><a href={`/video-game-devs#${item.id}`}>{item.name}</a></li>))()}
       </ul>
     </div>
   );

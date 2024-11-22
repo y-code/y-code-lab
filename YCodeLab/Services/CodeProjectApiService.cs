@@ -97,8 +97,8 @@ namespace YCodeLab.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _commands.Add(new CommandGetAll(this, _logger));
-            _serviceTask = Run();
+            // _commands.Add(new CommandGetAll(this, _logger));
+            // _serviceTask = Run();
             return Task.CompletedTask;
         }
 

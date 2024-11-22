@@ -48,7 +48,7 @@ export class Stethoscope {
             isAllNotified = listener.notifyDispatch(result)
           } catch (e) {
             if (!this._error) {
-              this._error = e
+              this._error = e as Error
             }
           }
         }

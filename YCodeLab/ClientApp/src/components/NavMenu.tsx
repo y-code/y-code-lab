@@ -30,9 +30,9 @@ export default function(props: {}){
               <NavItem>
                   <NavLink tag={Link} className="text-light" to="/my-projects" onClick={e => toggleOnLink(e.target)}>My Projects</NavLink>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink tag={Link} className="text-light" to="/contributions-in-3rd-party" onClick={e => toggleOnLink(e.target)}>Devs in 3rd Party</NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                   <NavLink tag={Link} className="text-light" to="/video-game-devs" onClick={e => toggleOnLink(e.target)}>Video Game Devs</NavLink>
               </NavItem>

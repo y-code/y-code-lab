@@ -1,5 +1,5 @@
-import React from "react";
-import { Row, Col, Badge, Container } from "reactstrap";
+import React from 'react';
+import { Row, Col, Badge, Container } from 'reactstrap';
 
 import './ContributionsIn3rdParty.scss';
 import bgImg from './tpl-frame.svg';
@@ -7,10 +7,11 @@ import bgImg2 from './GitHub-Mark-120px-plus.png';
 import bgImg3 from './rip.svg';
 
 import linkInjector from '../utilities/linkInjector';
-import { HashLink } from "react-router-hash-link";
+import { RoutingProps } from "../App";
 
-interface Props {
+interface Props extends RoutingProps {
 }
+
 interface State {
   thirdPartyLib: { items: ThirdPartyLibItem[] }
 }
@@ -189,7 +190,7 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
                 let items: Array<JSX.Element> = [];
                 if (this.state && this.state.thirdPartyLib && this.state.thirdPartyLib.items && this.state.thirdPartyLib.items.length) {
                   for (let i of this.state.thirdPartyLib.items) {
-                    items.push(<li key={`h2-${i.id}`}><HashLink to={`#${i.id}`}>{i.libName}</HashLink></li>);
+                    items.push(<li key={`h2-${i.id}`}><a href={`/contributions-in-3rd-party#${i.id}`}>{i.libName}</a></li>);
                     items.push(
                       <ul key={`h3-items-${i.id}`} className="h3">
                         {
@@ -236,7 +237,7 @@ export default class ThirdPartyLibDevs extends React.PureComponent<Props, State>
                                 {
                                   item.description.map((d, i) =>
                                     <p key={`description-${item.id}-${i}`}>
-                                      {linkInjector.inject([ d ], item.links)}
+                                      {linkInjector.inject(d, item.links)}
                                     </p>
                                   )
                                 }

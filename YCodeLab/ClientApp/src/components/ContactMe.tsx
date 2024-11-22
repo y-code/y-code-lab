@@ -6,23 +6,24 @@ import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 
 import './ContactMe.scss';
+import { RoutingProps } from '../App';
 
-interface ContactMeProperties {
+interface Props extends RoutingProps {
 }
 
 class ContactMeState {
   content: string = "";
 }
 
-export default class ContactMe extends React.PureComponent<ContactMeProperties, ContactMeState> {
-  constructor(props: ContactMeProperties) {
+export default class ContactMe extends React.PureComponent<Props, ContactMeState> {
+  constructor(props: Props) {
     super(props);
     this.state = new ContactMeState();
   }
 
   public render() {
     return (
-      <ContactMeForm/>
+      <ConnectedContactMeForm/>
     );
   }
 }
@@ -218,7 +219,7 @@ function appendIsValidClass(classNames: string, flag: boolean | undefined, total
   return (classNames ? classNames + " " : classNames) + (flag ? "is-valid" : "is-invalid");
 }
 
-ContactMeForm = connect(
+let ConnectedContactMeForm = connect(
   (state: ApplicationState) => state.messaging,
   actionCreators
 )(ContactMeForm as any)

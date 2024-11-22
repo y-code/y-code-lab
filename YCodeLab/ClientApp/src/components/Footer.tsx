@@ -79,9 +79,9 @@ export default function(props: { children?: React.ReactNode }) {
                     <NavItem>
                         <NavLink tag={Link} className="text-light" to="/my-projects">My Projects</NavLink>
                     </NavItem>
-                    <NavItem>
+                    {/* <NavItem>
                         <NavLink tag={Link} className="text-light" to="/contributions-in-3rd-party">Devs in 3rd Party</NavLink>
-                    </NavItem>
+                    </NavItem> */}
                     <NavItem>
                         <NavLink tag={Link} className="text-light" to="/video-game-devs">Video Game Devs</NavLink>
                     </NavItem>

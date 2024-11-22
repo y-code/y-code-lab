@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -8,21 +8,23 @@ COPY YCodeLabDB/*.csproj ./YCodeLabDB/
 RUN dotnet restore
 
 # copy everything else and build app
+COPY frontend/. ./frontend/
 COPY YCodeLab/. ./YCodeLab/
 COPY YCodeLabDB/. ./YCodeLabDB/
 WORKDIR /app/YCodeLab
 
-RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl git nano
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -yq nodejs build-essential
-RUN npm install -g npm
+RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+RUN . ~/.bashrc && nvm install 22 && node -v && npm -v
+RUN . ~/.bashrc && npm install -g npm
 # RUN npm install
 
-RUN dotnet publish -c Release -o out
+RUN . ~/.bashrc && dotnet publish -c Release -o out
 
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
-# EXPOSE 8080/tcp
-# ENV ASPNETCORE_URLS http://+:8080
-COPY --from=build /app/YCodeLab/out ./
+EXPOSE 80/tcp
+ENV ASPNETCORE_URLS http://+:80
+COPY --from=build /app/YCodeLab/out/ ./
 ENTRYPOINT ["dotnet", "YCodeLab.dll"]

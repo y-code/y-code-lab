@@ -1,20 +1,30 @@
-import React from "react"
+import React from 'react'
 import { v1 as uuid } from 'uuid'
 
-function inject(original: (string|JSX.Element)[], links: { [key:string]: string }) : (string|JSX.Element)[] {
-  let buf: (string|JSX.Element)[] = original;
-  for (let linkKey in links)
-    buf = injectLink(buf, linkKey, links[linkKey]);
+function inject(original: ((string|JSX.Element)[]|string), links: { [key:string]: string }, routerLinks?: { [key:string]: string }) : (string|JSX.Element)[] {
+  let buf: (string|JSX.Element)[] = typeof(original) === "string" ? [ original ] : original;
+
+  for (let linkKey in links) {
+    buf = injectLink(buf, linkKey, links[linkKey],
+      (key, url) => <a key={uuid()} href={url} target="_blank">{key}</a>);
+  }
+
+  for (let linkKey in routerLinks) {
+    buf = injectLink(buf, linkKey, routerLinks[linkKey],
+      (key, url) => <a key={uuid()} href={url}>{key}</a>);
+  }
+
   buf = buf.map(b => {
     if (typeof(b) === 'string')
       return <span key={uuid()}>{b}</span>
     else
       return b;
   })
+
   return buf;
 }
 
-function injectLink(original: (string|JSX.Element)[], linkKey: string, linkUrl: string) : (string|JSX.Element)[] {
+function injectLink(original: (string|JSX.Element)[], linkKey: string, linkUrl: string, createLink: (key: string, url: string) => JSX.Element) : (string|JSX.Element)[] {
   let result : (string|JSX.Element)[] = [];
 
   for (let line of original) {
@@ -34,7 +44,7 @@ function injectLink(original: (string|JSX.Element)[], linkKey: string, linkUrl: 
             fragment = fragment;
           result.push(fragment);
           if (i < fragments.length - 1)
-            result.push(<a key={uuid()} href={linkUrl}>{linkKey}</a>);
+            result.push(createLink(linkKey, linkUrl));
         }
       }
     } else {

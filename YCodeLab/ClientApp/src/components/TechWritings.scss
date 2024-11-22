@@ -16,39 +16,9 @@
     font-size: 1.4em;
   }
 
-  @include media-breakpoint-up(lg) {
-    .page-section {
-      padding-top: 2em;
-      padding-bottom: 2em;
-    }
-  }
-
-  @include media-breakpoint-up(xl) {
-    .page-section {
-      padding-top: 6em;
-      padding-bottom: 6em;
-    }
-  }
-
   .writing-props-row {
     @extend .row;
     margin-right: 0px;
     margin-left: 0px;
-  }
-
-  .card {
-    border: 0px;
-    margin-bottom: 20px;
-
-    .card-header {
-      border-radius: 0.5rem 0.5rem 0 0;
-      border-bottom: 0px;
-      background-color: #0000001e;
-    }
-
-    .card-body {
-      border-radius: 0 0 0.5rem 0.5rem;
-      background-color: #0000000d;
-    }
   }
 }
