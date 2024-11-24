@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TechWritingInfo } from '../model/tech-writing.model';
 
-let data: TechWritingInfo[] = [
+const data: readonly Readonly<TechWritingInfo>[] = [
   {
-    url: "https://yasu-log.blogspot.com/2024/07/fix-was-released-for-c-cmake-build.html",
+    url: "https://www.codeproject.com/Articles/5385400/Cplusplus-CMake-Build-Issue-with-SQLite3-Fixed-Usi",
     title: "C++ CMake build issue with SQLite3 fixed using pkg-config utility",
     summary: "When I ran into a problem with `find_package( SQLite3 REQUIRED )`, I dug into the fix and played with the pkg-config utility.",
     rating: 5,
@@ -12,7 +12,7 @@ let data: TechWritingInfo[] = [
     publishedDate: "14 July 2024",
   },
   {
-    url: "https://yasu-log.blogspot.com/2024/06/factory-design-pattern-in-c.html",
+    url: "https://www.codeproject.com/Articles/5384546/Factory-Design-Pattern-in-Cplusplus",
     title: "Factory Design Pattern in C++",
     summary: "Factory design pattern is one of the common design patterns seen in code. It is a simple structure, but it can be written a variety of ways in C++, with the conceptual intentions behind it. Let us see several solutions and consider their potential.",
     rating: 5,
@@ -60,7 +60,7 @@ let data: TechWritingInfo[] = [
 
 interface WritingsState {
   isLoading: boolean,
-  data?: TechWritingInfo[],
+  data?: readonly Readonly<TechWritingInfo>[],
 }
 
 export interface TechWritingState {
@@ -74,7 +74,7 @@ export const initialState: TechWritingState = {
 } as const;
 
 export const requestTechWritingsAsync = createAsyncThunk(
-  'MyProjects/requestTechWritingsAsync',
+  'TechWritings/requestTechWritingsAsync',
   async () => ({data})
 );
 
@@ -92,7 +92,7 @@ const techWritingSlice = createSlice({
       state.writings = {
         ...state.writings,
         isLoading: false,
-        data: action.payload.data,
+        data: [...action.payload.data],
       };
     }),
 });

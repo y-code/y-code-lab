@@ -2,6 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import myProjects from './my-projets.feature';
 import techWriting from './tech-writing.feature';
+import videoGameDevs from './video-game-devs.feature';
 import sjProjects from './sj-projets.feature';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +10,7 @@ export const store = configureStore({
   reducer: {
     myProjects: myProjects.reducer,
     techWriting: techWriting.reducer,
+    videoGameDevs: videoGameDevs.reducer,
     sjProjects: sjProjects.reducer,
   },
 });
@@ -22,11 +24,14 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export {
   requestProjectsAsync,
-  requestNuGetInfoAsync
+  requestNuGetInfoAsync,
 } from './my-projets.feature';
 export {
   requestTechWritingsAsync,
 } from './tech-writing.feature';
+export {
+  requestVideoGameDevsAsync,
+} from './video-game-devs.feature'
 export {
   requestSJProjectsAsync,
 } from './sj-projets.feature';

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ProjectInfo } from '../model/my-projects.model';
 
-const data: ProjectInfo[] = [
+const data: readonly Readonly<ProjectInfo>[] = [
   {
     id: "power-maniac",
     name: "Power Maniac",
@@ -25,7 +25,7 @@ const data: ProjectInfo[] = [
 
 interface ProjectsState {
   isLoading: boolean,
-  data?: ProjectInfo[],
+  data?: readonly Readonly<ProjectInfo>[],
 }
 
 export interface SJProjectsState {
@@ -57,7 +57,7 @@ const sjProjectsSlice = createSlice({
       state.projects = {
         ...state.projects,
         isLoading: false,
-        data: action.payload.data,
+        data: [...action.payload.data],
       };
     }),
 });

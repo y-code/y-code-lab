@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, NavLink as RouterNavLink } from 'react-router-dom';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { useScrollableStickyFooter } from '@ycode-lab/common';
 import { FooterContent, FooterTop } from "./footer";
@@ -24,16 +24,16 @@ export function YcodeLabLayout(props: Props) {
         <Collapse isOpen={collapsed} navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink href="/">Home</NavLink>
+              <NavLink tag={RouterNavLink} to="/">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/my-projects">My Projects</NavLink>
+              <NavLink tag={RouterNavLink} to="/my-projects">My Projects</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/video-game-devs">Video Game Devs</NavLink>
+              <NavLink tag={RouterNavLink} to="/video-game-devs">Video Game Devs</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/tech-writings">Technical Writings</NavLink>
+              <NavLink tag={RouterNavLink} to="/tech-writings">Technical Writings</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

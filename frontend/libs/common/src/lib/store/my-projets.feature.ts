@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { NuGetInfo, ProjectInfo } from '../model/my-projects.model';
 
-const data: ProjectInfo[] = [
+const data: readonly Readonly<ProjectInfo>[] = [
   {
     id: "ycode-lab",
     name: "Y-code Lab",
@@ -211,11 +211,11 @@ const data: ProjectInfo[] = [
 
 interface NuGetInfoState {
   isLoading: boolean,
-  data?: NuGetInfo,
+  data?: Readonly<NuGetInfo>,
 }
 
 interface ProjectState {
-  data: ProjectInfo,
+  data: Readonly<ProjectInfo>,
   nugetInfo: NuGetInfoState,
 }
 
@@ -236,7 +236,7 @@ export const initialState: MyProjectsState = {
 
 export const requestProjectsAsync = createAsyncThunk(
   'MyProjects/requestProjectsAsync',
-  async ({}: {}, { dispatch }) => {
+  async (_: object, { dispatch }) => {
     for (const project of data) {
       if (project.nugetPackage)
         // intentionally not awaiting
@@ -248,7 +248,7 @@ export const requestProjectsAsync = createAsyncThunk(
 
 export const requestNuGetInfoAsync = createAsyncThunk(
   'MyProjects/requestNuGetInfoAsync',
-  async ({ id, nugetPackage }: {id: string, nugetPackage: string}, { dispatch }) => {
+  async ({ nugetPackage }: {id: string, nugetPackage: string}) => {
     const response = await fetch(`https://api.nuget.org/v3-flatcontainer/${nugetPackage}/index.json`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
