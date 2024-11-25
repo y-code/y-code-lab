@@ -7,7 +7,7 @@ const data: ProjectInfo[] = [
   {
     id: "ycode-lab",
     name: "Y-code Lab",
-    category: "WebAppDev",
+    category: "AppDev",
     logo: "/favicon-32.png",
     logoAlt: "logo image",
     subLogo: "/GitHub-Mark-64px.png",
@@ -32,7 +32,7 @@ const data: ProjectInfo[] = [
   {
     id: "happyfl",
     name: "HappyFL",
-    category: "WebAppDev",
+    category: "AppDev",
     logo: "https://github.com/y-code/happyfl/raw/master/HappyFL/wwwroot/favicon.png",
     logoAlt: "logo image",
     subLogo: "https://img.icons8.com/metro/26/000000/external-link.png",

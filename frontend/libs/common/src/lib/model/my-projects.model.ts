@@ -1,5 +1,5 @@
-export type ProjectCategory = 'WebAppDev'|'LibDev'|'GameApp';
-export type ProjectLanguage = '.NET C#'|'JavaScript'|'TypeScript'|'Sass';
+export type ProjectCategory = 'AppDev'|'LibDev'|'GameApp';
+export type ProjectLanguage = 'C++'|'CMake'|'Java'|'.NET C#'|'JavaScript'|'TypeScript'|'Sass'|'PLpgSQL'|'Protobuf'|'Dockerfile'|'Docker Compose';
 
 export interface ProjectInfo {
   id: string,

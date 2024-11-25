@@ -43,7 +43,7 @@ class MyProjects extends React.PureComponent<Props & typeof actionCreators, Stat
         let project = this.props.myProjects.projects.data[projectId].data
         let nuget = this.props.myProjects.projects.data[projectId].nuget.data
         switch (project.category) {
-          case "WebAppDev":
+          case "AppDev":
             webAppDevNavItems = [
               ...webAppDevNavItems,
               generateNavItem(project, nuget, "/my-projects"),
@@ -164,7 +164,7 @@ export function generatePageSection(item: ProjectInfo, nuget: NuGetInfo) : JSX.E
 
   let cssClassPageSection = "";
   switch (item.category) {
-    case "WebAppDev":
+    case "AppDev":
       cssClassPageSection = "page-section-web-app-dev"
       break
     case "LibDev":

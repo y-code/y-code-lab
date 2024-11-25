@@ -26,7 +26,7 @@ function _MyProjects(props: Props) {
       const project = projects[projectId].data
       const nuget = projects[projectId].nugetInfo?.data
       switch (project.category) {
-        case "WebAppDev":
+        case "AppDev":
           webAppDevNavItems = [
             ...webAppDevNavItems,
             generateNavItem(project, nuget, "/my-projects"),
@@ -120,7 +120,7 @@ export function generatePageSection(item: ProjectInfo, nuget?: NuGetInfo) : JSX.
 
   let cssClassPageSection = '';
   switch (item.category) {
-    case 'WebAppDev':
+    case 'AppDev':
       cssClassPageSection = 'my-projects-section-web-app-dev';
       break;
     case 'LibDev':
@@ -152,7 +152,7 @@ export function generatePageSection(item: ProjectInfo, nuget?: NuGetInfo) : JSX.
           </a>
         </h3>
         <Row>
-          <Col className="d-flex gap-2">
+          <Col className="d-flex gap-2 flex-wrap">
             {
               item.languages ? item.languages.map(lang => <Badge key={lang} color="primary">{lang}</Badge>) : []
             }

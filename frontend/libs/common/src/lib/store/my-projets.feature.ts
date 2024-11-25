@@ -3,9 +3,30 @@ import { NuGetInfo, ProjectInfo } from '../model/my-projects.model';
 
 const data: readonly Readonly<ProjectInfo>[] = [
   {
+    id: "sniffy",
+    name: "Sniffy - PCAP Sandbox",
+    category: "AppDev",
+    subLogo: "/assets/GitHub-Mark-64px.png",
+    subLogoLink: "https://github.com/y-code/pcap-sample",
+    languages: [ "C++", "CMake", "Java", ".NET C#", "TypeScript", "Sass", "PLpgSQL", "Protobuf", "Dockerfile", "Docker Compose" ],
+    tags: [ "PCAP", "Apache AGE", "PostgreSQL", "Kafka", "Kafka Connect", "Three.js" ],
+    description: [
+      "Sniffy is my sandbox project to play with the PCAP library and try analysing network traffic to derive insight or anomalies.",
+      "A C++ program, Sniffy, monitors a network interface and gathers the network packets that go through it. Another C++ program aggregates data by time and some fields, serialises it using Protobuf, and sends it to Kafka. A custom Kafka Sink consumes the Kafka topic and stores it in the PostgreSQL database.",
+      "By running Sniffy in the network gateway, we can gather the network traffic thoroughly. As it collects in the central database via Kafka, Sniffy can be deployed and run on subnetwork gateways to distribute the traffic monitoring load. However, adjustment for traffic overlap still needs to be implemented for the nested subnetwork case.",
+      "To begin the network traffic analysis, I aggregated the communications by PLpgSQL and Apache AGE to form a graph of the relationships between network nodes by the network protocol. I visualised the graph data in a force-directed iterative layout to help derive insights into the network.",
+      "I plan on extending this sandbox to experiment with machine learning algorithms, which may detect complex network anomalies.",
+    ],
+    links: {
+      "force-directed iterative layout": "https://github.com/vasturiano/3d-force-graph",
+    },
+    routerLinks: {},
+    video: "https://www.youtube.com/embed/-8Xy9PcRYEo",
+  },
+  {
     id: "ycode-lab",
     name: "Y-code Lab",
-    category: "WebAppDev",
+    category: "AppDev",
     logo: "/assets/favicon-32.png",
     logoAlt: "logo image",
     subLogo: "/assets/GitHub-Mark-64px.png",
@@ -14,23 +35,19 @@ const data: readonly Readonly<ProjectInfo>[] = [
     tags: [ "ASP.NET Core", "React", "Redux" ],
     description: [
       "Y-code Lab is my profile website here. I'm using ASP.Net Core SPA with React/Redux and Entity Framework with PostgreSQL for this web application development. I dockerize it and am hosting the docker container at Heroku.",
-      "A service is running in the backend to cache updates from Code Project API in terms of my articles. This API is still in beta release, and it turned to be very unstable where requests sometimes fail. Therefore, I created the caching service to provide my articles information on Technical Writings page in a stable.",
-      "Entity Framework is for saving the message on Contact ME page.",
       "The source code of this web application is in public in y-code/y-code-lab repository at GitHub. Please feel free to look over it.",
     ],
     links: {
-      "Code Project API": "https://api.codeproject.com/",
       "y-code/y-code-lab repository at GitHub": "https://github.com/y-code/y-code-lab",
     },
     routerLinks: {
       "Technical Writings page": "/tech-writings",
-      "Contact ME page": "/contact-me",
     },
   },
   {
     id: "happyfl",
     name: "HappyFL",
-    category: "WebAppDev",
+    category: "AppDev",
     logo: "https://github.com/y-code/happyfl/raw/master/HappyFL/wwwroot/favicon.png",
     logoAlt: "logo image",
     subLogo: "https://img.icons8.com/metro/26/000000/external-link.png",

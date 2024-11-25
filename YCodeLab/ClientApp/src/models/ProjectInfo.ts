@@ -1,7 +1,7 @@
 export interface ProjectInfo {
   id: string,
   name: string,
-  category: ("WebAppDev"|"LibDev"|"GameApp"),
+  category: ("AppDev"|"LibDev"|"GameApp"),
   logo?: string,
   logoAlt?: string,
   subLogo?: string,
