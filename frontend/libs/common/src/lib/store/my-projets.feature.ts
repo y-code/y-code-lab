@@ -21,7 +21,7 @@ const data: readonly Readonly<ProjectInfo>[] = [
       "force-directed iterative layout": "https://github.com/vasturiano/3d-force-graph",
     },
     routerLinks: {},
-    video: "https://www.youtube.com/embed/-8Xy9PcRYEo",
+    video: "https://www.youtube.com/embed/aUK6dQsG94A",
   },
   {
     id: "ycode-lab",
