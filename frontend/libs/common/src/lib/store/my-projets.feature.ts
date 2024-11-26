@@ -50,8 +50,6 @@ const data: readonly Readonly<ProjectInfo>[] = [
     category: "AppDev",
     logo: "https://github.com/y-code/happyfl/raw/master/HappyFL/wwwroot/favicon.png",
     logoAlt: "logo image",
-    subLogo: "https://img.icons8.com/metro/26/000000/external-link.png",
-    subLogoLink: "https://happyfl.apphb.com/",
     languages: [ ".NET C#", "TypeScript" ],
     tags: [ "ASP.NET Core", "Angular", "NgRx" ],
     description: [
