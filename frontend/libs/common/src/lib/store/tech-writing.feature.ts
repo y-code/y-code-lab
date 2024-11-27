@@ -14,7 +14,7 @@ const data: readonly Readonly<TechWritingInfo>[] = [
   {
     url: "https://www.codeproject.com/Articles/5384546/Factory-Design-Pattern-in-Cplusplus",
     title: "Factory Design Pattern in C++",
-    summary: "Factory design pattern is one of the common design patterns seen in code. It is a simple structure, but it can be written a variety of ways in C++, with the conceptual intentions behind it. Let us see several solutions and consider their potential.",
+    summary: "Factory design pattern is one of the common design patterns seen in code. It is a simple structure, but it can be written in various ways in C++ with the same conceptual intentions. Let us see several solutions and consider their potential.",
     rating: 5,
     votes: 4,
     views: 1770,
