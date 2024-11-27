@@ -18,7 +18,7 @@ export function YcodeLabLayout(props: Props) {
       <Navbar color="dark" dark expand="lg" className={styles['header']}>
         <NavbarBrand href="/">
           <img alt="logo" src="/assets/favicon-32.png" className={styles['header-logo']} />
-          Ycode Lab
+          Y-code Lab
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="me-2" />
         <Collapse isOpen={collapsed} navbar>
