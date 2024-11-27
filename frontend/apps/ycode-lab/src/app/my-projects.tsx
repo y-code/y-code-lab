@@ -56,7 +56,7 @@ function _MyProjects(props: Props) {
 
       <Container className={styles['my-projects']}>
         <ul>
-          <li><a href="/my-projects#web-app-dev">Web Application Developments</a></li>
+          <li><a href="/my-projects#web-app-dev">Application Developments</a></li>
           <ul>
             {webAppDevNavItems}
           </ul>
