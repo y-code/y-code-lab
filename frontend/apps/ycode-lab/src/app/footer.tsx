@@ -35,7 +35,7 @@ export function FooterContent() {
           <Row>
             <Col sm={6} md={6} lg={12} xl={12} className="text-center">
               <div className="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="yasuikeda">
-                <a className="LI-simple-link" href='https://nz.linkedin.com/in/yasuikeda?trk=profile-badge'>Yasunori Ikeda</a>
+                <a className="LI-simple-link" href='https://nz.linkedin.com/in/yasuikeda?trk=profile-badge'>Profile in LinkedIn</a>
               </div>
             </Col>
             <Col sm={6} md={6} lg={12} xl={12}>
