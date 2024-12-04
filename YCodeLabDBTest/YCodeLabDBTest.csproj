@@ -4,6 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <AssemblyName>YCodeLab.Test</AssemblyName>
     <RootNamespace>YCodeLab.DB.Test</RootNamespace>
+    <Nullable>enable</Nullable>
     <RunSettingsFilePath>.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 

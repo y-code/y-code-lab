@@ -6,6 +6,7 @@
     <RootNamespace>YCodeLab.DevDBSetup</RootNamespace>
     <AssemblyName>YCodeLab.DevDBSetup</AssemblyName>
     <StartupObject>YCodeLab.DevDBSetup.DevDBSetup</StartupObject>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
