@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using YCodeLab.DB.Messaging;
 
 namespace YCodeLab.DB.Messaging
 {
@@ -48,5 +51,12 @@ public class FullNameAttribute : ValidationAttribute
         if (value is string && !_patternName.IsMatch((string)value))
             return new ValidationResult(FormatErrorMessage(validationContext.DisplayName));
         return null;
+    }
+}
+
+internal class MessageEntityConfig : IEntityTypeConfiguration<Message>
+{
+    public void Configure(EntityTypeBuilder<Message> builder)
+    {
     }
 }

@@ -12,23 +12,28 @@ namespace YCodeLab.DB.Test
         [Test]
         public void TestMessageCreatedTime()
         {
-            var dbContextFactory = new YCodeLabDbContextFactory();
-            var context = dbContextFactory.CreateDbContext();
-            var message = new Message
-            {
-                CreatedTime = DateTime.UtcNow + TimeSpan.FromHours(1),
-            };
-            context.Messages.Add(message);
             var timeStamp = DateTime.UtcNow;
-            context.SaveChanges();
-
-            var dbContextFactory2 = new YCodeLabDbContextFactory();
-            var context2 = dbContextFactory2.CreateDbContext();
-            var message2 = context2.Messages
-                .FirstOrDefault(e => e.Id == message.Id);
-
-            Assert.That(message2.CreatedTime, Is.GreaterThan(timeStamp).And.LessThan(timeStamp + TimeSpan.FromSeconds(3)),
-                "The stored new message should have create_time the time right after the time stamp taken right before DbContext.SaveChanges method call.");
+            long? id = null;
+            {
+                var dbContextFactory = new YCodeLabDbContextFactory();
+                using var context = dbContextFactory.CreateDbContext();
+                var message = new Message
+                {
+                    CreatedTime = DateTime.UtcNow + TimeSpan.FromHours(1),
+                };
+                context.Set<Message>().Add(message);
+                timeStamp = DateTime.UtcNow;
+                context.SaveChanges();
+                id = message.Id;
+            }
+            {
+                var dbContextFactory = new YCodeLabDbContextFactory();
+                using var context = dbContextFactory.CreateDbContext();
+                var message = context.Set<Message>()
+                    .FirstOrDefault(e => e.Id == id);
+                Assert.That(message?.CreatedTime, Is.GreaterThan(timeStamp).And.LessThan(timeStamp + TimeSpan.FromSeconds(3)),
+                    "The stored new message should have create_time the time right after the time stamp taken right before DbContext.SaveChanges method call.");
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using YCodeLab.DB;
@@ -11,9 +12,11 @@ using YCodeLab.DB;
 namespace YCodeLab.DB.Migrations
 {
     [DbContext(typeof(YCodeLabDbContext))]
-    partial class YCodeLabDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241204185440_add_message_tbl")]
+    partial class add_message_tbl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

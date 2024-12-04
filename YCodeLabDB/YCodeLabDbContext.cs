@@ -3,19 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using YCodeLab.DB.Messaging;
-using YCodeLab.DB.Resume;
 
 namespace YCodeLab.DB
 {
     public class YCodeLabDbContext : DbContext
     {
-        public DbSet<Profile> Profiles { get; set; }
-        public DbSet<Experience> Experiences { get; set; }
-        public DbSet<Company> Companies { get; set; }
-
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-
         public YCodeLabDbContext(DbContextOptions<YCodeLabDbContext> options) : base(options)
         {
 
@@ -23,13 +15,10 @@ namespace YCodeLab.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Profile>();
-            modelBuilder.Entity<Experience>();
-            modelBuilder.Entity<Company>();
+            base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Message>();
-            modelBuilder.Entity<Comment>()
-                .HasIndex(e => e.category);
+            modelBuilder.ApplyConfiguration(new MessageEntityConfig());
+            modelBuilder.ApplyConfiguration(new CommentEntityConfig());
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
