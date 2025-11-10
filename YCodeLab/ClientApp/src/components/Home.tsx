@@ -19,7 +19,10 @@ class Home extends React.Component<RoutingProps> {
         <Container className="main-content-container">
           <h1 className='site-name'>Y-code Lab</h1>
           <div className='introduction-container'>
-            <p>Welcome to Yas's Lab! It is a place I showcase my works. Please feel free to look around. I would be grateful if you could <Link to="/contact-me">leave a comment.</Link></p>
+            <p>Welcome to Yas's Lab!</p>
+            <p>It is a place I showcase my works.</p>
+            <p>Please feel free to look around.</p>
+            <p>I would be grateful if you could <Link to="/contact-me">leave a comment.</Link></p>
           </div>
         </Container>
 
