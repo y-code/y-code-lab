@@ -1,0 +1,29 @@
+services:
+
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/dotnet:10.0-noble
+    container_name: y-code-lab-dev
+    hostname: dev
+
+    volumes:
+      - '../:/home/app/'
+    networks:
+      - y-code-lab
+    ports:
+      - '5010:5010'
+      - '7010:7010'
+
+    cpus: 2.0
+    mem_limit: 2G
+    shm_size: 128mb
+
+    user: app
+    working_dir: /home/app/y-code-lab
+
+    command: |
+      sleep infinity
+
+networks:
+  y-code-lab:
+    driver: bridge
+
