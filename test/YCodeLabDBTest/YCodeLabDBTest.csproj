@@ -31,9 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\YCodeLabDB\YCodeLabDB.csproj" />
-    <ProjectReference Include="..\YCodeLabDBFactory\YCodeLabDBFactory.csproj" />
-    <ProjectReference Include="..\DevDBSetup\DevDBSetup.csproj" />
+    <ProjectReference Include="..\..\src\YCodeLabDB\YCodeLabDB.csproj" />
+    <ProjectReference Include="..\..\src\YCodeLabDBFactory\YCodeLabDBFactory.csproj" />
+    <ProjectReference Include="..\..\src\DevDBSetup\DevDBSetup.csproj" />
   </ItemGroup>
 
 </Project>

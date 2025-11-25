@@ -14,7 +14,7 @@
     <PackageReference Include="Moq" Version="4.13.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\YCodeLab\YCodeLab.csproj" />
-    <ProjectReference Include="..\YCodeLabDB\YCodeLabDB.csproj" />
+    <ProjectReference Include="..\..\src\YCodeLab\YCodeLab.csproj" />
+    <ProjectReference Include="..\..\src\YCodeLabDB\YCodeLabDB.csproj" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 {
   "name": "Y-code Lab Development Environment",
   "dockerComposeFile": "../docker-compose.yml",
-  "service": "devcontainer",
+  "service": "devcontainer-dotnet",
   "workspaceFolder": "/home/app/y-code-lab",
   "shutdownAction": "stopCompose"
 }
