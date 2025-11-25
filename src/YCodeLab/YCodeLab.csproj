@@ -6,6 +6,7 @@
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
+    <SpaRoot>..\frontend\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
@@ -27,8 +28,18 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
+
   <ItemGroup>
-    <Folder Include="Models\" />
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <None Include="Properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YCodeLabDB\YCodeLabDB.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Update="Properties\launchSettings.json">
@@ -37,5 +48,25 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
+
+  <Target Name="UseCustomLib" AfterTargets="Build">
+    <Message Importance="high" Text="Deploying custom libraries to build destination: $(OutputPath)" />
+    <ItemGroup>
+      <CustomLibs Include="lib\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CustomLibs)" DestinationFiles="@(CustomLibs-&gt;'$(OutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- Include the frontend built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**\*" />
+      <ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>ClientApp\%(RecursiveDir)%(FileName)%(Extension)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
 
 </Project>

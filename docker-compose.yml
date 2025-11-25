@@ -31,6 +31,8 @@ services:
 
     volumes:
       - '../:/home/app'
+    networks:
+      - y-code-lab
     ports:
       - '4200:4200'
 

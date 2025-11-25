@@ -62,6 +62,7 @@
         "buildTarget": "ycode-lab:build",
         "hmr": true,
         "host": "0.0.0.0",
+        "allowedHosts": "frontend",
         "port": 4200,
         "proxyConig": "apps/ycode-lab/proxy.conf.json"
       },
