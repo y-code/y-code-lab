@@ -2,10 +2,11 @@ FROM node:24-alpine AS nodejs
 
 WORKDIR /app
 
-COPY src/frontend/package*.json ./
-RUN npm ci
+RUN npm install pnpm
+COPY src/frontend/package.json src/frontend/pnpm-lock.yaml ./
 COPY src/frontend/ ./
-RUN npx nx build ycode-lab --configuration production
+RUN npx pnpm approve-builds --all && npx pnpm install
+RUN npx pnpx nx build ycode-lab --configuration production
 
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0-azurelinux3.0 AS build

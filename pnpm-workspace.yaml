@@ -1,0 +1,5 @@
+minimumReleaseAgeExclude:
+  - bare-os
+  - brace-expansion
+  - electron-to-chromium
+  - es-module-lexer
