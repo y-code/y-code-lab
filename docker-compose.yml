@@ -1,0 +1,54 @@
+services:
+
+  devcontainer-dotnet:
+    image: mcr.microsoft.com/devcontainers/dotnet:10.0-noble
+    container_name: y-code-lab-dotnet
+    hostname: api
+
+    volumes:
+      - '../:/home/app/'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      - y-code-lab
+    ports:
+      - '5010:5010'
+      - '7010:7010'
+
+    cpus: 2.0
+    mem_limit: 2G
+    shm_size: 128mb
+
+    user: app
+    working_dir: /home/app/y-code-lab
+
+    command: |
+      sleep infinity
+
+
+  devcontainer-nodejs:
+    image: mcr.microsoft.com/devcontainers/javascript-node:24-trixie
+    container_name: y-code-lab-nodejs
+    hostname: frontend
+
+    volumes:
+      - '../:/home/app'
+    networks:
+      - y-code-lab
+    ports:
+      - '4200:4200'
+
+    cpus: 2.0
+    mem_limit: 2G
+    shm_size: 128mb
+
+    user: node
+    working_dir: /home/app/y-code-lab
+
+    command: |
+      sleep infinity
+
+
+networks:
+  y-code-lab:
+    driver: bridge
+

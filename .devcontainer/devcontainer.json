@@ -1,0 +1,17 @@
+{
+  "name": "Y-code Lab Development Environment",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "devcontainer-dotnet",
+  "workspaceFolder": "/home/app/y-code-lab",
+  "shutdownAction": "stopCompose",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+      ]
+    }
+  }
+}
+
